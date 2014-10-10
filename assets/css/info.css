@@ -69,13 +69,13 @@
     text-transform: uppercase;
     background: #1a4f83;
     font-weight: bold;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
     padding: 10px;
     margin-top: 0;
     font-size: 13px;
-    margin-bottom: 3px;
+    margin-bottom: 0;
 }
 .content_infra_table{
     margin-bottom: 0;
@@ -84,14 +84,15 @@
     font-family: 'Arimo', sans-serif;
     text-transform: uppercase;
     border: 2px solid #adbece;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
     background: #e8e6e7;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 10px;
-    padding: 10px 0;
+    padding: 0 0 10px 0;
 }
 .content_infra_table>thead>tr>th,
 .content_infra_table>tbody>tr>th,
