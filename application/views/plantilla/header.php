@@ -563,21 +563,21 @@
                                                         '</div>' +
                                                         '<div class="col-xs-6 h3_footer">' +
 
-                                                            '<div class="col-xs-12 quitar_derecha">' +
+                                                            '<div class="col-xs-12 h3_footer">' +
                                                                 '<h3 class="infra_content_name">ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES</h3>' +
                                                                 '<div class="content_infra">' +
                                                                     '<table class="table content_infra_table"><tr><td width="90%">Aula común</td><td width="10%">10</td></tr><tr><td width="90%">Pedagógico</td><td width="10%">3</td></tr><tr><td width="90%">Administrativo</td><td width="10%">2</td></tr><tr><td width="90%">Complementario</td><td width="10%">0</td></tr><tr><td width="90%">Servicios</td><td width="10%">2</td></tr></table>' +
                                                                 '</div>' +
                                                             '</div>' +
-                                                            '<div class="col-xs-12 quitar_derecha">' +
+                                                            '<div class="col-xs-12 h3_footer">' +
                                                                 '<h3 class="infra_content_name">Opinión técnica del evaluador</h3>' +
                                                                 '<div class="content_infra">' +
                                                                     '<table class="table content_infra_table"><tr><td width="90%">Edificaciones para mantenimiento</td><td width="10%">3</td></tr><tr><td width="90%">Edificaciones para rehabilitación</td><td width="10%">2</td></tr><tr><td width="90%">Edificaciones para demolición</td><td width="10%">1</td></tr></table>' +
                                                                 '</div>' +
                                                             '</div>' +
 
-                                                            '<div class="col-xs-12 quitar_derecha" style="margin-bottom: 10px">' +
-                                                                '<h3 class="infra_content_name" style="padding: 0;">' +
+                                                            '<div class="col-xs-12 h3_footer" style="margin-bottom: 10px">' +
+                                                                '<h3 class="infra_content_name" style="padding: 0;border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;padding-bottom: 5px;">' +
                                                                     '<table class="table content_infra_table">' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Total de pisos</td>' +
@@ -587,15 +587,15 @@
                                                                 '</h3>' +
                                                             '</div>'+
 
-                                                            '<div class="col-xs-12 quitar_derecha">' +
+                                                            '<div class="col-xs-12 h3_footer">' +
                                                                 '<h3 class="infra_content_name">Área de terreno</h3>' +
                                                                 '<div class="content_infra">' +
                                                                     '<table class="table content_infra_table"><tr><td width="90%">Área de terreno del local escolar</td><td width="10%">5,238m2</td></tr></table>' +
                                                                '</div>' +
                                                             '</div>' +
                                                         '</div>' +
-                                                        '<div class="col-xs-12 h3_footer">' +
-                                                            '<h3 class="infra_content_name text-center ">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
+                                                        '<div class="col-xs-12 h3_footer" >' +
+                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
                                                         '</div>' +
                                                    '</div>' +
                                                 '</div>' +
