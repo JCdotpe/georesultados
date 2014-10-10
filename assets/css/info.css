@@ -1,0 +1,115 @@
+@import url(http://fonts.googleapis.com/css?family=Arimo);
+.tabInfos{
+    padding: 10px;
+}
+.tabInfos .tab-content{
+    margin-top: 10px;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    color: #003399;
+    cursor: pointer;
+}
+.nav-tabs>li>a {
+    background: #ccc;
+    color: #000;
+    border-radius: 0;
+}
+.h3_name{
+    text-transform: uppercase;
+}
+/* General */
+.general{
+
+}
+.general_content{
+    /*border: 2px solid #728798;*/
+    padding: 5px;
+}
+.general_content_name{
+    font-family: 'Arimo', sans-serif;
+    color: #fff;text-transform: uppercase;background: #1a4f83;font-weight: bold; border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px; padding: 10px 0;margin-top: 0;
+}
+.name_educativo{
+    font-family: 'Arimo', sans-serif;
+    text-transform: uppercase;
+    border: 2px solid #adbece;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: #e8e6e7;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+.name_educativo:last-child{
+    margin-bottom: 0;
+}
+.name_educativo_icono{
+    width: 25px;
+}
+.base_medio{
+    vertical-align: sub;
+}
+/* Fin General */
+/* Infraestructura */
+.infraestructura{
+
+}
+.infra_content{
+    /*border: 2px solid #728798;*/
+    padding: 10px 20px 10px 10px;
+}
+.infra_content_name{
+    font-family: 'Arimo', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    background: #1a4f83;
+    font-weight: bold;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 10px;
+    margin-top: 0;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+.content_infra_table{
+    margin-bottom: 0;
+}
+.content_infra{
+    font-family: 'Arimo', sans-serif;
+    text-transform: uppercase;
+    border: 2px solid #adbece;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: #e8e6e7;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+.content_infra_table>thead>tr>th,
+.content_infra_table>tbody>tr>th,
+.content_infra_table>tfoot>tr>th,
+.content_infra_table>thead>tr>td,
+.content_infra_table>tbody>tr>td,
+.content_infra_table>tfoot>tr>td {
+    border-top: 0px solid #ddd;
+    font-family: 'Arimo', sans-serif;
+}
+.h3_footer{
+    padding-left: 0;
+    padding-right: 0;
+}
+.quitar_derecha{
+    padding-right: 0;
+}
+.quitar_izquierda{
+    padding-left: 0;
+}
+/* Fin Infraestructura*/
