@@ -266,7 +266,9 @@
                 $("#btnFindCodLocal").click(function() {
                     var codLocal = $('#searchCodigo').val();
                     if (codLocal == "") {
+                        $("#dv_download").hide();
                         alert("Ingrese código");
+                        $('#searchCodigo').focus();
                     } else {
                         $('#prov').empty();
                         $("#prov").append('<option value="">Seleccione</option>');
@@ -278,9 +280,12 @@
                         var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal;
                         $.get(url, function(data) {
                             if(data.length==2){
+                                $("#dv_download").hide();
                                 alert("Código incorrecto");
                                 initialize();
                             }else{
+                                $("#dv_download").slideDown('slow');
+                                $("#btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codLocal);
                                 var result = JSON.parse(data);
                                 $.each(result, function(i, datos) {
                                     var latitud = datos.LatitudPunto_UltP;
@@ -396,12 +401,19 @@
                         infowindow.close();
                         google.maps.event.addListener(layer, 'click', function(e) {
                             var codigoid = e.row['id_local'].value;
+                            
                             var contentString = '<div>';
                             var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codigoid;
                             $.get(url, function(data) {
                                 var result = JSON.parse(data);
                                 $.each(result, function(i, datos) {
                                     //General
+                                    /*'<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+ */
+                                    if(datos.RutaFoto !=null){
+                                        $('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></div></div>');
+                                    }else{
+                                        $('.gen_rutaFoto').append('');
+                                    }
                                     $('.gen_codLocal').append(datos.codigo_de_local);
                                     $('.gen_nombreIE').append(datos.nombres_IIEE);
                                     $('.gen_latitud').append(datos.LatitudPunto_UltP);
@@ -415,13 +427,13 @@
                                     $('.gen_nivEducativo').append(datos.nivel);
                                     $('.gen_areaLocal').append(datos.des_area);
                                     $('.micentropoblado').append(datos.centroPoblado);
-                                    $('.gen_countAlumnos').append(datos.Talum);
+                                    if( datos.Talum == 0 ){ $('.gen_countAlumnos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_countAlumnos').append(datos.Talum);}
                                     if( datos.tel_IE == null){ $('.gen_telLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
                                     //Infraestructura
                                     //--Numero de predios y edificaciones
                                     if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
                                     if( datos.cEdif== 0){ $('.inf_numEdificaciones').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
-                                    if( datos.Piso== 0){ $('.inf_countPiso').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_countPiso').append(datos.Piso); }
+                                    if( (datos.Piso ==null) || (datos.Piso== 0)){ $('.inf_countPiso').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_countPiso').append(datos.Piso); }
                                     if( datos.P1_B_3_9_At_Local== null){ $('.inf_areTerreno').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local);}                                    
                                     //--Otras edificaciones
                                     if( datos.P== 0){ $('.inf_numPatios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numPatios').append(datos.P);}
@@ -429,12 +441,12 @@
                                     if( datos.CTE== 0){ $('.inf_numCisTanques').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numCisTanques').append(datos.CTE);}
                                     if( datos.MC== 0){$('.inf_numMurContencion').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numMurContencion').append(datos.MC);}
                                     //--Servicios basicos y comunicaciones
-                                    if( datos.P2_C_2LocE_1_Energ== null){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append(datos.P2_C_2LocE_1_Energ); }
-                                    if( datos.P2_C_2LocE_2_Agua== null){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append(datos.P2_C_2LocE_2_Agua);}
-                                    if( datos.P2_C_2LocE_3_Alc== null){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append(datos.P2_C_2LocE_3_Alc);}
-                                    if( datos.P2_C_2LocE_4_Tfija== null){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append(datos.P2_C_2LocE_4_Tfija);}
-                                    if( datos.P2_C_2LocE_5_Tmov== null){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append(datos.P2_C_2LocE_5_Tmov);}
-                                    if( datos.P2_C_2LocE_6_Int== null){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append(datos.P2_C_2LocE_6_Int);}
+                                    if( (datos.P2_C_2LocE_1_Energ== null) || (datos.P2_C_2LocE_1_Energ ==2)){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append(datos.P2_C_2LocE_1_Energ); }
+                                    if( (datos.P2_C_2LocE_2_Agua== null) || (datos.P2_C_2LocE_2_Agua ==2)){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append(datos.P2_C_2LocE_2_Agua);}
+                                    if( (datos.P2_C_2LocE_3_Alc== null) || (datos.P2_C_2LocE_3_Alc ==2)){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append(datos.P2_C_2LocE_3_Alc);}
+                                    if( (datos.P2_C_2LocE_4_Tfija== null) || (datos.P2_C_2LocE_4_Tfija ==2)){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append(datos.P2_C_2LocE_4_Tfija);}
+                                    if( (datos.P2_C_2LocE_5_Tmov== null) || (datos.P2_C_2LocE_5_Tmov ==2)){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append(datos.P2_C_2LocE_5_Tmov);}
+                                    if( (datos.P2_C_2LocE_6_Int== null) || (datos.P2_C_2LocE_6_Int ==2)){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append(datos.P2_C_2LocE_6_Int);}
                                     //--Espacios educativos que funcionan en las edificaciones
                                     if( datos.e_1== 0){ $('.inf_aulComun').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_aulComun').append(datos.e_1);}
                                     if( datos.e_2== 0){ $('.inf_pedagogico').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_pedagogico').append(datos.e_2);}
@@ -550,12 +562,8 @@
                                                             '</div>' +
                                                         '</div>'+
                                                         
-                                                        '<div class="row name_educativo">' +
-                                                            '<div class="col-xs-12 text-center">'+
-                                                                '<h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3>'+
-                                                                '<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+
-                                                            '</div>'+
-                                                        '</div>' +
+                                                        '<div class="gen_rutaFoto"></div>'+
+                                                        
                                                     '</div>' +
                                                 '</div>' +
                                             '</div>' +
@@ -570,20 +578,20 @@
                                                                 '<div class="content_infra">' +
                                                                     '<table class="table content_infra_table">'+
                                                                         '<tr>'+
-                                                                            '<td width="90%">Predios</td>'+
-                                                                            '<td width="10%"><strong><span class="inf_numPredios"></span></strong></td>'+
+                                                                            '<td width="80%">Predios</td>'+
+                                                                            '<td width="20%"><strong><span class="inf_numPredios"></span></strong></td>'+
                                                                         '</tr>'+
                                                                         '<tr>'+
-                                                                            '<td width="90%">Edificaciones</td>'+
-                                                                            '<td width="10%"><strong><span class="inf_numEdificaciones"></span></strong></td>'+
+                                                                            '<td width="80%">Edificaciones</td>'+
+                                                                            '<td width="20%"><strong><span class="inf_numEdificaciones"></span></strong></td>'+
                                                                         '</tr>'+
                                                                         '<tr>' +
-                                                                            '<td width="90%">Total de pisos</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_countPiso"></span></strong></td>' +
+                                                                            '<td width="80%">Total de pisos</td>' +
+                                                                            '<td width="20%"><strong><span class="inf_countPiso"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
-                                                                            '<td width="90%">Área del terreno</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_areTerreno"></span></strong></td>' +
+                                                                            '<td width="80%">Área del terreno</td>' +
+                                                                            '<td width="20%"><strong><span class="inf_areTerreno"></span></strong></td>' +
                                                                         '</tr>' +
                                                                     '</table>' +
                                                                 '</div>' +

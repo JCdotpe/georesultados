@@ -21,13 +21,19 @@
                 <!-- Buscador -->
                 <div id="dv_search" class="form-group col-xs-12 text-center">
                     <label class="preguntas_sub2" for="searchCodigo">Buscar por código</label>
-
                     <div class="form-group">
                         <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Buscar por código" onKeyPress="return validar(event);" style="width: 120px;margin-right: 6px;"/>
                         <button type="submit" class="col-xs-3 btn btn-primary btn-sm" id="btnFindCodLocal" name="btnFindCodLocal"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
 
                 </div>
+                <div id="dv_download" class="form-group col-xs-12 text-center">
+                    <label class="preguntas_sub2" for="searchCodigo">Descargar Información</label>
+                    <div class="form-group">
+                        <a href="" class="col-xs-12 btn btn-success btn-sm" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar</a>
+                    </div>
+                </div>
+                
                 <!-- Fin Buscador -->
                 <!-- Departamento -->
                 <div id="dv_dep" class="form-group col-xs-12 text-center">
