@@ -144,7 +144,13 @@
                 text-transform: uppercase;
                 color: #000;
             }
-            .infra_content_name_collapse a:hover{
+            
+            .infra_content_name_collapse:hover{
+                color:#1a4f83;
+                font-weight: bold;
+            }
+            
+            .all_acordion_title a:hover{
                 color:#1a4f83;
                 text-decoration: none !important;
                 font-weight: bold;
@@ -264,7 +270,7 @@
                                 $.each(result, function(i, datos) {
                                     var latitud = datos.LatitudPunto_UltP;
                                     var longitud = datos.LongitudPunto_UltP;
-                                    var puntokml = datos.CCDD+datos.CCPP+datos.CCDI;
+                                    var puntokml = datos.cod_dpto+datos.cod_prov+datos.cod_dist;
                                     console.log(puntokml);
                                     load_kml_ft(table_dist, puntokml);
 
@@ -380,71 +386,155 @@
                             $.get(url, function(data) {
                                 var result = JSON.parse(data);
                                 $.each(result, function(i, datos) {
-                                    $('.micodigolocal').append(datos.id_local);
-                                    $('.minombreie').append(datos.P1_A_2_1_NomIE);
-                                    $('.milatitud').append(datos.LatitudPunto_UltP);
-                                    $('.milongitud').append(datos.LongitudPunto_UltP);
-                                    $('.mipropietariolocal').append(datos.Propietario_Local);
-                                    $('.midireccion').append(datos.Direccion);
-                                    $('.midepartamento').append(datos.Nomb_Dpto);
-                                    $('.miprovincia').append(datos.Nomb_Prov);
-                                    $('.midistrito').append(datos.Nomb_Dist);
-                                    $('.midirector').append(datos.Nombre_Director);
-                                    $('.miniveleducativo').append(datos.Nivel);
-                                    if(datos.Telefono == null){
-                                        $('.mitelefono').append("--");
-                                    }else{
-                                        $('.mitelefono').append(datos.Telefono);
-                                    }
+                                    //General
+                                    $('.gen_codLocal').append(datos.codigo_de_local);
+                                    $('.gen_nombreIE').append(datos.nombres_IIEE);
+                                    $('.gen_latitud').append(datos.LatitudPunto_UltP);
+                                    $('.gen_longitud').append(datos.LongitudPunto_UltP);
+                                    if( datos.prop_IE == null){  $('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.gen_proLocal').append(datos.prop_IE);}
+                                    $('.gen_direccionIE').append(datos.direcc_IE);
+                                    $('.gen_departLocal').append(datos.dpto_nombre);
+                                    $('.gen_provLocal').append(datos.prov_nombre);
+                                    $('.gen_distLocal').append(datos.dist_nombre);
+                                    $('.gen_dirLocal').append(datos.Director_IIEE);
+                                    $('.gen_nivEducativo').append(datos.nivel);
+                                    $('.gen_areaLocal').append(datos.des_area);
+                                    $('.micentropoblado').append(datos.centroPoblado);
+                                    $('.gen_countAlumnos').append(datos.Talum);
+                                    if( datos.tel_IE == null){ $('.gen_telLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
+                                    //Infraestructura
+                                    //--Numero de predios y edificaciones
+                                    if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
+                                    if( datos.cEdif== 0){ $('.inf_numEdificaciones').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
+                                    if( datos.Piso== 0){ $('.inf_countPiso').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_countPiso').append(datos.Piso); }
+                                    if( datos.P1_B_3_9_At_Local== null){ $('.inf_areTerreno').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local);}                                    
+                                    //--Otras edificaciones
+                                    if( datos.P== 0){ $('.inf_numPatios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numPatios').append(datos.P);}
+                                    if( datos.LD== 0){ $('.inf_numLosDeportivas').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numLosDeportivas').append(datos.LD);}
+                                    if( datos.CTE== 0){ $('.inf_numCisTanques').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numCisTanques').append(datos.CTE);}
+                                    if( datos.MC== 0){$('.inf_numMurContencion').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numMurContencion').append(datos.MC);}
+                                    //--Servicios basicos y comunicaciones
+                                    if( datos.P2_C_2LocE_1_Energ== null){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append(datos.P2_C_2LocE_1_Energ); }
+                                    if( datos.P2_C_2LocE_2_Agua== null){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append(datos.P2_C_2LocE_2_Agua);}
+                                    if( datos.P2_C_2LocE_3_Alc== null){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append(datos.P2_C_2LocE_3_Alc);}
+                                    if( datos.P2_C_2LocE_4_Tfija== null){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append(datos.P2_C_2LocE_4_Tfija);}
+                                    if( datos.P2_C_2LocE_5_Tmov== null){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append(datos.P2_C_2LocE_5_Tmov);}
+                                    if( datos.P2_C_2LocE_6_Int== null){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append(datos.P2_C_2LocE_6_Int);}
+                                    //--Espacios educativos que funcionan en las edificaciones
+                                    if( datos.e_1== 0){ $('.inf_aulComun').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_aulComun').append(datos.e_1);}
+                                    if( datos.e_2== 0){ $('.inf_pedagogico').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_pedagogico').append(datos.e_2);}
+                                    if( datos.e_3== 0){ $('.inf_administrativo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_administrativo').append(datos.e_3);}
+                                    if( datos.e_4== 0){ $('.inf_complementario').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_complementario').append(datos.e_4);}
+                                    if( datos.e_5== 0){ $('.inf_servicio').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_servicio').append(datos.e_5);}
+                                    //--Características de las edificaciones
+                                    if( datos.eo_1== 0){ $('.inf_gobNacional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobNacional').append(datos.eo_1);}
+                                    if( datos.eo_3== 0){ $('.inf_apafa').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_apafa').append(datos.eo_3); }
+                                    if( datos.a_2== 0){ $('.inf_entre').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_entre').append(datos.a_2);}
+                                    if( datos.a_3== 0){ $('.inf_despues').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_despues').append(datos.a_3);}
+                                    if( datos.eman== 0){ $('.inf_countEdiMante').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiMante').append(datos.eman);}
+                                    if( datos.ereh== 0){ $('.inf_countEdiEstruc').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiEstruc').append(datos.ereh);}
+                                    if( datos.edem== 0){ $('.inf_countEdiDemo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
                                 });
                             });
 
                             contentString += '<ul class="tabs">' +
                                     '<li class="active"><a href="#tab1">GENERAL</a></li>' +
                                     '<li><a href="#tab2">INFRAESTRUCTURA</a></li>' +
-                                    '<li><a href="#tab3">CROQUIS</a></li>' +
-                                    '<li><a href="#tab4">OTRAS TOMAS</a></li>' +
+                                    '<li><a href="#tab4">TOMAS FOTOGRÁFICAS</a></li>' +
                                     '</ul>' +
                                     '<div class="tab_container">' +
                                         '<div id="tab1" class="tab_content">' +
                                             '<div class="col-xs-12 h3_footer">' +
                                                 '<div class="general">' +
                                                     '<div class="general_content">' +
-                                                        '<h3 class="general_content_name text-center">Información del local escolar - código: <span class="micodigolocal"></span></h3>' +
-                                                        '<div class="row name_educativo">' +
-                                                            '<div class="col-xs-3"><strong class="">Nombre de la I.E </strong></div>' +
-                                                            '<div class="col-xs-3"><span class="minombreie"></span></div>' +
-                                                            '<div class="col-xs-3"><strong class="">Nivel Educativo</strong></div>' +
-                                                            '<div class="col-xs-3"><span class="miniveleducativo"></span></div>' +
-                                                        '</div>' +
-                                                        '<div class="row name_educativo">' +
-                                                            '<div class="col-xs-3"><strong class="">Nombre del director </strong></div>' +
-                                                            '<div class="col-xs-3"><span class="midirector"></span></div>' +
-                                                            '<div class="col-xs-3"><strong class="">Teléfono</strong></span></div>' +
-                                                            '<div class="col-xs-3"><span class="mitelefono"></span></div>' +
-                                                        '</div>' +
-                                                        '<div class="row name_educativo">' +
-                                                            '<div class="col-xs-3"><strong >Dirección </strong></div>' +
-                                                            '<div class="col-xs-3"><span class="midireccion"></span></div>' +
-                                                            '<div class="col-xs-6">'+
-                                                                '<div class="col-xs-6"><strong >Departamento</strong></div>' +
-                                                                '<div class="col-xs-6"><span class="midepartamento"></span></div>' +
-                                                                '<div class="col-xs-6"><strong >Provincia</strong></div>' +
-                                                                '<div class="col-xs-6"><span class="miprovincia"></span></div>' +
-                                                                '<div class="col-xs-6"><strong >Distrito</strong></div>' +
-                                                                '<div class="col-xs-6"><span class="midistrito"></span></div>' +
-                                                            '</div>'+
-
-                                                        '</div>' +
-                                                        '<div class="row name_educativo">' +
-                                                            '<div class="col-xs-3"><strong class="">Propietario local </strong></div>' +
-                                                            '<div class="col-xs-9"><span class="mipropietariolocal"></span></div>' +
-                                                        '</div>' +
-                                                        '<div class="row name_educativo">' +
-                                                            '<div class="col-xs-3"><strong class="">Georeferencia </strong></div>' +
-                                                            '<div class="col-xs-4"><strong >Latitud: <span class="milatitud"></span></strong></div>' +
-                                                            '<div class="col-xs-4"><strong >Longitud: <span class="milongitud"></span></strong></div>' +
-                                                        '</div>' +
+                                                        '<h3 class="general_content_name text-center">Principales características del local escolar<br/>código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                        
+                                                        '<div class="panel-group all_acordion" id="accordion">' +
+                                                            '<div class="panel panel-default all_acordion_chidren">' +
+                                                                '<div class="panel-heading all_acordion_title">' +
+                                                                    '<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_gen_1">' +
+                                                                        '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                            'Institución educativa que presta servicios en el local escolar' +
+                                                                        '</h5>' +
+                                                                    '</a>' +
+                                                                '</div>' +
+                                                                '<div id="collapseOne_gen_1" class="panel-collapse collapse in">' +
+                                                                    '<div class="panel-body all_acordion_panelBody">' +
+                                                                        '<table class="table content_infra_table">' +
+                                                                            '<tr>' +
+                                                                                '<td width="40%">Nombre de la I.E</td>' +
+                                                                                '<td width="60%"><strong><span class="gen_nombreIE"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="40%">Nombre del director</td>' +
+                                                                                '<td width="60%"><strong><span class="gen_dirLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="40%">Teléfono</td>' +
+                                                                                '<td width="60%"><strong><span class="gen_telLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="40%">Nivel Educativo</td>' +
+                                                                                '<td width="60%"><strong><span class="gen_nivEducativo"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="40%">Propietario del predio</td>' +
+                                                                                '<td width="60%"><strong><span class="gen_proLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="40%">Número de alumnos</td>' +
+                                                                                '<td width="60%"><strong><span class="gen_countAlumnos"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                        '</table>' +
+                                                                    '</div>' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                            
+                                                            '<div class="panel panel-default all_acordion_chidren">' +
+                                                                '<div class="panel-heading all_acordion_title">' +
+                                                                    '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_gen_2">' +
+                                                                        '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                            'Ubicación geográfica' +
+                                                                        '</h5>' +
+                                                                    '</a>' +
+                                                                '</div>' +
+                                                                '<div id="collapseTwo_gen_2" class="panel-collapse collapse">' +
+                                                                    '<div class="panel-body all_acordion_panelBody">' +
+                                                                        '<table class="table content_infra_table">' +
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Departamento</td>' +
+                                                                                '<td width="70%"><strong><span class="gen_departLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Provincia</td>' +
+                                                                                '<td width="70%"><strong><span class="gen_provLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Distrito</td>' +
+                                                                                '<td width="70%"><strong><span class="gen_distLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Centro poblado</td>' +
+                                                                                '<td width="70%"><strong><span class="micentropoblado"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Área</td>' +
+                                                                                '<td width="70%"><strong><span class="gen_areaLocal"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Dirección</td>' +
+                                                                                '<td width="70%"><strong><span class="gen_direccionIE"></span></strong></td>' +
+                                                                            '</tr>' + 
+                                                                            '<tr>' +
+                                                                                '<td width="30%">Georeferenciación</td>' +
+                                                                                '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong><span class="gen_longitud"></span></strong></td>' +
+                                                                            '</tr>' +
+                                                                        '</table>' +
+                                                                    '</div>' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                        '</div>'+
+                                                        
                                                         '<div class="row name_educativo">' +
                                                             '<div class="col-xs-12 text-center">'+
                                                                 '<h3 class="general_content_name text-center">Fotografía del Local Escolar</h3>'+
@@ -463,101 +553,81 @@
                                                             '<div class="col-xs-12 quitar_izquierda">' +
                                                                 '<h3 class="infra_content_name">Número predios y edificaciones</h3>' +
                                                                 '<div class="content_infra">' +
-                                                                    '<table class="table content_infra_table"><tr><td width="90%">Predios</td><td width="10%">1</td></tr><tr><td width="90%">Edificaciones</td><td width="10%">6</td></tr></table>' +
+                                                                    '<table class="table content_infra_table">'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Predios</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_numPredios"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Edificaciones</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_numEdificaciones"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Total de pisos</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_countPiso"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Área del terreno</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_areTerreno"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                    '</table>' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                            
+                                                            '<div class="col-xs-12 quitar_izquierda">' +
+                                                                '<h3 class="infra_content_name">Otras edificaciones</h3>' +
+                                                                '<div class="content_infra">' +
+                                                                    '<table class="table content_infra_table">' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Patio</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_numPatios"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Losa deportiva</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_numLosDeportivas"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Cisterna - tanque</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_numCisTanques"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Muro de contención</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_numMurContencion"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                    '</table>' +
                                                                 '</div>' +
                                                             '</div>' +
 
                                                             '<div class="col-xs-12 quitar_izquierda">' +
                                                                 '<h3 class="infra_content_name">Servicios Básicos y Comunicaciones</h3>' +
                                                                 '<div class="content_infra">' +
-                                                                    '<table class="table content_infra_table"><tr><td width="90%">Energía eléctrica</td><td width="10%"><img src="<?php echo base_url()?>assets/img/icono/cancel.png" class="" alt=""/></td></tr><tr><td width="90%">Agua potable</td><td width="10%"><img src="<?php echo base_url()?>assets/img/icono/cancel.png" class="" alt=""/></td></tr><tr><td width="90%">Alcantarillado</td><td width="10%"><img src="<?php echo base_url()?>assets/img/icono/success.png" class="" alt=""/></td></tr><tr><td width="90%">Telefonía fija</td><td width="10%"><img src="<?php echo base_url()?>assets/img/icono/success.png" class="" alt=""/></td></tr><tr><td width="90%">Telefonía movil</td><td width="10%"><img src="<?php echo base_url()?>assets/img/icono/success.png" class="" alt=""/></td></tr><tr><td width="90%">internet</td><td width="10%"><img src="<?php echo base_url()?>assets/img/icono/cancel.png" class="" alt=""/></td></tr></table>' +
+                                                                    '<table class="table content_infra_table">'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Energía eléctrica</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_serBasEnerElec"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Agua potable</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_aguPtable"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Alcantarillado</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_alcantarillado"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Telefonía fija</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_telFija"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Telefonía movil</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_telMovil"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                        '<tr>'+
+                                                                            '<td width="90%">Internet</td>'+
+                                                                            '<td width="10%"><strong><span class="inf_internet"></span></strong></td>'+
+                                                                        '</tr>'+
+                                                                    '</table>' +
                                                                 '</div>' +
-                                                            '</div>' +
-
-                                                            '<div class="col-xs-12 quitar_izquierda">' +
-                                                                '<h3 class="infra_content_name">Otras edificaciones</h3>' +
-                                                                '<div class="content_infra">' +
-                                                                    '<table class="table content_infra_table"><tr><td width="90%">Patio</td><td width="10%">1</td></tr><tr><td width="90%">Losa deportiva</td><td width="10%">3</td></tr><tr><td width="90%">Cisterna - tanque</td><td width="10%">0</td></tr><tr><td width="90%">Muro de contención</td><td width="10%">0</td></tr></table>' +
-                                                                '</div>' +
-                                                            '</div>' +
-
-                                                            '<div class="col-xs-12 quitar_izquierda">' +
-                                                                '<h3 class="infra_content_name">Caracteristicas de las edificaciones</h3>' +
-                                                                '<div class="panel-group all_acordion" id="accordion">' +
-                                                                    '<div class="panel panel-default all_acordion_chidren">' +
-                                                                        '<div class="panel-heading all_acordion_title">' +
-                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
-                                                                                '<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">' +
-                                                                                    'Edificaciones por ejecutor de la obra' +
-                                                                                '</a>' +
-                                                                            '</h5>' +
-                                                                        '</div>' +
-                                                                        '<div id="collapseOne" class="panel-collapse collapse in">' +
-                                                                            '<div class="panel-body all_acordion_panelBody">' +
-                                                                                '<table class="table content_infra_table">' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Gobierno nacional / proyecto especial</td>' +
-                                                                                        '<td width="10%">13</td>' +
-                                                                                    '</tr>' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Apafa / autoconstrucción</td>' +
-                                                                                        '<td width="10%">4</td>' +
-                                                                                    '</tr>' +
-                                                                                '</table>' +
-                                                                            '</div>' +
-                                                                        '</div>' +
-                                                                    '</div>' +
-                                                                    '<div class="panel panel-default all_acordion_chidren">' +
-                                                                        '<div class="panel-heading all_acordion_title">' +
-                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
-                                                                                '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">' +
-                                                                                    'Edificaciones segun año de construcción' +
-                                                                                '</a>' +
-                                                                            '</h5>' +
-                                                                        '</div>' +
-                                                                        '<div id="collapseTwo" class="panel-collapse collapse">' +
-                                                                            '<div class="panel-body all_acordion_panelBody">' +
-                                                                                '<table class="table content_infra_table">' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Entre 1978 y 1998</td>' +
-                                                                                        '<td width="10%">13</td>' +
-                                                                                    '</tr>' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Después de 1998</td>' +
-                                                                                        '<td width="10%">4</td>' +
-                                                                                    '</tr>' +
-                                                                                '</table>' +
-                                                                            '</div>' +
-                                                                        '</div>' +
-                                                                    '</div>' +
-                                                                    '<div class="panel panel-default all_acordion_chidren">' +
-                                                                        '<div class="panel-heading all_acordion_title">' +
-                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
-                                                                                '<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">' +
-                                                                                    'Intervención a realizar' +
-                                                                                '</a>' +
-                                                                            '</h5>' +
-                                                                        '</div>' +
-                                                                        '<div id="collapseThree" class="panel-collapse collapse">' +
-                                                                            '<div class="panel-body all_acordion_panelBody">' +
-                                                                                '<table class="table content_infra_table">' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Número de edificaciones para mantenimiento</td>' +
-                                                                                        '<td width="10%">4</td>' +
-                                                                                    '</tr>' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Número de edificaciones para reforzamiento estructural</td>' +
-                                                                                        '<td width="10%">0</td>' +
-                                                                                    '</tr>' +
-                                                                                    '<tr>' +
-                                                                                        '<td width="90%">Número de edificaciones para demolición</td>' +
-                                                                                        '<td width="10%">13</td>'+
-                                                                                    '</tr>'+
-                                                                                '</table>'+
-                                                                            '</div>'+
-                                                                        '</div>'+
-                                                                    '</div>'+
-                                                                '</div>'+
                                                             '</div>' +
 
                                                         '</div>' +
@@ -566,33 +636,110 @@
                                                             '<div class="col-xs-12 h3_footer">' +
                                                                 '<h3 class="infra_content_name">ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES</h3>' +
                                                                 '<div class="content_infra">' +
-                                                                    '<table class="table content_infra_table"><tr><td width="90%">Aula común</td><td width="10%">10</td></tr><tr><td width="90%">Pedagógico</td><td width="10%">3</td></tr><tr><td width="90%">Administrativo</td><td width="10%">2</td></tr><tr><td width="90%">Complementario</td><td width="10%">0</td></tr><tr><td width="90%">Servicios</td><td width="10%">2</td></tr></table>' +
-                                                                '</div>' +
-                                                            '</div>' +
-                                                            '<div class="col-xs-12 h3_footer">' +
-                                                                '<h3 class="infra_content_name">Opinión técnica del evaluador</h3>' +
-                                                                '<div class="content_infra">' +
-                                                                    '<table class="table content_infra_table"><tr><td width="90%">Edificaciones para mantenimiento</td><td width="10%">3</td></tr><tr><td width="90%">Edificaciones para rehabilitación</td><td width="10%">2</td></tr><tr><td width="90%">Edificaciones para demolición</td><td width="10%">1</td></tr></table>' +
-                                                                '</div>' +
-                                                            '</div>' +
-
-                                                            '<div class="col-xs-12 h3_footer" style="margin-bottom: 10px">' +
-                                                                '<h3 class="infra_content_name" style="padding: 0;border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;padding-bottom: 5px;">' +
                                                                     '<table class="table content_infra_table">' +
                                                                         '<tr>' +
-                                                                            '<td width="90%">Total de pisos</td>' +
-                                                                            '<td width="10%">3</td>' +
+                                                                            '<td width="90%">Aula común</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_aulComun"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Pedagógico</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_pedagogico"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Administrativo</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_administrativo"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Complementario</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_complementario"></span></strong></td>' +
+                                                                        '</tr>' +
+                                                                        '<tr>' +
+                                                                            '<td width="90%">Servicios</td>' +
+                                                                            '<td width="10%"><strong><span class="inf_servicio"></span></strong></td>' +
                                                                         '</tr>' +
                                                                     '</table>' +
-                                                                '</h3>' +
-                                                            '</div>'+
-
-                                                            '<div class="col-xs-12 h3_footer">' +
-                                                                '<h3 class="infra_content_name">Área de terreno</h3>' +
-                                                                '<div class="content_infra">' +
-                                                                    '<table class="table content_infra_table"><tr><td width="90%">Área de terreno del local escolar</td><td width="10%">5,238m2</td></tr></table>' +
-                                                               '</div>' +
+                                                                '</div>' +
                                                             '</div>' +
+                                                            
+                                                            '<div class="col-xs-12 h3_footer">' +
+                                                                '<h3 class="infra_content_name">Caracteristicas de las edificaciones</h3>' +
+                                                                '<div class="panel-group all_acordion" id="accordion">' +
+                                                                    '<div class="panel panel-default all_acordion_chidren">' +
+                                                                        '<div class="panel-heading all_acordion_title">' +
+                                                                            '<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_1">' +
+                                                                                '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                                    'Edificaciones por ejecutor de la obra' +
+                                                                                '</h5>' +
+                                                                            '</a>' +
+                                                                        '</div>' +
+                                                                        '<div id="collapseOne_1" class="panel-collapse collapse in">' +
+                                                                            '<div class="panel-body all_acordion_panelBody">' +
+                                                                                '<table class="table content_infra_table">' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Gobierno nacional / proyecto especial</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_gobNacional"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Apafa / autoconstrucción</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_apafa"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                '</table>' +
+                                                                            '</div>' +
+                                                                        '</div>' +
+                                                                    '</div>' +
+                                                                    '<div class="panel panel-default all_acordion_chidren">' +
+                                                                        '<div class="panel-heading all_acordion_title">' +
+                                                                            '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_2">' +
+                                                                                '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                                    'Edificaciones segun año de construcción' +
+                                                                                '</h5>' +
+                                                                            '</a>' +
+                                                                        '</div>' +
+                                                                        '<div id="collapseTwo_2" class="panel-collapse collapse">' +
+                                                                            '<div class="panel-body all_acordion_panelBody">' +
+                                                                                '<table class="table content_infra_table">' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Entre 1978 y 1998</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_entre"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Después de 1998</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_despues"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                '</table>' +
+                                                                            '</div>' +
+                                                                        '</div>' +
+                                                                    '</div>' +
+                                                                    '<div class="panel panel-default all_acordion_chidren">' +
+                                                                        '<div class="panel-heading all_acordion_title">' +
+                                                                            '<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree_3">' +
+                                                                                '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                                    'Intervención a realizar' +
+                                                                                '</h5>' +
+                                                                            '</a>' +
+                                                                        '</div>' +
+                                                                        '<div id="collapseThree_3" class="panel-collapse collapse">' +
+                                                                            '<div class="panel-body all_acordion_panelBody">' +
+                                                                                '<table class="table content_infra_table">' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Número de edificaciones para mantenimiento</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_countEdiMante"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Número de edificaciones para reforzamiento estructural</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_countEdiEstruc"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Número de edificaciones para demolición</td>' +
+                                                                                        '<td width="10%"><strong><span class="inf_countEdiDemo"></span></strong></td>'+
+                                                                                    '</tr>'+
+                                                                                '</table>'+
+                                                                            '</div>'+
+                                                                        '</div>'+
+                                                                    '</div>'+
+                                                                '</div>'+
+                                                            '</div>' +
+                                                            
                                                         '</div>' +
                                                         '<div class="col-xs-12 h3_footer" >' +
                                                             '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
@@ -601,16 +748,7 @@
                                                 '</div>' +
                                             '</div>' +
                                         '</div>' +
-                                        '<div id="tab3" class="tab_content" style="display:none;">' +
-                                            '<div class="col-xs-12 text-center">'+
-                                                '<h3 class="general_content_name text-center">Croquis de Ubicación</h3>'+
-                                                '<img src="http://jc.pe/portafolio/cie/cap4-cap5/Amazonas/C.C/'+codigoid+'/PRED_1/CAP4/'+codigoid+'_1_Croquis.png" class="foto_img_croqui" /><br><br>'+
-                                                '<h3 class="general_content_name text-center">Esquema de distribución de espacio por número de piso</h3>'+
-                                                '<img src="http://jc.pe/portafolio/cie/cap4-cap5/Amazonas/C.C/'+codigoid+'/PRED_1/CAP5/'+codigoid+'_1_Piso1.png" class="foto_img_croqui" /><br><br>'+
-                                            '</div>'+
-                                        '</div>' +
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
-
                                             '<div class="col-xs-12 text-center">'+
                                                 '<h3 class="general_content_name text-center">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+

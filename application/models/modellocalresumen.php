@@ -10,8 +10,8 @@ class ModelLocalResumen extends CI_Model {
     }
 
     public function getDatosLocales($idCodigo) {
-        $this->db->where('id_local', $idCodigo);
-        $sql = $this->db->get('LOCAL_RESUMEN');
+        $this->db->where('codigo_de_local', $idCodigo);
+        $sql = $this->db->get('Local_Resumen');
         return $sql->result();
     }
 
