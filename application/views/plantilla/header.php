@@ -174,6 +174,17 @@
             .all_acordion_panelBody{
                 padding: 5px;
             }
+            
+            .panel-heading .accordion-toggle:before {
+                font-family: 'Glyphicons Halflings'; 
+                content: "\e114";
+                float: right;
+                color: grey;
+            }
+            .panel-heading .accordion-toggle.collapsed:before {
+                content: "\e080"; 
+            }
+            
         </style>
         <!-- script para traer los valores -->
         <script type="text/javascript">
@@ -453,10 +464,10 @@
                                                     '<div class="general_content">' +
                                                         '<h3 class="general_content_name text-center">Principales características del local escolar<br/>código del local escolar n° <span class="gen_codLocal"></span></h3>' +
                                                         
-                                                        '<div class="panel-group all_acordion" id="accordion">' +
-                                                            '<div class="panel panel-default all_acordion_chidren">' +
+                                                        '<div class="panel-group all_acordion" id="accordion_gen">' +
+                                                            '<div class="panel  panel-default all_acordion_chidren">' +
                                                                 '<div class="panel-heading all_acordion_title">' +
-                                                                    '<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_gen_1">' +
+                                                                    '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseOne_gen_1">' +
                                                                         '<h5 class="panel-title infra_content_name_collapse">' +
                                                                             'Institución educativa que presta servicios en el local escolar' +
                                                                         '</h5>' +
@@ -496,7 +507,7 @@
                                                             
                                                             '<div class="panel panel-default all_acordion_chidren">' +
                                                                 '<div class="panel-heading all_acordion_title">' +
-                                                                    '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_gen_2">' +
+                                                                    '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseTwo_gen_2">' +
                                                                         '<h5 class="panel-title infra_content_name_collapse">' +
                                                                             'Ubicación geográfica' +
                                                                         '</h5>' +
@@ -670,7 +681,7 @@
                                                                 '<div class="panel-group all_acordion" id="accordion">' +
                                                                     '<div class="panel panel-default all_acordion_chidren">' +
                                                                         '<div class="panel-heading all_acordion_title">' +
-                                                                            '<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_1">' +
+                                                                            '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_1">' +
                                                                                 '<h5 class="panel-title infra_content_name_collapse">' +
                                                                                     'Edificaciones por ejecutor de la obra' +
                                                                                 '</h5>' +
@@ -693,7 +704,7 @@
                                                                     '</div>' +
                                                                     '<div class="panel panel-default all_acordion_chidren">' +
                                                                         '<div class="panel-heading all_acordion_title">' +
-                                                                            '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_2">' +
+                                                                            '<a class="accordion-toggle" data-toggle="collapse"  data-parent="#accordion" href="#collapseTwo_2">' +
                                                                                 '<h5 class="panel-title infra_content_name_collapse">' +
                                                                                     'Edificaciones segun año de construcción' +
                                                                                 '</h5>' +
@@ -716,7 +727,7 @@
                                                                     '</div>' +
                                                                     '<div class="panel panel-default all_acordion_chidren">' +
                                                                         '<div class="panel-heading all_acordion_title">' +
-                                                                            '<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree_3">' +
+                                                                            '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree_3">' +
                                                                                 '<h5 class="panel-title infra_content_name_collapse">' +
                                                                                     'Intervención a realizar' +
                                                                                 '</h5>' +
