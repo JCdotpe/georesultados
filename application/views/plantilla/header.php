@@ -89,6 +89,10 @@
             }
             .general_content_name{
                 font-size: 16px;
+                border-radius: 5px 5px 0 0 ;
+                -webkit-border-radius: 5px 5px 0 0 ;
+                -moz-border-radius: 5px 5px 0 0 ;
+                margin-bottom: 0;
             }
             .general_content{
                 font-size: 11px;
@@ -537,7 +541,7 @@
                                                         
                                                         '<div class="row name_educativo">' +
                                                             '<div class="col-xs-12 text-center">'+
-                                                                '<h3 class="general_content_name text-center">Fotografía del Local Escolar</h3>'+
+                                                                '<h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3>'+
                                                                 '<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+
                                                             '</div>'+
                                                         '</div>' +
@@ -750,7 +754,7 @@
                                         '</div>' +
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12 text-center">'+
-                                                '<h3 class="general_content_name text-center">REGISTRO FOTOGRÁFICO</h3>'+
+                                                '<h3 class="general_content_name text-center" style="margin-bottom: 10px;">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+
                                                     '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " />'+
                                                 '</div>'+
