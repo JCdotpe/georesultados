@@ -91,15 +91,12 @@ table,td,tr,th{
     font-family: 'Open Sans', sans-serif;
 }
 .filtro_map {
-    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    top: 80px;
-    left: 20px;
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 1);
     margin: 0 !important;
     position: absolute;
-    width: 230px;
+    height: 100%;
+    width: 300px;
+    padding: 0 15px;
 }
 
 .coordenadas_map {

@@ -22,7 +22,7 @@
                 });
             });
         </script>
-        <script type="text/javascript">
+<!--        <script type="text/javascript">
             $(function() {
                 $(".search").keyup(function() {
                     var inputSearch = $(this).val();
@@ -76,7 +76,7 @@
                     }
                 });
             });
-        </script>
+        </script>-->
         <style type="text/css">
             .tooltip_info{
                 cursor: pointer;
@@ -377,100 +377,92 @@
                 $('.select2').select2();
                 carga_departamento();
 
-                $("#btnFindCodLocal").click(function() {
-                    var codLocal = $('#searchCodigo').val();
-                    if (codLocal == "") {
-                        $("#dv_download").hide();
-                        alert("Ingrese código");
-                        $('#searchCodigo').focus();
-                    } else {
-                        $('#prov').empty();
-                        $("#prov").append('<option value="">Seleccione</option>');
-                        $("#dv_prov .select2-chosen").text("Seleccione");
-                        $("#dv_dist .select2-chosen").text("Seleccione");
-                        $('#depa option:selected').val("");
-                        $("#dv_dep .select2-chosen").text("Seleccione");
-                        carga_departamento();
-                        var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal;
-                        $.get(url, function(data) {
-                            if(data.length==2){
-                                alert("Código incorrecto");
-                                $('#searchCodigo').focus().select();
-                                initialize();
-                            }else{
-                                $("#dv_download").slideDown('slow');
-                                $("#btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codLocal);
-                                var result = JSON.parse(data);
-                                $.each(result, function(i, datos) {
-                                    var latitud = datos.LatitudPunto_UltP;
-                                    var longitud = datos.LongitudPunto_UltP;
-                                    var puntokml = datos.cod_dpto+datos.cod_prov+datos.cod_dist;
-                                    console.log(puntokml);
-                                    load_kml_ft(table_dist, puntokml);
-
-                                    zomCenter = new google.maps.LatLng(latitud, longitud);
-                                    zom = 8;
-                                    map.setCenter(zomCenter);
-                                    map.setZoom(zom);
-                                });
-                                var query = " id_local = '" + codLocal + "' ";
-
-                                load_fusiontable(query);
-                            }
-                        });
-                    }
-                });
+//                $("#btnFindCodLocal").click(function() {
+//                    var codLocal = $('#searchCodigo').val();
+//                    if (codLocal == "") {
+//                        alert("Ingrese código");
+//                        $('#searchCodigo').focus();
+//                    } else {
+//                        $('#prov').empty();
+//                        $("#prov").append('<option value="">Seleccione</option>');
+//                        $("#dv_prov .select2-chosen").text("Seleccione");
+//                        $("#dv_dist .select2-chosen").text("Seleccione");
+//                        $('#depa option:selected').val("");
+//                        $("#dv_dep .select2-chosen").text("Seleccione");
+//                        carga_departamento();
+//                        var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal;
+//                        $.get(url, function(data) {
+//                            if(data.length==2){
+//                                alert("Código incorrecto");
+//                                $('#searchCodigo').focus().select();
+//                                initialize();
+//                            }else{
+//                                $("#dv_download").slideDown('slow');
+//                                $("#btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codLocal);
+//                                var result = JSON.parse(data);
+//                                $.each(result, function(i, datos) {
+//                                    var latitud = datos.LatitudPunto_UltP;
+//                                    var longitud = datos.LongitudPunto_UltP;
+//                                    var puntokml = datos.cod_dpto+datos.cod_prov+datos.cod_dist;
+//                                    console.log(puntokml);
+//                                    load_kml_ft(table_dist, puntokml);
+//
+//                                    zomCenter = new google.maps.LatLng(latitud, longitud);
+//                                    zom = 8;
+//                                    map.setCenter(zomCenter);
+//                                    map.setZoom(zom);
+//                                });
+//                                var query = " id_local = '" + codLocal + "' ";
+//
+//                                load_fusiontable(query);
+//                            }
+//                        });
+//                    }
+//                });
                 
-                $("#btnFindColegio").click(function(){
-                
-                    var codLocal_1 = $('.hiddenColegioCodigo').text().trim();
-                    //alert(codLocal_1);
-                    if (codLocal_1 == "") {
-                        alert("Ingrese el nombre de la Institución");
-                        $('.searchColegio').focus();
-                    } else {
-                        $('#prov').empty();
-                        $("#prov").append('<option value="">Seleccione</option>');
-                        $("#dv_prov .select2-chosen").text("Seleccione");
-                        $("#dv_dist .select2-chosen").text("Seleccione");
-                        $('#depa option:selected').val("");
-                        $("#dv_dep .select2-chosen").text("Seleccione");
-                        carga_departamento();
-                        var url_1 = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal_1;
-                        $.get(url_1, function(data_1) {
-                            var result_1 = JSON.parse(data_1);
-                            $.each(result_1, function(i, datos_1) {
-                                var latitud_1 = datos_1.LatitudPunto_UltP;
-                                var longitud_1 = datos_1.LongitudPunto_UltP;
-                                var puntokml_1 = datos_1.cod_dpto+datos_1.cod_prov+datos_1.cod_dist;
-                                console.log(codLocal_1+" ");
-                                console.log(puntokml_1);
-                                load_kml_ft(table_dist, puntokml_1);
-
-                                zomCenter_1 = new google.maps.LatLng(latitud_1, longitud_1);
-                                zom_1 = 8;
-                                map.setCenter(zomCenter_1);
-                                map.setZoom(zom_1);
-                            });
-                            var query = " id_local = '" + codLocal_1 + "' ";
-
-                            load_fusiontable(query);
-                            
-                        });
-                    }
-                });
+//                $("#btnFindColegio").click(function(){
+//                
+//                    var codLocal_1 = $('.hiddenColegioCodigo').text().trim();
+//                    //alert(codLocal_1);
+//                    if (codLocal_1 == "") {
+//                        alert("Ingrese el nombre de la Institución");
+//                        $('.searchColegio').focus();
+//                    } else {
+//                        $('#prov').empty();
+//                        $("#prov").append('<option value="">Seleccione</option>');
+//                        $("#dv_prov .select2-chosen").text("Seleccione");
+//                        $("#dv_dist .select2-chosen").text("Seleccione");
+//                        $('#depa option:selected').val("");
+//                        $("#dv_dep .select2-chosen").text("Seleccione");
+//                        carga_departamento();
+//                        var url_1 = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal_1;
+//                        $.get(url_1, function(data_1) {
+//                            var result_1 = JSON.parse(data_1);
+//                            $.each(result_1, function(i, datos_1) {
+//                                var latitud_1 = datos_1.LatitudPunto_UltP;
+//                                var longitud_1 = datos_1.LongitudPunto_UltP;
+//                                var puntokml_1 = datos_1.cod_dpto+datos_1.cod_prov+datos_1.cod_dist;
+//                                console.log(codLocal_1+" ");
+//                                console.log(puntokml_1);
+//                                load_kml_ft(table_dist, puntokml_1);
+//
+//                                zomCenter_1 = new google.maps.LatLng(latitud_1, longitud_1);
+//                                zom_1 = 8;
+//                                map.setCenter(zomCenter_1);
+//                                map.setZoom(zom_1);
+//                            });
+//                            var query = " id_local = '" + codLocal_1 + "' ";
+//
+//                            load_fusiontable(query);
+//                            
+//                        });
+//                    }
+//                });
                 
                 
 
                 $('#depa').change(function() {
                     var cod_ubigeo;
-                    $('#searchCodigo').val("");
-                    
-                    $('#optCodigo').attr("checked",false);
-                    $('#optColegio').attr("checked",false);
-                    $('.searchColegio').val("");
-                    $('#dv_searchColegio').hide();
-                    $('#dv_search').hide();
                     $('#prov').empty();
                     $("#prov").append('<option value="">Seleccione</option>');
                     $("#dv_prov .select2-chosen").text("Seleccione");

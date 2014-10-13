@@ -30,18 +30,3 @@ function validar(e) {
     return patron.test(te);
 }
 
-$(function() {
-    $('#optCodigo').click(function() {
-        $("#dv_searchColegio").slideUp('fast').hide();
-        $("#dv_search").show();
-        $("#searchCodigo").focus();
-        $('#searchColegio').val("");
-    });
-    $('#optColegio').click(function() {
-        $('#searchCodigo').val("");
-        $("#dv_search").slideUp('fast').hide();
-        $("#dv_searchColegio").show();
-        $('#searchColegio').focus();
-    });
-});
-
