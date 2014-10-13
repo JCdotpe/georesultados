@@ -15,7 +15,62 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".tooltip_info").tooltip({
+                    placement: 'right'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function() {
+                $(".search").keyup(function() {
+                    var inputSearch = $(this).val();
+                    var dataString = 'searchword=' + inputSearch;
+                    if (inputSearch != '') {
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo base_url() ?>buscarIE",
+                            data: dataString,
+                            cache: false,
+                            success: function(data) {
+                                $("#divResult").html(data).show();
+                            }
+                        });
+                    }
+                    return false;
+                });
+
+                $("#divResult").on("click", function(e) {
+                    
+                    var $clicked = $(e.target);
+                    var $name = $clicked.find('.name').html();
+                    var decoded = $("<div/>").html($name).text();
+                    $('#searchColegio').val(decoded);
+                    
+                    var $clicked_2 = $(e.target);
+                    var $name_2 = $clicked_2.find('.hiddenColegio').html();
+                    var decoded_2 = $("<div/>").html($name_2).text();
+                    $('#hiddenColegioCodigo').text(decoded_2);
+                });
+                $(document).on("click", function(e) {
+                    var $clicked = $(e.target);
+                    if (!$clicked.hasClass("search")) {
+                        $("#divResult").fadeOut();
+                    }
+                });
+                $('#searchColegio').click(function() {
+                    $(this).select();
+                    if($(".search").val() !=""){
+                        $("#divResult").fadeIn();
+                    }
+                });
+            });
+        </script>
         <style type="text/css">
+            .tooltip_info{
+                cursor: pointer;
+            }
             ul.tabs {
                 margin: 0;
                 padding: 0;
@@ -185,6 +240,47 @@
                 content: "\e080"; 
             }
             
+            .contentArea{
+                width:600px;
+                margin:0 auto;
+            }
+            #inputSearch{
+                width:350px;
+                border:solid 1px #000;
+                padding:3px;
+            }
+            #divResult{
+                z-index: 99999999;
+                position:absolute;
+                width:350px;
+                display:none;
+                margin-top:31px;
+                border:solid 1px #dedede;
+                border-top:0px;
+                overflow:hidden;
+                border-bottom-right-radius: 6px;
+                border-bottom-left-radius: 6px;
+                -moz-border-bottom-right-radius: 6px;
+                -moz-border-bottom-left-radius: 6px;
+                box-shadow: 0px 0px 5px #999;
+                border-width: 3px 1px 1px;
+                background-color: white;
+            }
+            .display_box{
+                padding:4px; border-top:solid 1px #dedede; 
+                font-size:12px; height:50px;
+            }
+            .display_box:hover{
+                background: #00A1C7;
+                color:#FFFFFF;
+                cursor:pointer;
+            }
+            .descar_info{
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                border-radius: 5px 5px 0 0;
+                font-size: 16px;
+            }
         </style>
         <!-- script para traer los valores -->
         <script type="text/javascript">
@@ -280,8 +376,8 @@
                         var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal;
                         $.get(url, function(data) {
                             if(data.length==2){
-                                $("#dv_download").hide();
                                 alert("Código incorrecto");
+                                $('#searchCodigo').focus().select();
                                 initialize();
                             }else{
                                 $("#dv_download").slideDown('slow');
@@ -306,10 +402,57 @@
                         });
                     }
                 });
+                
+                $("#btnFindColegio").click(function(){
+                
+                    var codLocal_1 = $('#hiddenColegioCodigo').text().trim();
+                    //alert(codLocal_1);
+                    if (codLocal_1 == "") {
+                        alert("Ingrese el nombre de la Institución");
+                        $('#searchColegio').focus();
+                    } else {
+                        $('#prov').empty();
+                        $("#prov").append('<option value="">Seleccione</option>');
+                        $("#dv_prov .select2-chosen").text("Seleccione");
+                        $("#dv_dist .select2-chosen").text("Seleccione");
+                        $('#depa option:selected').val("");
+                        $("#dv_dep .select2-chosen").text("Seleccione");
+                        carga_departamento();
+                        var url_1 = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal_1;
+                        $.get(url_1, function(data_1) {
+                            var result_1 = JSON.parse(data_1);
+                            $.each(result_1, function(i, datos_1) {
+                                var latitud_1 = datos_1.LatitudPunto_UltP;
+                                var longitud_1 = datos_1.LongitudPunto_UltP;
+                                var puntokml_1 = datos_1.cod_dpto+datos_1.cod_prov+datos_1.cod_dist;
+                                console.log(codLocal_1+" ");
+                                console.log(puntokml_1);
+                                load_kml_ft(table_dist, puntokml_1);
+
+                                zomCenter_1 = new google.maps.LatLng(latitud_1, longitud_1);
+                                zom_1 = 8;
+                                map.setCenter(zomCenter_1);
+                                map.setZoom(zom_1);
+                            });
+                            var query = " id_local = '" + codLocal_1 + "' ";
+
+                            load_fusiontable(query);
+                            
+                        });
+                    }
+                });
+                
+                
 
                 $('#depa').change(function() {
                     var cod_ubigeo;
                     $('#searchCodigo').val("");
+                    
+                    $('#optCodigo000043').attr("checked",false);
+                    $('#optColegio').attr("checked",false);
+                    $('#searchColegio').val("");
+                    $('#dv_searchColegio').hide();
+                    $('#dv_search').hide();
                     $('#prov').empty();
                     $("#prov").append('<option value="">Seleccione</option>');
                     $("#dv_prov .select2-chosen").text("Seleccione");
@@ -409,6 +552,7 @@
                                 $.each(result, function(i, datos) {
                                     //General
                                     /*'<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+ */
+                                    $("#btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
                                     if(datos.RutaFoto !=null){
                                         $('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></div></div>');
                                     }else{
@@ -474,6 +618,7 @@
                                             '<div class="col-xs-12 h3_footer">' +
                                                 '<div class="general">' +
                                                     '<div class="general_content">' +
+                                                        '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar información</a>' +
                                                         '<h3 class="general_content_name text-center">Principales características del local escolar<br/>código del local escolar n° <span class="gen_codLocal"></span></h3>' +
                                                         
                                                         '<div class="panel-group all_acordion" id="accordion_gen">' +
@@ -568,11 +713,14 @@
                                                 '</div>' +
                                             '</div>' +
                                         '</div>' +
+                                        
                                         '<div id="tab2" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
                                                     '<div class="row infra_content">' +
+                                                        '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar información</a>' +
                                                         '<div class="col-xs-6 h3_footer">' +
+                                                            
                                                             '<div class="col-xs-12 quitar_izquierda">' +
                                                                 '<h3 class="infra_content_name">Número predios y edificaciones</h3>' +
                                                                 '<div class="content_infra">' +
@@ -771,8 +919,10 @@
                                                 '</div>' +
                                             '</div>' +
                                         '</div>' +
+                                        
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12 text-center">'+
+                                                '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar información</a>' +
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+
                                                     '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " />'+

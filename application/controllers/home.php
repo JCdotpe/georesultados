@@ -25,6 +25,11 @@ class Home extends CI_Controller {
         echo json_encode($locales);
     }
 
+    public function getSearchIE() {
+        $datos['searchwordPost'] = $this->input->post('searchword');
+        $datos['result_IE'] = $this->modeloResumen->getIESearch($datos['searchwordPost']);
+        $this->load->view('front/dataSearch', $datos);
+    }
     
     public function general() {
 //        $datos['titulo'] = "Caracteristicas generales del local escolar";
