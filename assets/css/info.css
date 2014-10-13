@@ -32,6 +32,21 @@
     font-family: 'Arimo', sans-serif;
     color: #fff;text-transform: uppercase;background: #1a4f83;font-weight: bold; border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px; padding: 10px 0;margin-top: 0;
 }
+
+.general_content_name_general{
+    font-family: 'Arimo', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    background: #1a4f83;
+    font-weight: bold;
+    border-radius: 5px 0 0 0;
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+    padding: 10px 0;
+    margin-top: 0;
+    font-size: 14px;
+}
+
 .name_educativo{
     font-family: 'Arimo', sans-serif;
     text-transform: uppercase;
