@@ -448,7 +448,7 @@
                     var cod_ubigeo;
                     $('#searchCodigo').val("");
                     
-                    $('#optCodigo000043').attr("checked",false);
+                    $('#optCodigo').attr("checked",false);
                     $('#optColegio').attr("checked",false);
                     $('#searchColegio').val("");
                     $('#dv_searchColegio').hide();
