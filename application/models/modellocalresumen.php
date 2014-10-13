@@ -16,7 +16,7 @@ class ModelLocalResumen extends CI_Model {
     }
 
     public function getIESearch($palabra) {
-        $sql = $this->db->query("SELECT TOP 5 codigo_de_local, nombres_IIEE FROM Local_Resumen where nombres_IIEE like '%" . $palabra . "%' ORDER BY codigo_de_local ");
+        $sql = $this->db->query("SELECT  codigo_de_local, nombres_IIEE,dpto_nombre,prov_nombre,dist_nombre FROM Local_Resumen where nombres_IIEE like '%" . $palabra . "%' ORDER BY codigo_de_local ");
         return $sql->result();
     }
 

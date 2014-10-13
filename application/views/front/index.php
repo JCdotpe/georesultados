@@ -18,50 +18,44 @@
     <div class="filtro_map">
         <div class="row">
             <div class="col-xs-12">
-                <!-- Buscador -->
-
+                <!-- Buscador Tipo -->
                 <div id="dv_searchTipo" class="form-group col-xs-12 text-center" style="margin-bottom: -6px;">
-                    <label class="preguntas_sub2" for="searchCodigo">Tipo de búsqueda:</label>
-                    <div class="form-group"  style="margin-bottom: 0px;">
+                    <label class="preguntas_sub2" >Tipo de búsqueda:</label>
+                    <div class="form-group text-left" style="margin-bottom: 0px;">
                         <div class="radio"  style="margin-top: 0px;">
-                            <label><input type="radio" name="optTipoBusqueda" id="optCodigo" value="cod">Por código</label>
+                            <label><input type="radio" name="optTipoBusqueda" id="optCodigo" value="cod">Por código de local escolar</label>
                         </div>
                         <div class="radio" style="margin-top: 0px;">
-                            <label><input type="radio" name="optTipoBusqueda" id="optColegio" value="col">Por colegio</label>
+                            <label><input type="radio" name="optTipoBusqueda" id="optColegio" value="col">Por nombre de I.E <i class="glyphicon glyphicon-question-sign tooltip_info" data-toggle="tooltip" data-placement="right" title="" data-original-title="Institución Educativa"></i></label>
                         </div>
                     </div>
                 </div>
-
+                <!-- Fin Buscador Tipo-->
+                
+                <!-- Buscador codigo -->
                 <div id="dv_search">
-                    <div id="dv_searchParent" class="form-group col-xs-12 text-center">
+                    <div id="dv_searchParent" class="form-group col-xs-12 text-center"  style="margin-bottom: 0;">
                         <label class="preguntas_sub2" for="searchCodigo">Buscar por código</label>
-                        <div class="form-group">
-                            <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Buscar por código" onKeyPress="return validar(event);" style="width: 120px;margin-right: 6px;"/>
+                        <div class="form-group col-xs-12 h3_footer">
+                            <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Buscar por código" onKeyPress="return validar(event);" style="width: 142px;margin-right: 6px;"/>
                             <button type="submit" class="col-xs-3 btn btn-primary btn-sm" id="btnFindCodLocal" name="btnFindCodLocal"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
-
-<!--                    <div id="dv_download" class="form-group col-xs-12 text-center">
-                        <label class="preguntas_sub2" for="searchCodigo">Descargar Información</label>
-                        <div class="form-group">
-                            <a href="" class="col-xs-12 btn btn-success btn-sm" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar</a>
-                        </div>
-                    </div>-->
                 </div>
+                <!-- Fin Buscador codigo -->
 
-
-                <div id="dv_searchColegio" class="form-group col-xs-12 text-center">
+                <!-- Buscador Colegio -->
+                <div id="dv_searchColegio" class="form-group col-xs-12 text-center"  style="margin-bottom: 0;">
                     <label class="preguntas_sub2" for="searchColegio">Ingrese nombre I.E <i class="glyphicon glyphicon-question-sign tooltip_info" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ingrese nombre Institución Educativa"></i></label>
-                    <div class="form-group contentArea">
-                        <input type="text" name="searchColegio" class="col-xs-9 form-control input-sm search" id="searchColegio" placeholder="Ingrese nombre I.E" style="width: 120px;margin-right: 6px;"/>
-                        
+                    <div class="form-group contentArea col-xs-12 h3_footer">
+                        <input type="text" name="searchColegio" class="col-xs-9 form-control input-sm search searchColegio" id="searchColegio" placeholder="Ingrese nombre I.E"  style="width: 142px;margin-right: 6px;"/>
                         <button type="submit" class="col-xs-3 btn btn-primary btn-sm" id="btnFindColegio" name="btnFindCodLocal" style="width: 50px"><i class="glyphicon glyphicon-search" ></i></button>
-                        <div id="hiddenColegioCodigo" style="display: none"></div>
+                        <div class="hiddenColegioCodigo" style="display: none"></div>
                         <div id="divResult"></div>
                     </div>
                 </div>
-
-                <!-- Fin Buscador -->
+                <!-- Fin Buscador Colegio -->
+                
                 <!-- Departamento -->
                 <div id="dv_dep" class="form-group col-xs-12 text-center">
                     <label class="preguntas_sub2" for="depa">departamento</label>
@@ -72,6 +66,7 @@
                     </select>
                 </div>
                 <!-- Fin Departamento -->
+                
                 <!-- Provincia -->
                 <div id="dv_prov" class="form-group col-xs-12 text-center">
                     <label class="preguntas_sub2" for="prov">provincia</label>
@@ -83,6 +78,7 @@
                     </div>
                 </div>
                 <!-- fin provincia-->
+                
                 <!-- Distrito -->
                 <div id="dv_dist" class="form-group col-xs-12 text-center">
                     <label class="preguntas_sub2" for="dist">distrito</label>
@@ -92,6 +88,7 @@
                     </select>                            
                 </div>
                 <!-- Fin Distrito -->
+                
             </div>
         </div>
     </div>

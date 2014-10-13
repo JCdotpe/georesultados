@@ -35,16 +35,13 @@ $(function() {
         $("#dv_searchColegio").slideUp('fast').hide();
         $("#dv_search").show();
         $("#searchCodigo").focus();
-        
+        $('#searchColegio').val("");
     });
     $('#optColegio').click(function() {
-        $("#dv_search").slideUp('fast').hide();
         $('#searchCodigo').val("");
-        $('#searchColegio').val("").focus();
-        $('#dv_download').attr("href", "").hide();
+        $("#dv_search").slideUp('fast').hide();
         $("#dv_searchColegio").show();
-        
-        
+        $('#searchColegio').focus();
     });
 });
 

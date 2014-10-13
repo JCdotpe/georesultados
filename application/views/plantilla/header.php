@@ -41,25 +41,35 @@
                     return false;
                 });
 
+//                $(".contenido_colegio").on("click", function() {
+//                   var obtener = $(".name").html();
+//                   console.log(obtener);
+//                });
+
+            
+
                 $("#divResult").on("click", function(e) {
                     
-                    var $clicked = $(e.target);
-                    var $name = $clicked.find('.name').html();
-                    var decoded = $("<div/>").html($name).text();
-                    $('#searchColegio').val(decoded);
+                    var clicked = $(e.target);
+                    var name = clicked.find('.name').html();
+                    var decoded = $("<div/>").html(name).text();
+                    console.log(name);
+                    console.log(decoded);
+                    $('.searchColegio').val(decoded);
                     
                     var $clicked_2 = $(e.target);
                     var $name_2 = $clicked_2.find('.hiddenColegio').html();
                     var decoded_2 = $("<div/>").html($name_2).text();
-                    $('#hiddenColegioCodigo').text(decoded_2);
+                    $('.hiddenColegioCodigo').text(decoded_2);
                 });
+                
                 $(document).on("click", function(e) {
                     var $clicked = $(e.target);
                     if (!$clicked.hasClass("search")) {
                         $("#divResult").fadeOut();
                     }
                 });
-                $('#searchColegio').click(function() {
+                $('.searchColegio').click(function() {
                     $(this).select();
                     if($(".search").val() !=""){
                         $("#divResult").fadeIn();
@@ -151,6 +161,7 @@
             }
             .general_content{
                 font-size: 11px;
+                display: inline-block;
             }
             .select2-results {
                 /*font-family: 'Arimo', sans-serif;*/
@@ -281,6 +292,13 @@
                 border-radius: 5px 5px 0 0;
                 font-size: 16px;
             }
+            .descar_info_general {
+                margin-bottom: 10px;
+                border-radius: 0 5px 0 0;
+                -moz-border-radius: 0 5px 0 0;
+                -webkit-border-radius: 0 5px 0 0;
+                font-size: 13px;
+            }
         </style>
         <!-- script para traer los valores -->
         <script type="text/javascript">
@@ -294,7 +312,7 @@
             var table_prov = '1tmpbIqHGt8ymHU_L_qTEOpzcMHTOh3i_zzvWB7ZQ';
             var table_dist = '1Qvu7A-6HA7TCPVTAJ6xgld_3J7UFBr2SIlbQBz4w';
             var infowindow = new google.maps.InfoWindow({
-                size: new google.maps.Size(550, 450)
+                size: new google.maps.Size(650, 550)
             });
             function checkGoogleMap() {
                 var msg = document.getElementById('msg');
@@ -405,11 +423,11 @@
                 
                 $("#btnFindColegio").click(function(){
                 
-                    var codLocal_1 = $('#hiddenColegioCodigo').text().trim();
+                    var codLocal_1 = $('.hiddenColegioCodigo').text().trim();
                     //alert(codLocal_1);
                     if (codLocal_1 == "") {
                         alert("Ingrese el nombre de la Institución");
-                        $('#searchColegio').focus();
+                        $('.searchColegio').focus();
                     } else {
                         $('#prov').empty();
                         $("#prov").append('<option value="">Seleccione</option>');
@@ -450,7 +468,7 @@
                     
                     $('#optCodigo').attr("checked",false);
                     $('#optColegio').attr("checked",false);
-                    $('#searchColegio').val("");
+                    $('.searchColegio').val("");
                     $('#dv_searchColegio').hide();
                     $('#dv_search').hide();
                     $('#prov').empty();
@@ -512,8 +530,16 @@
                     checkGoogleMap();
                     condicion = query;
                     cargar_tabs();
-
                 }
+                
+                if($('.searchColegio').val() !="" && $('#depa').val() == ""){
+                    maploaded = false;
+                    checkGoogleMap();
+                    condicion = query;
+                    cargar_tabs();
+                }
+                
+                
                 if ($('#depa').val() != "") {
                     maploaded = false;
                     checkGoogleMap();
@@ -552,7 +578,7 @@
                                 $.each(result, function(i, datos) {
                                     //General
                                     /*'<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+ */
-                                    $("#btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
+                                    $(".btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
                                     if(datos.RutaFoto !=null){
                                         $('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></div></div>');
                                     }else{
@@ -618,97 +644,101 @@
                                             '<div class="col-xs-12 h3_footer">' +
                                                 '<div class="general">' +
                                                     '<div class="general_content">' +
-                                                        '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar información</a>' +
-                                                        '<h3 class="general_content_name text-center">Principales características del local escolar<br/>código del local escolar n° <span class="gen_codLocal"></span></h3>' +
-                                                        
-                                                        '<div class="panel-group all_acordion" id="accordion_gen">' +
-                                                            '<div class="panel  panel-default all_acordion_chidren">' +
-                                                                '<div class="panel-heading all_acordion_title">' +
-                                                                    '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseOne_gen_1">' +
-                                                                        '<h5 class="panel-title infra_content_name_collapse">' +
-                                                                            'Institución educativa que presta servicios en el local escolar' +
-                                                                        '</h5>' +
-                                                                    '</a>' +
-                                                                '</div>' +
-                                                                '<div id="collapseOne_gen_1" class="panel-collapse collapse in">' +
-                                                                    '<div class="panel-body all_acordion_panelBody">' +
-                                                                        '<table class="table content_infra_table">' +
-                                                                            '<tr>' +
-                                                                                '<td width="40%">Nombre de la I.E</td>' +
-                                                                                '<td width="60%"><strong><span class="gen_nombreIE"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="40%">Nombre del director</td>' +
-                                                                                '<td width="60%"><strong><span class="gen_dirLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="40%">Teléfono</td>' +
-                                                                                '<td width="60%"><strong><span class="gen_telLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="40%">Nivel Educativo</td>' +
-                                                                                '<td width="60%"><strong><span class="gen_nivEducativo"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="40%">Propietario del predio</td>' +
-                                                                                '<td width="60%"><strong><span class="gen_proLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="40%">Número de alumnos</td>' +
-                                                                                '<td width="60%"><strong><span class="gen_countAlumnos"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                        '</table>' +
+                                                        '<div class="col-xs-12 h3_footer">'+
+                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                            '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                                        '</div>'+
+                                                        '<div class="col-xs-12 h3_footer">'+
+                                                            '<div class="panel-group all_acordion" id="accordion_gen">' +
+                                                                '<div class="panel  panel-default all_acordion_chidren">' +
+                                                                    '<div class="panel-heading all_acordion_title">' +
+                                                                        '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseOne_gen_1">' +
+                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                                'Institución educativa que presta servicios en el local escolar' +
+                                                                            '</h5>' +
+                                                                        '</a>' +
+                                                                    '</div>' +
+                                                                    '<div id="collapseOne_gen_1" class="panel-collapse collapse in">' +
+                                                                        '<div class="panel-body all_acordion_panelBody">' +
+                                                                            '<table class="table content_infra_table">' +
+                                                                                '<tr>' +
+                                                                                    '<td width="40%">Nombre de la I.E</td>' +
+                                                                                    '<td width="60%"><strong><span class="gen_nombreIE"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="40%">Nombre del director</td>' +
+                                                                                    '<td width="60%"><strong><span class="gen_dirLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="40%">Teléfono</td>' +
+                                                                                    '<td width="60%"><strong><span class="gen_telLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="40%">Nivel Educativo</td>' +
+                                                                                    '<td width="60%"><strong><span class="gen_nivEducativo"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="40%">Propietario del predio</td>' +
+                                                                                    '<td width="60%"><strong><span class="gen_proLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="40%">Número de alumnos</td>' +
+                                                                                    '<td width="60%"><strong><span class="gen_countAlumnos"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                            '</table>' +
+                                                                        '</div>' +
                                                                     '</div>' +
                                                                 '</div>' +
-                                                            '</div>' +
-                                                            
-                                                            '<div class="panel panel-default all_acordion_chidren">' +
-                                                                '<div class="panel-heading all_acordion_title">' +
-                                                                    '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseTwo_gen_2">' +
-                                                                        '<h5 class="panel-title infra_content_name_collapse">' +
-                                                                            'Ubicación geográfica' +
-                                                                        '</h5>' +
-                                                                    '</a>' +
-                                                                '</div>' +
-                                                                '<div id="collapseTwo_gen_2" class="panel-collapse collapse">' +
-                                                                    '<div class="panel-body all_acordion_panelBody">' +
-                                                                        '<table class="table content_infra_table">' +
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Departamento</td>' +
-                                                                                '<td width="70%"><strong><span class="gen_departLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Provincia</td>' +
-                                                                                '<td width="70%"><strong><span class="gen_provLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Distrito</td>' +
-                                                                                '<td width="70%"><strong><span class="gen_distLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Centro poblado</td>' +
-                                                                                '<td width="70%"><strong><span class="micentropoblado"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Área</td>' +
-                                                                                '<td width="70%"><strong><span class="gen_areaLocal"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Dirección</td>' +
-                                                                                '<td width="70%"><strong><span class="gen_direccionIE"></span></strong></td>' +
-                                                                            '</tr>' + 
-                                                                            '<tr>' +
-                                                                                '<td width="30%">Georeferenciación</td>' +
-                                                                                '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong><span class="gen_longitud"></span></strong></td>' +
-                                                                            '</tr>' +
-                                                                        '</table>' +
+
+                                                                '<div class="panel panel-default all_acordion_chidren">' +
+                                                                    '<div class="panel-heading all_acordion_title">' +
+                                                                        '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseTwo_gen_2">' +
+                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                                'Ubicación geográfica' +
+                                                                            '</h5>' +
+                                                                        '</a>' +
+                                                                    '</div>' +
+                                                                    '<div id="collapseTwo_gen_2" class="panel-collapse collapse">' +
+                                                                        '<div class="panel-body all_acordion_panelBody">' +
+                                                                            '<table class="table content_infra_table">' +
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Departamento</td>' +
+                                                                                    '<td width="70%"><strong><span class="gen_departLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Provincia</td>' +
+                                                                                    '<td width="70%"><strong><span class="gen_provLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Distrito</td>' +
+                                                                                    '<td width="70%"><strong><span class="gen_distLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Centro poblado</td>' +
+                                                                                    '<td width="70%"><strong><span class="micentropoblado"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Área</td>' +
+                                                                                    '<td width="70%"><strong><span class="gen_areaLocal"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Dirección</td>' +
+                                                                                    '<td width="70%"><strong><span class="gen_direccionIE"></span></strong></td>' +
+                                                                                '</tr>' + 
+                                                                                '<tr>' +
+                                                                                    '<td width="30%">Georeferenciación</td>' +
+                                                                                    '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong><span class="gen_longitud"></span></strong></td>' +
+                                                                                '</tr>' +
+                                                                            '</table>' +
+                                                                        '</div>' +
                                                                     '</div>' +
                                                                 '</div>' +
-                                                            '</div>' +
+                                                            '</div>'+
                                                         '</div>'+
                                                         
-                                                        '<div class="gen_rutaFoto"></div>'+
-                                                        
+                                                        '<div class="col-xs-12 h3_footer">'+
+                                                            '<div class="gen_rutaFoto"></div>'+
+                                                        '</div>'+
                                                     '</div>' +
                                                 '</div>' +
                                             '</div>' +
@@ -718,7 +748,7 @@
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
                                                     '<div class="row infra_content">' +
-                                                        '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar información</a>' +
+                                                        '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info btnDonwload" id=""><i class="glyphicon glyphicon-download-alt"></i> Descargar<br>información</a>' +
                                                         '<div class="col-xs-6 h3_footer">' +
                                                             
                                                             '<div class="col-xs-12 quitar_izquierda">' +
@@ -922,7 +952,8 @@
                                         
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12 text-center">'+
-                                                '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info" id="btnDonwload"><i class="glyphicon glyphicon-download"></i> Descargar información</a>' +
+                                                
+                                                '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info btnDonwload" id=""><i class="glyphicon glyphicon-download-alt"></i> Descargar<br>información</a>' +
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+
                                                     '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " />'+

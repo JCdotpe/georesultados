@@ -7,8 +7,9 @@ foreach ($result_IE as $resulIEE) {
     ?>
     <div class="display_box" align="left">
         <div class="contenido_colegio">
-            <span class="name" style="font-size: 14px;"><?php echo $final_username; ?></span>
-            <span class="name_lugar" style="font-size: 11px;"><strong><?php echo $resulIEE->dpto_nombre; ?></strong> - <strong><?php echo $resulIEE->prov_nombre; ?></strong> - <strong><?php echo $resulIEE->dist_nombre; ?></strong></span>
+            <span class="name" ><?php echo $final_username; ?></span><br>
+            <span class="name_lugar"><strong><?php echo $resulIEE->dpto_nombre; ?></strong> - <strong><?php echo $resulIEE->prov_nombre; ?></strong> - <strong><?php echo $resulIEE->dist_nombre; ?></strong></span>
+            <span class="hiddenColegio" style="display: none"><?php echo $resulIEE->codigo_de_local; ?></span>
             <span class="hiddenColegio" style="display: none"><?php echo $resulIEE->codigo_de_local; ?></span>
         </div>
     </div>
