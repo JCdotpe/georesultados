@@ -17,7 +17,6 @@ class Home extends CI_Controller {
     }
 
     public function getBubble() {
-        
         $idCodigo = $_GET['idCodigo'];
         $locales = $this->modeloResumen->getDatosLocales($idCodigo);
         
@@ -31,29 +30,11 @@ class Home extends CI_Controller {
 //        $this->load->view('front/dataSearch', $datos);
 //    }
     
-    public function general() {
-//        $datos['titulo'] = "Caracteristicas generales del local escolar";
-//        $datos['contenido'] = "datos/general";
-//        $this->load->view('plantilla/plantilla', $datos);
-        $this->load->view('datos/general');
-    }
 
-    public function infraestructura() {
-//        $datos['titulo']= "Infraestructura del local escolar";
-//        $datos['contenido'] = "datos/infraestructura";
-//        $this->load->view('plantilla/plantilla',$datos);
-//        $datos['contenido'] = "datos/infraestructura";
-        $this->load->view('datos/infraestructura');
-    }
-
-    public function tabs() {
-        $datos['titulo'] = "Tabs de navegación";
-        $datos['contenido'] = "datos/tabs";
-        $this->load->view('plantilla/plantilla', $datos);
-//        $this->load->view('datos/tabs');
-    }
     public function getSearchIE() {
+        
         $datos['datosEnviar'] = $_REQUEST;
+        $datos[''] = $this->modeloResumen->getIESearch($_REQUEST);
         $this->load->view("front/recargarDatos",$datos);
     }
     

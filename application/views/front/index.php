@@ -39,7 +39,7 @@
                         <!-- Fin Buscador codigo -->                    
 
                         <!-- Departamento -->
-                        <div id="dv_dep" class="form-group col-xs-12 text-center">
+                        <div id="dv_dep" class="form-group col-xs-12 text-center coger_valor">
                             <label class="preguntas_sub2" for="depa">departamento</label>
                             <select id="depa" class="col-xs-12 sinpadding select2" name="depa">
                                 <option value="">Seleccione</option>
@@ -50,7 +50,7 @@
                         <!-- Fin Departamento -->
 
                         <!-- Provincia -->
-                        <div id="dv_prov" class="form-group col-xs-12 text-center">
+                        <div id="dv_prov" class="form-group col-xs-12 text-center coger_valor">
                             <label class="preguntas_sub2" for="prov">provincia</label>
                             <div class="controls">
                                 <select id="prov" class="col-xs-12 sinpadding select2" name="prov">                            
@@ -62,7 +62,7 @@
                         <!-- fin provincia-->
 
                         <!-- Distrito -->
-                        <div id="dv_dist" class="form-group col-xs-12 text-center">
+                        <div id="dv_dist" class="form-group col-xs-12 text-center coger_valor">
                             <label class="preguntas_sub2" for="dist">distrito</label>
                             <select id="dist" class="col-xs-12 sinpadding select2" name="dist">
                                 <option  value="">Seleccione</option>
@@ -74,7 +74,7 @@
                         <!-- botones de envio -->
                         <div id="boton_accion" class="form-group col-xs-12 text-center clase_boton_accion">
                             <div class="col-xs-6">
-                                <input rel="facebox" name="sendSearch" id="filtrar" class="btn btn-success" value="Buscar" onclick="filtrarTablaLista('buscarDatosLocal',1)" type="button"  />
+                                <input name="sendSearch" id="filtrar" class="btn btn-success" value="Buscar" onclick="filtrarTablaLista('buscarDatosLocal',1)" type="button"  />
                             </div>
                             <div class="col-xs-6">
                                 <input type="reset" class="btn btn-danger " name="sendSearch" value="Limpiar" />

@@ -15,8 +15,18 @@ class ModelLocalResumen extends CI_Model {
         return $sql->result();
     }
 
-    public function getIESearch($palabra) {
-        $sql = $this->db->query("SELECT  codigo_de_local, nombres_IIEE,dpto_nombre,prov_nombre,dist_nombre FROM Local_Resumen where nombres_IIEE like '%" . $palabra . "%' ORDER BY codigo_de_local ");
+    public function getIESearch($params) {
+        if(isset($params['searchColegio']) and $params['searchColegio'] !=""){
+            $likeColegio = " AND nombres_IIEE like '%" . $params['searchColegio'] . "%'";
+        }else{
+            $likeColegio = " ";
+        }
+        $sql = $this->db->query("SELECT 
+                                * 
+                                FROM 
+                                    Local_Resumen 
+                                WHERE 
+                                    1=1 ".$likeColegio);
         return $sql->result();
     }
 
