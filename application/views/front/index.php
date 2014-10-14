@@ -90,7 +90,6 @@
 <!-- Fin Cuerpo -->
 <script type="text/javascript">
     $("#limpiar_inputs").on("click", function() {
-        alert("hola");
         $("#searchColegio").val("");
         $("#searchCodigo").val("");
         
