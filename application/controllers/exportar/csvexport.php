@@ -144,7 +144,7 @@ class Csvexport extends CI_Controller
 
 		$indice = 6; //fila inicial
 
-		$sql = "SELECT * FROM Local_Resumen WHERE codigo_de_local = '".$idCodigo."'";
+		$sql = "SELECT * FROM Local_Resumen WHERE codigo_de_local = '".$idCodigo."' and pc_c_2_Rfinal_resul = 1";
 		$query = $this->convert_utf8->convert_result( $this->export_model->only_query( $sql ) );
 
 		foreach ($query as $key => $row)
