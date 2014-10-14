@@ -67,7 +67,7 @@
  *
  */
 
- var rutaServer =   "http://localhost:88/geo/assets/";//"/test/public_html";
+ var rutaServer =   "assets/";//"/test/public_html";
  document.write('<link href="'+rutaServer+'js/facebox/src/facebox.css" media="screen" rel="stylesheet" type="text/css" />');
 
 (function($) {
