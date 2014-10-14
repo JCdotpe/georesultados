@@ -2,7 +2,7 @@
     <a class="logo" href="#">
         <img class="header_maps_img" src="<?php echo base_url() ?>assets/img/logo-inei.png" />
     </a>
-    <div class="titulo">
+    <div class="titulo_head">
         <span>Censo de Infraestructura Educativa 2013</span>
     </div>
     <div class="oted">
@@ -74,27 +74,32 @@
                         <!-- botones de envio -->
                         <div id="boton_accion" class="form-group col-xs-12 text-center clase_boton_accion">
                             <div class="col-xs-6">
-                                <input name="sendSearch" id="filtrar" class="btn btn-success" value="Buscar" onclick="filtrarTablaLista('buscarDatosLocal',1)" type="button"  />
+                                <button name="sendSearch" id="filtrar" class="btn btn-success" onclick="filtrarTablaLista('buscarDatosLocal',1)" type="button" >Buscar</button>
                             </div>
                             <div class="col-xs-6">
-                                <input type="reset" class="btn btn-danger " name="sendSearch" value="Limpiar" />
+                                <button id="limpiar_inputs" class="btn btn-danger " name="sendSearch" >Limpiar</button>
                             </div>
                         </div>
                         <!-- Fin botones de envio -->
                     </div>
                 </div>
-
             </div>
-
-            <!-- Button trigger modal -->
-
-            <a class="btn btn-block btn-info" rel="facebox" href="<?php echo base_url(); ?>buscarDatosLocal">
-                <i class="fa fa-edit"></i> Cargar
-            </a>
-
         </div>
     </div>
-
 </div>
 <!-- Fin Cuerpo -->
-
+<script type="text/javascript">
+    $("#limpiar_inputs").on("click", function() {
+        alert("hola");
+        $("#searchColegio").val("");
+        $("#searchCodigo").val("");
+        
+        $('#prov').empty();
+        $("#prov").append('<option value="">Seleccione</option>');
+        $("#dv_prov .select2-chosen").text("Seleccione");
+        $("#dv_dist .select2-chosen").text("Seleccione");
+        $('#depa option:selected').val("");
+        $("#dv_dep .select2-chosen").text("Seleccione");
+        
+    });
+</script>

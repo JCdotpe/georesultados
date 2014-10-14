@@ -46,7 +46,9 @@ function filtrarTablaLista(modulo, envio) {
     });
     if (envio == 1) {
         $('.mihref').attr('href', url);
-        $('.mihref').click();
+        setTimeout(function(){
+            $('.mihref').click();
+        },1000);
     }
 }
 

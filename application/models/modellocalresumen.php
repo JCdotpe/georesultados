@@ -12,22 +12,53 @@ class ModelLocalResumen extends CI_Model {
     public function getDatosLocales($idCodigo) {
         $this->db->where('codigo_de_local', $idCodigo);
         $sql = $this->db->get('Local_Resumen');
-        return $sql->result();
+        return $this->convert_utf8->convert_result($sql);
+        //return $sql->result();
     }
 
     public function getIESearch($params) {
-        if(isset($params['searchColegio']) and $params['searchColegio'] !=""){
-            $likeColegio = " AND nombres_IIEE like '%" . $params['searchColegio'] . "%'";
-        }else{
+
+
+        if (isset($params['searchColegio']) and $params['searchColegio'] != "") {
+            $likeColegio = " AND nombres_IIEE like '%" . $params['searchColegio'] . "%' ";
+        } else {
             $likeColegio = " ";
         }
+
+        if (isset($params['searchCodigo']) and $params['searchCodigo'] != "") {
+            $filterCodigo = " AND codigo_de_local = '" . $params['searchCodigo'] . "' ";
+        } else {
+            $filterCodigo = " ";
+        }
+
+        if (isset($params['depa']) and $params['depa'] != "") {
+            $filterDepa = " AND cod_dpto ='" . $params['depa'] . "' ";
+        } else {
+            $filterDepa = " ";
+        }
+
+        if (isset($params['prov']) and $params['prov'] != "") {
+            $filterProv = " AND cod_prov ='" . $params['prov'] . "' ";
+        } else {
+            $filterProv = " ";
+        }
+
+        if (isset($params['dist']) and $params['dist'] != "") {
+            $filterDist = " AND cod_dist ='" . $params['dist'] . "' ";
+        } else {
+            $filterDist = " ";
+        }
+
         $sql = $this->db->query("SELECT 
                                 * 
                                 FROM 
                                     Local_Resumen 
                                 WHERE 
-                                    1=1 ".$likeColegio);
-        return $sql->result();
+                                    1=1 " . $likeColegio . $filterCodigo . $filterDepa . $filterProv . $filterDist);
+        return $this->convert_utf8->convert_result($sql);
+
+        //return $sql;
+        //return $sql->result();
     }
 
 }

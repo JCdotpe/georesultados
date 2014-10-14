@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
         
         <!-- Enlace a Javascript -->
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/facebox/src/facebox.js"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         
@@ -391,7 +391,7 @@
                     }
                     $('#dist').html('<option value="">Seleccione</option>');
                     if ($(this).val() != "" && $(this).val() != -1) {
-                        cod_ubigeo = $(this).val();
+//                        cod_ubigeo = $(this).val();
 
                         //load_kml_ft(table_dpto, cod_ubigeo);
                     } else if ($(this).val() == -1) {
@@ -416,7 +416,7 @@
 //                    }
                     //load_fusiontable();
                 });
-//                $('#dist').change(function() {
+                $('#dist').change(function() {
 //                    var cod_ubigeo;
 //                    if ($(this).val() != "") {
 //                        cod_ubigeo = $('#depa').val() + $('#prov').val() + $(this).val();
@@ -428,7 +428,7 @@
 //                        load_kml_ft(table_prov, cod_ubigeo);
 //                    }
 //                    load_fusiontable();
-//                });
+                });
             });
 
             function load_fusiontable(query) {
@@ -436,14 +436,15 @@
                 if (layer != undefined) {
                     layer.setMap(null);
                 }
-                if($('#searchCodigo').val() !="" && $('#depa').val() == ""){
+                //if($('#searchCodigo').val() !="" && $('#depa').val() == ""){
+                if($('#searchCodigo').val() !=""){
                     maploaded = false;
                     checkGoogleMap();
                     condicion = query;
                     cargar_tabs();
                 }
                 
-                if($('.searchColegio').val() !="" && $('#depa').val() == ""){
+                if($('#searchColegio').val() !=""){
                     maploaded = false;
                     checkGoogleMap();
                     condicion = query;
@@ -454,9 +455,10 @@
                 if ($('#depa').val() != "") {
                     maploaded = false;
                     checkGoogleMap();
-                    condicion = ($('#depa').val() != "" && $('#depa').val() != -1) ? " CCDD = '" + $('#depa').val() + "'" : '';
-                    condicion += ($('#prov').val() != "") ? " AND CCPP = '" + $('#prov').val() + "'" : '';
-                    condicion += ($('#dist').val() != "") ? " AND CCDI = '" + $('#dist').val() + "'" : '';
+                    condicion = query;
+//                    condicion = ($('#depa').val() != "" && $('#depa').val() != -1) ? " CCDD = '" + $('#depa').val() + "'" : '';
+//                    condicion += ($('#prov').val() != "") ? " AND CCPP = '" + $('#prov').val() + "'" : '';
+//                    condicion += ($('#dist').val() != "") ? " AND CCDI = '" + $('#dist').val() + "'" : '';
                     cargar_tabs();
                 }
             }
@@ -658,8 +660,13 @@
                                         '<div id="tab2" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
+                                                    '<div class="col-xs-12 h3_footer">'+
+                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                            '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                                        '</div>'+
+                                                
+                                                
                                                     '<div class="row infra_content">' +
-                                                        '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info btnDonwload" id=""><i class="glyphicon glyphicon-download-alt"></i> Descargar<br>información</a>' +
                                                         '<div class="col-xs-6 h3_footer">' +
                                                             
                                                             '<div class="col-xs-12 quitar_izquierda">' +
@@ -862,9 +869,12 @@
                                         '</div>' +
                                         
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
+                                            '<div class="col-xs-12 ">'+
+                                                '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                            '</div>'+
                                             '<div class="col-xs-12 text-center">'+
                                                 
-                                                '<a href="" class="col-xs-12 btn btn-success btn-sm descar_info btnDonwload" id=""><i class="glyphicon glyphicon-download-alt"></i> Descargar<br>información</a>' +
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+
                                                     '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " />'+

@@ -1,6 +1,6 @@
 <?php
 
-if (isset($contenido) and $contenido == "front/index") {
+if (isset($contenido) and ($contenido == "front/index")) {
     $this->load->view('plantilla/header');
     $this->load->view($contenido);
     $this->load->view('plantilla/footer');

@@ -19,7 +19,7 @@ class Home extends CI_Controller {
     public function getBubble() {
         $idCodigo = $_GET['idCodigo'];
         $locales = $this->modeloResumen->getDatosLocales($idCodigo);
-        
+
         //$convertido = $this->convert_utf8->convert_result($this->modeloResumen->getDatosLocales($idCodigo));
         echo json_encode($locales);
     }
@@ -29,15 +29,23 @@ class Home extends CI_Controller {
 //        $datos['result_IE'] = $this->modeloResumen->getIESearch($datos['searchwordPost']);
 //        $this->load->view('front/dataSearch', $datos);
 //    }
-    
+
 
     public function getSearchIE() {
+        $_REQUEST['searchColegio'] = $_GET['searchColegio'];
+        $_REQUEST['searchCodigo'] = $_GET['searchCodigo'];
+        $_REQUEST['depa'] = $_GET['depa'];
+        $_REQUEST['prov'] = $_GET['prov'];
+        $_REQUEST['dist'] = $_GET['dist'];
         
-        $datos['datosEnviar'] = $_REQUEST;
-        $datos[''] = $this->modeloResumen->getIESearch($_REQUEST);
-        $this->load->view("front/recargarDatos",$datos);
+        $datos['datos_Resumen'] = $this->modeloResumen->getIESearch($_REQUEST);
+
+        //print_r($datos['datos_Resumen']);exit;
+        $this->load->view("front/recargarDatos", $datos);
+//        $datos['contenido'] = "front/recargarDatos";
+//        $this->load->view('plantilla/plantilla', $datos);
     }
-    
+
 }
 
 /* End of file welcome.php */
