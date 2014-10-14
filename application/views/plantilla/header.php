@@ -6,20 +6,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo (isset($titulo) and $titulo != "") ? $titulo . " | " : ""; ?>INEI</title>
         <!-- Enlace a estilos -->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/select2.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/maps.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/info.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />
+        <link type="text/css" href="<?php echo base_url() ?>assets/css/bootswatch.min.css" rel="stylesheet" />
+        <link type="text/css" href="<?php echo base_url() ?>assets/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/select2.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/maps.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+        
         <!-- Enlace a Javascript -->
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/facebox/src/facebox.js"></script>
+        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        
+        
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/global.js"></script>
+        
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                $('a[rel*=facebox]').facebox();
                 $(".tooltip_info").tooltip({
                     placement: 'right'
                 });
+                $('#facebox').draggable({handle:'div.titulo'});
             });
         </script>
 

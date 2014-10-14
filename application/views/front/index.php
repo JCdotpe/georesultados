@@ -19,8 +19,7 @@
         <div class="filtro_map">
             <div class="row">
                 <div class="col-xs-12">
-                    <form role="form" action="<?php echo base_url() ?>buscarDatosLocal" class="form" id="" method="post">
-
+                    <div class="filtro_map_datos">
                         <!-- Buscador Colegio -->
                         <div id="dv_searchColegio" class="form-group col-xs-12 topSearchColegio"  style="margin-bottom: 0;">
                             <label class="preguntas_sub2" for="searchColegio">Nombre de la Institución Educativa </label>
@@ -71,54 +70,31 @@
                             </select>                            
                         </div>
                         <!-- Fin Distrito -->
-
+                        <a rel="facebox" href="" class="mihref"></a>
                         <!-- botones de envio -->
                         <div id="boton_accion" class="form-group col-xs-12 text-center clase_boton_accion">
                             <div class="col-xs-6">
-                                <input type="submit" class="btn btn-success " name="sendSearch" value="Buscar" />
+                                <input rel="facebox" name="sendSearch" id="filtrar" class="btn btn-success" value="Buscar" onclick="filtrarTablaLista('buscarDatosLocal',1)" type="button"  />
                             </div>
                             <div class="col-xs-6">
                                 <input type="reset" class="btn btn-danger " name="sendSearch" value="Limpiar" />
                             </div>
                         </div>
                         <!-- Fin botones de envio -->
-                    </form>
+                    </div>
                 </div>
 
             </div>
 
             <!-- Button trigger modal -->
-            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                Modal
-            </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Aenean placerat arcu sapien, a tempor nulla ultrices nec. 
-                            Curabitur diam ex, porttitor non eros eu, molestie pretium tortor. 
-                            Cras a lorem a metus ullamcorper semper sit amet ac sem. 
-                            Cras dignissim risus id mattis placerat. 
-                            Fusce eleifend nunc leo, at dignissim nisi vehicula eu. 
-                            Donec porttitor tincidunt 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-success">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a class="btn btn-block btn-info" rel="facebox" href="<?php echo base_url(); ?>buscarDatosLocal">
+                <i class="fa fa-edit"></i> Cargar
+            </a>
 
         </div>
     </div>
 
 </div>
 <!-- Fin Cuerpo -->
+

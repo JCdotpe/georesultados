@@ -30,3 +30,28 @@ function validar(e) {
     return patron.test(te);
 }
 
+function filtrarTablaLista(modulo,envio) {
+
+    url = 'http://localhost:88/geo/' + modulo+'?envio=1';
+    $('div.h3_footer input[type=text]').each(function() {
+        valor = fixedEncodeURIComponent($(this).val());
+        variable = $(this).attr('name');
+        url = url + '&' + variable + '=' + valor;
+    });
+
+    $('div#dv_dep select').each(function() {
+        valor = $(this).val();
+        variable = $(this).attr('name');
+        url = url + '&' + variable + '=' + valor;
+    });
+    if(envio ==1){
+        //location.href = url;
+        $('.mihref').attr('href',url);
+    }
+    
+    
+}
+
+function fixedEncodeURIComponent(str) {
+    return encodeURIComponent(str).replace(/[!'()*]/g, escape);
+}
