@@ -10,6 +10,7 @@ class ModelLocalResumen extends CI_Model {
     }
 
     public function getDatosLocales($idCodigo) {
+        $this->db->where('pc_c_2_Rfinal_resul','1');
         $this->db->where('codigo_de_local', $idCodigo);
         $sql = $this->db->get('Local_Resumen');
         return $this->convert_utf8->convert_result($sql);
@@ -54,7 +55,7 @@ class ModelLocalResumen extends CI_Model {
                                 FROM 
                                     Local_Resumen 
                                 WHERE 
-                                    1=1 " . $likeColegio . $filterCodigo . $filterDepa . $filterProv . $filterDist);
+                                    1=1 AND pc_c_2_Rfinal_resul ='1' " . $likeColegio . $filterCodigo . $filterDepa . $filterProv . $filterDist);
         return $this->convert_utf8->convert_result($sql);
 
         //return $sql;

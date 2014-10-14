@@ -8,7 +8,7 @@
     <?php
     if (count($datos_Resumen) > 0) {
         ?>
-    <label class="text-success">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
+    <label class="text-muted">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
         <table class="table table-striped table-hover title_center_table">
             <thead>
                 <tr>

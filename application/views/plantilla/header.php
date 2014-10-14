@@ -517,19 +517,19 @@
                                     if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
                                     if( datos.cEdif== 0){ $('.inf_numEdificaciones').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
                                     if( (datos.Piso ==null) || (datos.Piso== 0)){ $('.inf_countPiso').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_countPiso').append(datos.Piso); }
-                                    if( datos.P1_B_3_9_At_Local== null){ $('.inf_areTerreno').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local);}                                    
+                                    if( datos.P1_B_3_9_At_Local== null){ $('.inf_areTerreno').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local+" m2");}                                    
                                     //--Otras edificaciones
                                     if( datos.P== 0){ $('.inf_numPatios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numPatios').append(datos.P);}
                                     if( datos.LD== 0){ $('.inf_numLosDeportivas').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numLosDeportivas').append(datos.LD);}
                                     if( datos.CTE== 0){ $('.inf_numCisTanques').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numCisTanques').append(datos.CTE);}
                                     if( datos.MC== 0){$('.inf_numMurContencion').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numMurContencion').append(datos.MC);}
                                     //--Servicios basicos y comunicaciones
-                                    if( (datos.P2_C_2LocE_1_Energ== null) || (datos.P2_C_2LocE_1_Energ ==2)){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append(datos.P2_C_2LocE_1_Energ); }
-                                    if( (datos.P2_C_2LocE_2_Agua== null) || (datos.P2_C_2LocE_2_Agua ==2)){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append(datos.P2_C_2LocE_2_Agua);}
-                                    if( (datos.P2_C_2LocE_3_Alc== null) || (datos.P2_C_2LocE_3_Alc ==2)){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append(datos.P2_C_2LocE_3_Alc);}
-                                    if( (datos.P2_C_2LocE_4_Tfija== null) || (datos.P2_C_2LocE_4_Tfija ==2)){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append(datos.P2_C_2LocE_4_Tfija);}
-                                    if( (datos.P2_C_2LocE_5_Tmov== null) || (datos.P2_C_2LocE_5_Tmov ==2)){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append(datos.P2_C_2LocE_5_Tmov);}
-                                    if( (datos.P2_C_2LocE_6_Int== null) || (datos.P2_C_2LocE_6_Int ==2)){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append(datos.P2_C_2LocE_6_Int);}
+                                    if( (datos.P2_C_2LocE_1_Energ== null) || (datos.P2_C_2LocE_1_Energ ==2)){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>'); }
+                                    if( (datos.P2_C_2LocE_2_Agua== null) || (datos.P2_C_2LocE_2_Agua ==2)){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
+                                    if( (datos.P2_C_2LocE_3_Alc== null) || (datos.P2_C_2LocE_3_Alc ==2)){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
+                                    if( (datos.P2_C_2LocE_4_Tfija== null) || (datos.P2_C_2LocE_4_Tfija ==2)){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
+                                    if( (datos.P2_C_2LocE_5_Tmov== null) || (datos.P2_C_2LocE_5_Tmov ==2)){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
+                                    if( (datos.P2_C_2LocE_6_Int== null) || (datos.P2_C_2LocE_6_Int ==2)){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
                                     //--Espacios educativos que funcionan en las edificaciones
                                     if( datos.e_1== 0){ $('.inf_aulComun').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_aulComun').append(datos.e_1);}
                                     if( datos.e_2== 0){ $('.inf_pedagogico').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_pedagogico').append(datos.e_2);}
@@ -538,7 +538,9 @@
                                     if( datos.e_5== 0){ $('.inf_servicio').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_servicio').append(datos.e_5);}
                                     //--Características de las edificaciones
                                     if( datos.eo_1== 0){ $('.inf_gobNacional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobNacional').append(datos.eo_1);}
+                                    if( datos.eo_2== 0){ $('.inf_gobLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobLocal').append(datos.eo_2);}
                                     if( datos.eo_3== 0){ $('.inf_apafa').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_apafa').append(datos.eo_3); }
+                                    if( datos.a_1== 0){ $('.inf_antes').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_antes').append(datos.a_1);}
                                     if( datos.a_2== 0){ $('.inf_entre').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_entre').append(datos.a_2);}
                                     if( datos.a_3== 0){ $('.inf_despues').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_despues').append(datos.a_3);}
                                     if( datos.eman== 0){ $('.inf_countEdiMante').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiMante').append(datos.eman);}
@@ -660,7 +662,7 @@
                                         '<div id="tab2" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
-                                                    '<div class="col-xs-12 h3_footer">'+
+                                                    '<div class="col-xs-12 h3_footer"  style="margin-left: -4px;">'+
                                                             '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
                                                             '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                                         '</div>'+
@@ -674,20 +676,20 @@
                                                                 '<div class="content_infra">' +
                                                                     '<table class="table content_infra_table">'+
                                                                         '<tr>'+
-                                                                            '<td width="80%">Predios</td>'+
-                                                                            '<td width="20%"><strong><span class="inf_numPredios"></span></strong></td>'+
+                                                                            '<td width="60%">Predios</td>'+
+                                                                            '<td width="40%" class="text-center"><strong><span class="inf_numPredios"></span></strong></td>'+
                                                                         '</tr>'+
                                                                         '<tr>'+
-                                                                            '<td width="80%">Edificaciones</td>'+
-                                                                            '<td width="20%"><strong><span class="inf_numEdificaciones"></span></strong></td>'+
+                                                                            '<td width="60%">Edificaciones</td>'+
+                                                                            '<td width="40%" class="text-center"><strong><span class="inf_numEdificaciones"></span></strong></td>'+
                                                                         '</tr>'+
                                                                         '<tr>' +
-                                                                            '<td width="80%">Total de pisos</td>' +
-                                                                            '<td width="20%"><strong><span class="inf_countPiso"></span></strong></td>' +
+                                                                            '<td width="60%">Total de pisos</td>' +
+                                                                            '<td width="40%" class="text-center"><strong><span class="inf_countPiso"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
-                                                                            '<td width="80%">Área del terreno</td>' +
-                                                                            '<td width="20%"><strong><span class="inf_areTerreno"></span></strong></td>' +
+                                                                            '<td width="60%">Área del terreno</td>' +
+                                                                            '<td width="40%" class="text-center"><strong><span class="inf_areTerreno"></span></strong></td>' +
                                                                         '</tr>' +
                                                                     '</table>' +
                                                                 '</div>' +
@@ -699,19 +701,19 @@
                                                                     '<table class="table content_infra_table">' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Patio</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_numPatios"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_numPatios"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Losa deportiva</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_numLosDeportivas"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_numLosDeportivas"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Cisterna - tanque</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_numCisTanques"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_numCisTanques"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Muro de contención</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_numMurContencion"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_numMurContencion"></span></strong></td>' +
                                                                         '</tr>' +
                                                                     '</table>' +
                                                                 '</div>' +
@@ -758,23 +760,23 @@
                                                                     '<table class="table content_infra_table">' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Aula común</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_aulComun"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_aulComun"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Pedagógico</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_pedagogico"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_pedagogico"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Administrativo</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_administrativo"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_administrativo"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Complementario</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_complementario"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_complementario"></span></strong></td>' +
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="90%">Servicios</td>' +
-                                                                            '<td width="10%"><strong><span class="inf_servicio"></span></strong></td>' +
+                                                                            '<td width="10%" class="text-center"><strong><span class="inf_servicio"></span></strong></td>' +
                                                                         '</tr>' +
                                                                     '</table>' +
                                                                 '</div>' +
@@ -796,11 +798,15 @@
                                                                                 '<table class="table content_infra_table">' +
                                                                                     '<tr>' +
                                                                                         '<td width="90%">Gobierno nacional / proyecto especial</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_gobNacional"></span></strong></td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_gobNacional"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Gobierno Regional / Local</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_gobLocal"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                     '<tr>' +
                                                                                         '<td width="90%">Apafa / autoconstrucción</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_apafa"></span></strong></td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_apafa"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                 '</table>' +
                                                                             '</div>' +
@@ -818,12 +824,16 @@
                                                                             '<div class="panel-body all_acordion_panelBody">' +
                                                                                 '<table class="table content_infra_table">' +
                                                                                     '<tr>' +
+                                                                                        '<td width="90%">Antes y durante 1977</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_antes"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
                                                                                         '<td width="90%">Entre 1978 y 1998</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_entre"></span></strong></td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_entre"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                     '<tr>' +
                                                                                         '<td width="90%">Después de 1998</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_despues"></span></strong></td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_despues"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                 '</table>' +
                                                                             '</div>' +
@@ -842,15 +852,15 @@
                                                                                 '<table class="table content_infra_table">' +
                                                                                     '<tr>' +
                                                                                         '<td width="90%">Número de edificaciones para mantenimiento</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_countEdiMante"></span></strong></td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countEdiMante"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                     '<tr>' +
                                                                                         '<td width="90%">Número de edificaciones para reforzamiento estructural</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_countEdiEstruc"></span></strong></td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countEdiEstruc"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                     '<tr>' +
                                                                                         '<td width="90%">Número de edificaciones para demolición</td>' +
-                                                                                        '<td width="10%"><strong><span class="inf_countEdiDemo"></span></strong></td>'+
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countEdiDemo"></span></strong></td>'+
                                                                                     '</tr>'+
                                                                                 '</table>'+
                                                                             '</div>'+
