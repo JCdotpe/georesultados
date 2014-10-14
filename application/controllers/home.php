@@ -25,11 +25,11 @@ class Home extends CI_Controller {
         echo json_encode($locales);
     }
 
-    public function getSearchIE() {
-        $datos['searchwordPost'] = $this->input->post('searchword');
-        $datos['result_IE'] = $this->modeloResumen->getIESearch($datos['searchwordPost']);
-        $this->load->view('front/dataSearch', $datos);
-    }
+//    public function getSearchIE() {
+//        $datos['searchwordPost'] = $this->input->post('searchword');
+//        $datos['result_IE'] = $this->modeloResumen->getIESearch($datos['searchwordPost']);
+//        $this->load->view('front/dataSearch', $datos);
+//    }
     
     public function general() {
 //        $datos['titulo'] = "Caracteristicas generales del local escolar";
@@ -51,6 +51,10 @@ class Home extends CI_Controller {
         $datos['contenido'] = "datos/tabs";
         $this->load->view('plantilla/plantilla', $datos);
 //        $this->load->view('datos/tabs');
+    }
+    public function getSearchIE() {
+        $datos['datosEnviar'] = $_REQUEST;
+        $this->load->view("front/recargarDatos",$datos);
     }
     
 }

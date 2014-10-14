@@ -22,61 +22,7 @@
                 });
             });
         </script>
-<!--        <script type="text/javascript">
-            $(function() {
-                $(".search").keyup(function() {
-                    var inputSearch = $(this).val();
-                    var dataString = 'searchword=' + inputSearch;
-                    if (inputSearch != '') {
-                        $.ajax({
-                            type: "POST",
-                            url: "<?php echo base_url() ?>buscarIE",
-                            data: dataString,
-                            cache: false,
-                            success: function(data) {
-                                $("#divResult").html(data).show();
-                            }
-                        });
-                    }
-                    return false;
-                });
 
-//                $(".contenido_colegio").on("click", function() {
-//                   var obtener = $(".name").html();
-//                   console.log(obtener);
-//                });
-
-            
-
-                $("#divResult").on("click", function(e) {
-                    
-                    var clicked = $(e.target);
-                    var name = clicked.find('.name').html();
-                    var decoded = $("<div/>").html(name).text();
-                    console.log(name);
-                    console.log(decoded);
-                    $('.searchColegio').val(decoded);
-                    
-                    var $clicked_2 = $(e.target);
-                    var $name_2 = $clicked_2.find('.hiddenColegio').html();
-                    var decoded_2 = $("<div/>").html($name_2).text();
-                    $('.hiddenColegioCodigo').text(decoded_2);
-                });
-                
-                $(document).on("click", function(e) {
-                    var $clicked = $(e.target);
-                    if (!$clicked.hasClass("search")) {
-                        $("#divResult").fadeOut();
-                    }
-                });
-                $('.searchColegio').click(function() {
-                    $(this).select();
-                    if($(".search").val() !=""){
-                        $("#divResult").fadeIn();
-                    }
-                });
-            });
-        </script>-->
         <style type="text/css">
             .tooltip_info{
                 cursor: pointer;
@@ -249,42 +195,6 @@
             }
             .panel-heading .accordion-toggle.collapsed:before {
                 content: "\e080"; 
-            }
-            
-            .contentArea{
-                width:600px;
-                margin:0 auto;
-            }
-            #inputSearch{
-                width:350px;
-                border:solid 1px #000;
-                padding:3px;
-            }
-            #divResult{
-                z-index: 99999999;
-                position:absolute;
-                width:350px;
-                display:none;
-                margin-top:31px;
-                border:solid 1px #dedede;
-                border-top:0px;
-                overflow:hidden;
-                border-bottom-right-radius: 6px;
-                border-bottom-left-radius: 6px;
-                -moz-border-bottom-right-radius: 6px;
-                -moz-border-bottom-left-radius: 6px;
-                box-shadow: 0px 0px 5px #999;
-                border-width: 3px 1px 1px;
-                background-color: white;
-            }
-            .display_box{
-                padding:4px; border-top:solid 1px #dedede; 
-                font-size:12px; height:50px;
-            }
-            .display_box:hover{
-                background: #00A1C7;
-                color:#FFFFFF;
-                cursor:pointer;
             }
             .descar_info{
                 margin-bottom: 10px;
@@ -459,8 +369,6 @@
 //                    }
 //                });
                 
-                
-
                 $('#depa').change(function() {
                     var cod_ubigeo;
                     $('#prov').empty();
@@ -474,11 +382,11 @@
                     if ($(this).val() != "" && $(this).val() != -1) {
                         cod_ubigeo = $(this).val();
 
-                        load_kml_ft(table_dpto, cod_ubigeo);
+                        //load_kml_ft(table_dpto, cod_ubigeo);
                     } else if ($(this).val() == -1) {
                         carga_departamento();
                     }
-                    load_fusiontable();
+                    //load_fusiontable();
                 });
                 $('#prov').change(function() {
                     var cod_ubigeo;
@@ -488,28 +396,28 @@
                     if ($(this).val() != "") {
                         load_ubigeo('DIST');
                     }
-                    if ($(this).val() != "") {
-                        cod_ubigeo = $('#depa').val() + $(this).val();
-
-                        load_kml_ft(table_prov, cod_ubigeo);
-                    } else {
-                        load_kml_ft(table_dpto, $('#depa').val());
-                    }
-                    load_fusiontable();
+//                    if ($(this).val() != "") {
+//                        cod_ubigeo = $('#depa').val() + $(this).val();
+//
+//                        load_kml_ft(table_prov, cod_ubigeo);
+//                    } else {
+//                        load_kml_ft(table_dpto, $('#depa').val());
+//                    }
+                    //load_fusiontable();
                 });
-                $('#dist').change(function() {
-                    var cod_ubigeo;
-                    if ($(this).val() != "") {
-                        cod_ubigeo = $('#depa').val() + $('#prov').val() + $(this).val();
-
-                        load_kml_ft(table_dist, cod_ubigeo);
-                    } else {
-                        cod_ubigeo = $('#depa').val() + $('#prov').val();
-
-                        load_kml_ft(table_prov, cod_ubigeo);
-                    }
-                    load_fusiontable();
-                });
+//                $('#dist').change(function() {
+//                    var cod_ubigeo;
+//                    if ($(this).val() != "") {
+//                        cod_ubigeo = $('#depa').val() + $('#prov').val() + $(this).val();
+//
+//                        load_kml_ft(table_dist, cod_ubigeo);
+//                    } else {
+//                        cod_ubigeo = $('#depa').val() + $('#prov').val();
+//
+//                        load_kml_ft(table_prov, cod_ubigeo);
+//                    }
+//                    load_fusiontable();
+//                });
             });
 
             function load_fusiontable(query) {

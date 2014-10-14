@@ -43,7 +43,8 @@ $route['404_override'] = '';
 $route['tabs'] = "home/tabs";
 $route['general'] = "home/general";
 $route['infraestructura'] = "home/infraestructura";
-$route['buscarIE'] = "home/getSearchIE";
+//$route['buscarIE'] = "home/getSearchIE";
+$route['buscarDatosLocal'] = "home/getSearchIE";
 
 
 /* End of file routes.php */
