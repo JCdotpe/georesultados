@@ -584,6 +584,70 @@ class Csvexport extends CI_Controller
 
 	}
 
+	public function por_ubigeo()
+	{
+		// pestaña
+		$sheet = $this->phpexcel->getActiveSheet(0);
+
+		////////////////////////////////
+		// Formato de la hoja ( Set Orientation, size and scaling )
+		////////////////////////////////
+		$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);// vertical
+		$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+		$sheet->getPageSetup()->setRowsToRepeatAtTop(array(1,5)); // cabecera de impresion
+		$sheet->getDefaultStyle()->getFont()->setName('Calibri');
+		$sheet->getDefaultStyle()->getFont()->setSize(11);
+		// $sheet->getDefaultStyle()->applyFromArray($alignment_general);
+		$sheet->getSheetView()->setZoomScale(100);
+		$sheet->getDefaultColumnDimension()->setWidth(12); //default size column
+
+
+		////////////////////////////////
+		// Logo
+		////////////////////////////////
+		$objDrawing = new PHPExcel_Worksheet_Drawing();
+		$objDrawing->setWorksheet($sheet);
+		$objDrawing->setName("inei");
+		$objDrawing->setDescription("Inei");
+		$objDrawing->setPath("assets/img/inei.jpeg");
+		$objDrawing->setCoordinates('L1');
+		$objDrawing->setHeight(75);
+		$objDrawing->setOffsetX(15);
+		$objDrawing->setOffsetY(4);
+
+
+		////////////////////////////////
+		// Cabecera General
+		////////////////////////////////
+		$sheet->setCellValue('N3','INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA');
+			$sheet->mergeCells('N3:R3');
+		$sheet->setCellValue('N4','CENSO DE INFRAESTRUCTURA EDUCATIVA 2013');
+			$sheet->mergeCells('N4:R4');
+			// $sheet->getStyle('N2:R3')->applyFromArray($style_cabecera_general);
+
+
+
+
+
+		////////////////////////////////
+		// SALIDA EXCEL ( Propiedades del archivo excel )
+		////////////////////////////////
+		$sheet->setTitle("CIE 2013");
+		$this->phpexcel->getProperties()
+		->setTitle("INEI - CIE2013")
+		->setDescription("CIE2013");
+		header("Content-Type: application/vnd.ms-excel");
+		$nombreArchivo = 'CIE2013_'.date('Y-m-d');
+		header("Content-Disposition: attachment; filename=\"$nombreArchivo.xls\""); 
+		header("Cache-Control: max-age=0");
+		
+		// Genera Excel
+		$writer = PHPExcel_IOFactory::createWriter($this->phpexcel, "Excel5");
+
+		$writer->save('php://output');
+		exit;
+	}
+
 }
 
 ?>
