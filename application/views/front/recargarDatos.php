@@ -8,8 +8,7 @@
     <?php
     if (count($datos_Resumen) > 0) {
         ?>
-
-
+    <label class="text-success">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-eye text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
         <table class="table table-striped table-hover title_center_table">
             <thead>
                 <tr>
@@ -30,7 +29,7 @@
                     ?>
                     <tr>
         <!--                    <td>1</td>-->
-                        <td class="text-center"><a href="javascript:;" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');$(document).trigger('close.facebox');"><?php echo $datoResumen['codigo_de_local'] ?></a></td>
+                        <td class="text-center"><a href="javascript:;" class="details_eyes" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');$(document).trigger('close.facebox');"><i class="fa fa-eye"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
                         <td><?php echo $datoResumen['nivel'] ?></td>
                         <td><?php echo $datoResumen['prop_IE'] ?></td>
