@@ -8,6 +8,7 @@
         <!-- Enlace a estilos -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />
         <link type="text/css" href="<?php echo base_url() ?>assets/css/bootswatch.min.css" rel="stylesheet" />
+        <link type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap-tour.min.css" rel="stylesheet" />
         <link type="text/css" href="<?php echo base_url() ?>assets/css/font-awesome.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/select2.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/maps.css" />

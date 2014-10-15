@@ -671,3 +671,12 @@ table.content_infra_table tbody tr td{
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px);
 }
+
+.descargar_info_filtro{
+    float: right;
+    margin-right: 40px;
+}
+
+.descargar_info_filtro:hover{
+    text-decoration: none;
+}
