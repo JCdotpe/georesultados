@@ -47,6 +47,30 @@
             var infowindow = new google.maps.InfoWindow({
                 size: new google.maps.Size(650, 550)
             });
+            
+//            function drawChart() {
+//                // Create the data table.
+//                var data = google.visualization.arrayToDataTable([
+//                    ['Año', 'Ventas', 'Gastando'],
+//                    ['2004',  1000,      400],
+//                    ['2005',  1170,      460]
+//                ]);
+//
+//                var options = {
+//                    title: 'Nombrando',
+//                    hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+//                };
+//                //var node = document.createElement('div'),
+//                var node = document.getElementById('gen_clumnaschart');
+//                //infoWindow  = new google.maps.InfoWindow(),
+//                chart = new google.visualization.ColumnChart(node);
+//
+//                chart.draw(data, options);
+//                //infoWindow.setContent(node);
+//                //infoWindow.open(marker.getMap(),marker);
+//            }
+            
+            
             function checkGoogleMap() {
                 var msg = document.getElementById('msg');
                 if (maploaded == false) {
@@ -294,11 +318,37 @@
                         layer.setMap(map);
                         infowindow.close();
                         google.maps.event.addListener(layer, 'click', function(e) {
+                            
+                            
+                            
                             var codigoid = e.row['id_local'].value;
                             
                             var contentString = '<div>';
                             var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codigoid;
                             $.get(url, function(data) {
+//                                function drawChart() {
+                                    // Create the data table.
+//                                    var data = google.visualization.arrayToDataTable([
+//                                        ['Año', 'Ventas', 'Gastando'],
+//                                        ['2004',  1000,      400],
+//                                        ['2005',  1170,      460]
+//                                    ]);
+//
+//                                    var options = {
+//                                        title: 'Nombrando',
+//                                        hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+//                                    };
+//                                    //var node = document.createElement('div'),
+//                                    var node = document.getElementById('gen_clumnaschart');
+//                                    //infoWindow  = new google.maps.InfoWindow(),
+//                                    chart = new google.visualization.ColumnChart(node);
+//
+//                                    chart.draw(data, options);
+                                    //infoWindow.setContent(node);
+                                    //infoWindow.open(marker.getMap(),marker);
+//                                }
+                                
+                                //drawChart(this);
                                 var result = JSON.parse(data);
                                 $.each(result, function(i, datos) {
                                     //General
@@ -362,6 +412,24 @@
                                     if( datos.eman== 0){ $('.inf_countEdiMante').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiMante').append(datos.eman);}
                                     if( datos.ereh== 0){ $('.inf_countEdiEstruc').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiEstruc').append(datos.ereh);}
                                     if( datos.edem== 0){ $('.inf_countEdiDemo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
+                                    
+                                    //Grafico de Barra
+                                    var data = google.visualization.arrayToDataTable([
+                                        ['Año', 'Valor',{ role: "style" }],
+                                        ['Mantenimiento',  parseInt(datos.eman),'#2ecc71'],
+                                        ['Reforzamiento',  parseInt(datos.ereh),'#f1c40f'],
+                                        ['demolición',  parseInt(datos.edem),'#e74c3c']
+                                    ]);
+
+                                    var options = {
+//                                        title: 'Intervenciones a Realizar'
+                                    };
+                                    //var node = document.createElement('div'),
+                                    var node = document.getElementById('gen_clumnaschart');
+                                    //infoWindow  = new google.maps.InfoWindow(),
+                                    chart = new google.visualization.ColumnChart(node);
+
+                                    chart.draw(data, options);
                                 });
                             });
 
@@ -376,7 +444,7 @@
                                                 '<div class="general">' +
                                                     '<div class="general_content">' +
                                                         '<div class="col-xs-12 h3_footer">'+
-                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Características generales del local escolar - n° <span class="gen_codLocal"></span></h3>' +
                                                             '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                                         '</div>'+
                                                         '<div class="col-xs-12 h3_footer">'+
@@ -479,7 +547,7 @@
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
                                                     '<div class="col-xs-12 h3_footer"  style="margin-left: -4px;">'+
-                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar código - n° <span class="gen_codLocal"></span></h3>' +
                                                             '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                                         '</div>'+
                                                 
@@ -686,6 +754,13 @@
                                                             '</div>' +
                                                             
                                                         '</div>' +
+                                                        
+                                                        '<div class="col-xs-12 h3_footer">'+
+                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Grafico de barra en "Intervención a realizar"</h3>' +
+                                                            '<div id="gen_clumnaschart" style="width: 400px; height: 400px;"></div>'+
+                                                        '</div>'+
+                                                        
+                                                        
 //                                                        '<div class="col-xs-12 h3_footer" >' +
 //                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
 //                                                        '</div>' +
@@ -696,7 +771,7 @@
                                         
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12 ">'+
-                                                '<h3 class=" col-xs-9 general_content_name_general text-center">Principales características del local escolar código del local escolar n° <span class="gen_codLocal"></span></h3>' +
+                                                '<h3 class=" col-xs-9 general_content_name_general text-center">Tomas fotografícas del local escolar - n° <span class="gen_codLocal"></span></h3>' +
                                                 '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                             '</div>'+
                                             '<div class="col-xs-12 text-center">'+
