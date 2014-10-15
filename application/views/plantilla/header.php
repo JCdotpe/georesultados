@@ -298,6 +298,7 @@
                         layer.setMap(map);
                         infowindow.close();
                         google.maps.event.addListener(layer, 'click', function(e) {
+                            $('a[rel*=facebox]').facebox();
                             var codigoid = e.row['id_local'].value;
                             
                             var contentString = '<div>';
@@ -384,6 +385,11 @@
                                     chart = new google.visualization.ColumnChart(node);
 
                                     chart.draw(data, options);
+                                    
+                                    var thecode = "$.fancybox.loading([{href : 'preview.jpg', type : 'iframe'}]); return false;";
+
+                                    
+                                    
                                     
                                 });
                             });
@@ -733,7 +739,7 @@
                                                 
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;border-radius: 0;">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<a href="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_A.png" rel="facebox" class="img_a_fotografico"><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " /></a>'+
+                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_A.png" rel="facebox" class="img_a_fotografico"><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " /></a>'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
                                                     '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_B.png" class="foto_img_croqui_toma" />'+

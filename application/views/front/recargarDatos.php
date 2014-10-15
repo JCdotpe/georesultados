@@ -5,7 +5,7 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
 ?>
 
 
-<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Descargar Resultados</a></div>
+<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Descargar Resultados</a><?php }else{ echo "";} ?></div>
 <div class="cuerpo">
     <?php
     if (count($datos_Resumen) > 0) {
@@ -46,7 +46,7 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
             </tbody>
         </table>
     <?php } else { ?>
-        <h3> No hay data con el filtro seleccionado</h3>
+        <h3> Local escolar no encontrado...</h3>
     <?php }
     ?>
 </div>
