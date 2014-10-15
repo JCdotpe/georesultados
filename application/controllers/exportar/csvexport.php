@@ -787,18 +787,18 @@ class Csvexport extends CI_Controller
 		$objDrawing->setName("inei");
 		$objDrawing->setDescription("Inei");
 		$objDrawing->setPath("assets/img/inei.jpeg");
-		$objDrawing->setCoordinates('L1');
+		$objDrawing->setCoordinates('B1');
 		$objDrawing->setHeight(75);
-		$objDrawing->setOffsetX(15);
+		$objDrawing->setOffsetX(30);
 		$objDrawing->setOffsetY(4);
 
 
 		////////////////////////////////
 		// Cabecera General
 		////////////////////////////////
-		$this->cell_value_with_merge('N3','INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA','N3:R3');
-		$this->cell_value_with_merge('N4','CENSO DE INFRAESTRUCTURA EDUCATIVA 2013','N4:R4');
-		$this->sheet->getStyle('N3:R4')->applyFromArray($style_cabecera_general);
+		$this->cell_value_with_merge('B3','INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA','B3:F3');
+		$this->cell_value_with_merge('B4','CENSO DE INFRAESTRUCTURA EDUCATIVA 2013','B4:F4');
+		$this->sheet->getStyle('B3:F4')->applyFromArray($style_cabecera_general);
 
 		////////////////////////////////
 		// Cabecera Tabla
@@ -810,7 +810,7 @@ class Csvexport extends CI_Controller
 		$this->sheet->getStyle('B6:Q6')->applyFromArray($style_tabs);
 
 		$this->cell_value_with_merge('B7','Nombre de la I.E.','B7:B11');
-		$this->cell_value_with_merge('C7','Código','C7:C11');
+		$this->cell_value_with_merge('C7','Código de Local','C7:C11');
 		$this->cell_value_with_merge('D7','Nivel Educativo','D7:D11');
 		$this->cell_value_with_merge('E7','Total de Alumnos','E7:E11');
 		$this->cell_value_with_merge('F7','Nombre del Director','F7:F11');
@@ -899,6 +899,12 @@ class Csvexport extends CI_Controller
 		$_REQUEST['prov'] = $_GET['prov']; //'01';
 		$_REQUEST['dist'] = $_GET['dist']; //'01';
 
+		// $_REQUEST['searchColegio'] = '';
+		// $_REQUEST['searchCodigo'] = '';
+		// $_REQUEST['depa'] = '01';
+		// $_REQUEST['prov'] = '01';
+		// $_REQUEST['dist'] = '01';
+
 		$indice = 12; //fila inicial
 		$nro = 0;
 		$query = $this->modellocalresumen->getIESearch($_REQUEST);
@@ -970,7 +976,7 @@ class Csvexport extends CI_Controller
 		->setTitle("INEI - CIE2013")
 		->setDescription("CIE2013");
 		header("Content-Type: application/vnd.ms-excel");
-		$nombreArchivo = 'CIE2013_'.date('Y-m-d');
+		$nombreArchivo = 'CIE2013_All_'.date('Y-m-d');
 		header("Content-Disposition: attachment; filename=\"$nombreArchivo.xls\""); 
 		header("Cache-Control: max-age=0");
 		
