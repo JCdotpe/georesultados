@@ -16,7 +16,8 @@
 .map_container {
     height: 100%;
     position: absolute;
-    width: 100%;
+    width: 82%;
+    right: 0;
 }
 
 html, body, #map-canvas {
@@ -108,7 +109,9 @@ table,td,tr,th{
     margin: 0 !important;
     position: absolute;
     height: 100%;
-    width: 300px;
+/*    width: 300px;*/
+    width: 18%;
+    left: 0;
     padding: 0 15px;
 }
 

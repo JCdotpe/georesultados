@@ -1,37 +1,83 @@
 // Create a new tour
-var tour = new Tour();
+var tour = new Tour({
+    keyboard: true,
+    template: "<div class='popover tour'>" +
+                "<div class='arrow'></div>" +
+                    "<h3 class='popover-title text-center'></h3>" +
+                "<div class='popover-content'></div>" +
+                    "<div class='popover-navigation'>" +
+                        "<button class='btn btn-default btn-sm' data-role='prev'><i class='glyphicon glyphicon-chevron-left'></i> Atras</button>" +
+                        "<button class='btn btn-default btn-sm' data-role='next'>Siguiente <i class='glyphicon glyphicon-chevron-right'></i></button>" +
+                        "<button class='btn btn-default btn-sm' data-role='end'>Fin</button>" +
+                    "</div>" +
+                "</nav>" +
+            "</div>"
+
+});
 
 // Add your steps
 tour.addSteps([
     {
-        element: "#dv_searchColegio", // element selector to show the popover next to;
-        title: "NOMBRE DE LA INSTITUCIÓN EDUCATIVA",
-        content: "Ingrese nombre completo o parte del nombre de la Institución Educativa"
+        element: "#searchColegio", 
+        title: "<strong>NOMBRE DE LA INSTITUCIÓN EDUCATIVA</strong>",
+        content: "Puede realizar la búsqueda ingresando el nombre completo o parte del nombre de la <strong>Institución Educativa</strong>.",
+        animation: false,
+        backdrop: false
     },
     {
-        element: "#dv_searchParent",
-        title: "CÓDIGO DE LOCAL",
-        content: "Boom, bang, bam!"
+        element: "#searchCodigo",
+        title: "<strong>CÓDIGO DE LOCAL</strong>",
+        content: "Puede buscar también por el <strong>Código de Local Escolar</strong>.",
+        animation: false,
+        backdrop: false
     },
     {
-        element: "#dv_dep", // element selector to show the popover next to;
-        title: "DEPARTAMENTO",
-        content: "We're going to make this quick and useful."
+        element: "#dv_dep", 
+        title: "<strong>DEPARTAMENTO</strong>",
+        content: "Combo que contienen los <strong>depatarmentos</strong> del Perú. <br>Seleccione un departamento.",
+        animation: false,
+        backdrop: false
     },
     {
-        element: "#dv_prov", // element selector to show the popover next to;
-        title: "PROVINCIA",
-        content: "We're going to make this quick and useful."
+        element: "#dv_prov", 
+        title: "<strong>PROVINCIA</strong>",
+        content: "Combo que contienen las <strong>provincias</strong> de acuerdo al departamento seleccionado. <br>Seleccione una provincia.",
+        animation: false,
+        backdrop: false
     },
     {
-        element: "#dv_dist", // element selector to show the popover next to;
-        title: "DISTRITO",
-        content: "We're going to make this quick and useful."
+        element: "#dv_dist", 
+        title: "<strong>DISTRITO</strong>",
+        content: "Combo que contienen los <strong>distritos</strong> de acuerdo a la provincia seleccionada. <br>Seleccione un distrito.",
+        animation: false,
+        backdrop: false
     },
+    {
+        element: "#filtrar", 
+        title: "<strong>BUSCAR</strong>",
+        content: "Este boton filtrar los datos ingresados deacuerdo a su criterio de búsqueda.",
+        animation: false,
+        backdrop: false,
+        placement: "bottom"
+    },
+    {
+        element: "#limpiar_inputs", 
+        title: "<strong>LIMPIAR</strong>",
+        content: "Este boton restablece los campos de búsqueda y los combo para que vuelva a realizar su búsqueda.",
+        animation: false,
+        backdrop: false,
+        placement: "bottom"
+    },
+    {
+        element: "#map-canvas", 
+        title: "<strong>MAPA</strong>",
+        content: "Contiene el colegio deacuerdo al Código de Local.",
+        animation: false,
+        backdrop: true,
+        placement: "left"
+    }
 ]);
 
-// Initialize method on the Tour class. Get's everything loaded up and ready to go.
 tour.init();
 
-// This starts the tour itself
 tour.start();

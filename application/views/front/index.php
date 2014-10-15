@@ -12,15 +12,17 @@
 <!-- Cuerpo -->
 <div id="cuerpo" >
     <div id="msg" class="text-center"></div>
-    <div class="map_container">
-        <div id="map-canvas"></div>
-    </div>
+    
     <div class="row ">
         <div class="filtro_map">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="filtro_map_datos">
                         <!-- Buscador Colegio -->
+                        
+                      
+                        
+                        
                         <div id="dv_searchColegio" class="form-group col-xs-12 topSearchColegio"  style="margin-bottom: 0;">
                             <label class="preguntas_sub2" for="searchColegio">Nombre de la Institución Educativa </label>
                             <div class="form-group  col-xs-12 h3_footer">
@@ -85,6 +87,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="map_container">
+        <div id="map-canvas"></div>
     </div>
 </div>
 <!-- Fin Cuerpo -->
