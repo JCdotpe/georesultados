@@ -1,5 +1,5 @@
 function cargandoAjax(ref) {
-    $(ref).html('<img width="16" src="http://localhost:88/informativo/assets/img/icono/generando.gif" /> ');
+    $(ref).html('<img width="16" src="assets/img/icono/generando.gif" /> ');
 }
 function validar(e) {
     tecla = (document.all) ? e.keyCode : e.which;
@@ -30,9 +30,9 @@ function validar(e) {
     return patron.test(te);
 }
 
-function filtrarTablaLista(modulo, envio) {
+function filtrarTablaLista(ruta,modulo, envio) {
 
-    url = 'http://localhost/georesultados/' + modulo + '?envio=1';
+    url = ruta + modulo + '?envio=1';
     $('div.h3_footer input[type=text]').each(function() {
         valor = fixedEncodeURIComponent($(this).val());
         variable = $(this).attr('name');

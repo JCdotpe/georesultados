@@ -11,7 +11,7 @@
 </div>
 <!-- Cuerpo -->
 <div id="cuerpo" >
-    <div id="msg"></div>
+    <div id="msg" class="text-center"></div>
     <div class="map_container">
         <div id="map-canvas"></div>
     </div>
@@ -74,7 +74,7 @@
                         <!-- botones de envio -->
                         <div id="boton_accion" class="form-group col-xs-12 text-center clase_boton_accion">
                             <div class="col-xs-6">
-                                <button name="sendSearch" id="filtrar" class="btn btn-success" onclick="filtrarTablaLista('buscarDatosLocal',1)" type="button" >Buscar</button>
+                                <button name="sendSearch" id="filtrar" class="btn btn-success" onclick="filtrarTablaLista('<?php echo base_url();?>','buscarDatosLocal',1)" type="button" >Buscar</button>
                             </div>
                             <div class="col-xs-6">
                                 <button id="limpiar_inputs" class="btn btn-danger " name="sendSearch" >Limpiar</button>

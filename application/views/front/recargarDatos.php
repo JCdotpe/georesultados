@@ -54,7 +54,7 @@
         var num_local_id = local_id;
         var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + num_local_id;
         $.get(url, function(data) {
-            console.log(data);
+            //console.log(data);
 
             $("#btnDonwload").attr("href", "<?php echo base_url() ?>exportar/csvexport/por_Codigo?idCodigo=" + num_local_id);
             var result = JSON.parse(data);
@@ -62,7 +62,7 @@
                 var latitud = datos.LatitudPunto_UltP;
                 var longitud = datos.LongitudPunto_UltP;
                 var puntokml = datos.cod_dpto + datos.cod_prov + datos.cod_dist;
-                console.log(puntokml);
+                //console.log(puntokml);
                 load_kml_ft(table_dist, puntokml);
 
                 zomCenter = new google.maps.LatLng(latitud, longitud);

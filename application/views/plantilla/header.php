@@ -33,194 +33,6 @@
                 $('#facebox').draggable({handle:'div.titulo'});
             });
         </script>
-
-        <style type="text/css">
-            .tooltip_info{
-                cursor: pointer;
-            }
-            ul.tabs {
-                margin: 0;
-                padding: 0;
-                float: left;
-                list-style: none;
-                height: 32px;
-                border-bottom: 1px solid #999;
-                border-left: 1px solid #999;
-            }
-            ul.tabs li {
-                float: left;
-                margin: 0;
-                padding: 0;
-                height: 31px;
-                line-height: 31px;
-                border: 1px solid #999;
-                border-left: none;
-                margin-bottom: -1px;
-                overflow: hidden;
-                position: relative;
-                background: #e0e0e0;
-            }
-            ul.tabs li a {
-                text-decoration: none;
-                color: #000;
-                display: block;
-                font-size: 1.2em;
-                padding: 0 12px;
-                border: 1px solid #fff;
-                outline: none;
-            }
-            ul.tabs li a:hover {
-                background: #ccc;
-            }
-            ul.tabs li.active, html ul.tabs li.active a:hover  {
-                background: #fff;
-                border-bottom: 1px solid #fff;
-            }
-/*            ul.tabs li:first-child a{
-                color: #c7254e;
-                font-weight: bold;
-            }
-            ul.tabs li:nth-child(2) a{
-                color: #003399;
-                font-weight: bold;
-            }*/
-            .tab_container {
-                border: 1px solid #999;
-                border-top: none;
-                overflow: hidden;
-                clear: both;
-                float: left; width: 100%;
-                background: #fff;
-            }
-            .tab_content {
-                padding: 10px 0;
-                width:550px;
-            }
-            .tab_content h4{
-                font-family: 'Arimo', sans-serif;
-                color: #fff;
-                text-transform: uppercase;
-                background: #1a4f83;
-                font-weight: bold;
-                border-radius: 5px;
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-                padding: 10px 0;
-                margin-top: 0;
-                text-align: center;
-            }
-            .general_content_name{
-                font-size: 16px;
-                border-radius: 5px 5px 0 0 ;
-                -webkit-border-radius: 5px 5px 0 0 ;
-                -moz-border-radius: 5px 5px 0 0 ;
-                margin-bottom: 0;
-            }
-            .general_content{
-                font-size: 11px;
-                display: inline-block;
-            }
-            .select2-results {
-                /*font-family: 'Arimo', sans-serif;*/
-                font-size: 12px;
-            }
-            .foto_img{
-                width:500px;
-                height: 330px;
-                border-radius: 5px;
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-            }
-            .foto_img_croqui{
-                width:500px;
-                height: 280px;
-                border-radius: 5px;
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-            }
-
-            .foto_img_croqui_toma{
-                width:100%;
-                height: 135px;
-                border-radius: 5px;
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-                margin-bottom: 10px;
-                -webkit-transition:-webkit-transform 1s ease-out;
-                -moz-transition:-moz-transform 1s ease-out;
-                -o-transition:-o-transform 1s ease-out;
-                -ms-transition:-ms-transform 1s ease-out;
-                transition:transform 1s ease-out;
-            }
-
-            .foto_img_croqui_toma:hover{
-                -moz-transform: scale(1.1);
-                -webkit-transform: scale(1.1);
-                -o-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                cursor: pointer;
-            }
-
-            table.content_infra_table tbody tr td{
-                padding-bottom: 0;
-            }
-            
-            .infra_content_name_collapse{
-                font-size: 11px;
-                text-transform: uppercase;
-                color: #000;
-            }
-            
-            .infra_content_name_collapse:hover{
-                color:#1a4f83;
-                font-weight: bold;
-            }
-            
-            .all_acordion_title a:hover{
-                color:#1a4f83;
-                text-decoration: none !important;
-                font-weight: bold;
-            }
-            .all_acordion{
-                border: 1px solid #adbece;
-                border-radius: 0 0 5px 5px;
-                -webkit-border-radius: 0 0 5px 5px;
-                -moz-border-radius: 0 0 5px 5px;
-            }
-            .all_acordion_chidren{
-                border-radius: 0px !important;
-            }
-            .all_acordion_title{
-                padding: 10px 6px;
-            }
-            .all_acordion_panelBody{
-                padding: 5px;
-            }
-            
-            .panel-heading .accordion-toggle:before {
-                font-family: 'Glyphicons Halflings'; 
-                content: "\e114";
-                float: right;
-                color: grey;
-            }
-            .panel-heading .accordion-toggle.collapsed:before {
-                content: "\e080"; 
-            }
-            .descar_info{
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-                border-radius: 5px 5px 0 0;
-                font-size: 16px;
-            }
-            .descar_info_general {
-                margin-bottom: 10px;
-                border-radius: 0 5px 0 0;
-                -moz-border-radius: 0 5px 0 0;
-                -webkit-border-radius: 0 5px 0 0;
-                font-size: 13px;
-            }
-        </style>
         <!-- script para traer los valores -->
         <script type="text/javascript">
             google.load('visualization', '1', {'packages': ['corechart', 'table', 'geomap']});
@@ -238,10 +50,10 @@
             function checkGoogleMap() {
                 var msg = document.getElementById('msg');
                 if (maploaded == false) {
-                    msg.innerHTML = '<b><center><em><font face="Brush Script Std">Cargando Puntos </font></em><img src="<?php echo base_url()?>assets/img/294.gif" /></center></b>';
+                    msg.innerHTML = '<strong>Cargando Puntos<img src="<?php echo base_url()?>assets/img/294.gif" /></strong>';
                     $("#msg").slideDown("fast");
                 } else {
-                    msg.innerHTML = '<b><center><font face="Brush Script Std">Puntos Cargados</font><img src="<?php echo base_url()?>assets/img/08.gif" /></center></b>';
+                    msg.innerHTML = '<strong>Puntos Cargados<img src="<?php echo base_url()?>assets/img/08.gif" /></strong>';
                     $("#msg").delay("slow").slideUp('slow');
                 }
             }
@@ -492,26 +304,30 @@
                                     //General
                                     /*'<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+ */
                                     $(".btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
-                                    if(datos.RutaFoto !=null){
-                                        $('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></div></div>');
-                                    }else{
-                                        $('.gen_rutaFoto').append('');
-                                    }
+                                    
+                                    //--Insitución educativa que presta servicios en el lcal escolar
                                     $('.gen_codLocal').append(datos.codigo_de_local);
                                     $('.gen_nombreIE').append(datos.nombres_IIEE);
-                                    $('.gen_latitud').append(datos.LatitudPunto_UltP);
-                                    $('.gen_longitud').append(datos.LongitudPunto_UltP);
-                                    if( datos.prop_IE == null){  $('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.gen_proLocal').append(datos.prop_IE);}
                                     $('.gen_direccionIE').append(datos.direcc_IE);
+                                    if( datos.tel_IE == null){$('.gen_telLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
+                                    $('.gen_nivEducativo').append(datos.nivel);
+                                    if( datos.prop_IE == null){$('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_proLocal').append(datos.prop_IE);}
+                                    if( datos.Talum == 0 ){$('.gen_countAlumnos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_countAlumnos').append(datos.Talum);}
+                                    
+                                    //--Ubicación geografica                                    
                                     $('.gen_departLocal').append(datos.dpto_nombre);
                                     $('.gen_provLocal').append(datos.prov_nombre);
                                     $('.gen_distLocal').append(datos.dist_nombre);
-                                    $('.gen_dirLocal').append(datos.Director_IIEE);
-                                    $('.gen_nivEducativo').append(datos.nivel);
-                                    $('.gen_areaLocal').append(datos.des_area);
                                     $('.micentropoblado').append(datos.centroPoblado);
-                                    if( datos.Talum == 0 ){ $('.gen_countAlumnos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_countAlumnos').append(datos.Talum);}
-                                    if( datos.tel_IE == null){ $('.gen_telLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
+                                    $('.gen_areaLocal').append(datos.des_area);
+                                    $('.gen_dirLocal').append(datos.Director_IIEE);
+                                    $('.gen_latitud').append(datos.LatitudPunto_UltP);
+                                    $('.gen_longitud').append(datos.LongitudPunto_UltP);
+                                    $('.gen_altitud').append(datos.AltitudPunto_UltP+" msnm");
+                                    
+                                    //-- Fotografía del local escolar
+                                    if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></div></div>');}else{$('.gen_rutaFoto').append('');}
+                                    
                                     //Infraestructura
                                     //--Numero de predios y edificaciones
                                     if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
@@ -642,7 +458,7 @@
                                                                                 '</tr>' + 
                                                                                 '<tr>' +
                                                                                     '<td width="30%">Georeferenciación</td>' +
-                                                                                    '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong><span class="gen_longitud"></span></strong></td>' +
+                                                                                    '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong style="margin-right:20px"><span class="gen_longitud"></span></strong> Altitud <strong><span class="gen_altitud"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                             '</table>' +
                                                                         '</div>' +
@@ -689,7 +505,7 @@
                                                                         '</tr>' +
                                                                         '<tr>' +
                                                                             '<td width="60%">Área del terreno</td>' +
-                                                                            '<td width="40%" class="text-center"><strong><span class="inf_areTerreno"></span></strong></td>' +
+                                                                            '<td width="40%" class="text-center" style="text-transform: lowercase;"><strong><span class="inf_areTerreno"></span></strong></td>' +
                                                                         '</tr>' +
                                                                     '</table>' +
                                                                 '</div>' +
@@ -797,7 +613,7 @@
                                                                             '<div class="panel-body all_acordion_panelBody">' +
                                                                                 '<table class="table content_infra_table">' +
                                                                                     '<tr>' +
-                                                                                        '<td width="90%">Gobierno nacional / proyecto especial</td>' +
+                                                                                        '<td width="90%">Gobierno Nacional / Proyecto Especial</td>' +
                                                                                         '<td width="10%" class="text-center"><strong><span class="inf_gobNacional"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                     '<tr>' +
@@ -805,7 +621,7 @@
                                                                                         '<td width="10%" class="text-center"><strong><span class="inf_gobLocal"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                     '<tr>' +
-                                                                                        '<td width="90%">Apafa / autoconstrucción</td>' +
+                                                                                        '<td width="90%">Apafa / Autoconstrucción</td>' +
                                                                                         '<td width="10%" class="text-center"><strong><span class="inf_apafa"></span></strong></td>' +
                                                                                     '</tr>' +
                                                                                 '</table>' +
@@ -870,9 +686,9 @@
                                                             '</div>' +
                                                             
                                                         '</div>' +
-                                                        '<div class="col-xs-12 h3_footer" >' +
-                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
-                                                        '</div>' +
+//                                                        '<div class="col-xs-12 h3_footer" >' +
+//                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
+//                                                        '</div>' +
                                                    '</div>' +
                                                 '</div>' +
                                             '</div>' +
