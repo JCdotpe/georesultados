@@ -5,7 +5,7 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
 ?>
 
 
-<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Descargar Filtro</a></div>
+<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Descargar Resultados</a></div>
 <div class="cuerpo">
     <?php
     if (count($datos_Resumen) > 0) {
