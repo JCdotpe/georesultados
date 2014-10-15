@@ -46,7 +46,10 @@
             var table_prov = '1tmpbIqHGt8ymHU_L_qTEOpzcMHTOh3i_zzvWB7ZQ';
             var table_dist = '1Qvu7A-6HA7TCPVTAJ6xgld_3J7UFBr2SIlbQBz4w';
             var infowindow = new google.maps.InfoWindow({
-                size: new google.maps.Size(650, 550)
+                //size: new google.maps.Size(650, 750)
+                maxWidth: 600 ,
+                minHeight: 782
+//                maxHeight: 782
             });
             function checkGoogleMap() {
                 var msg = document.getElementById('msg');
@@ -708,7 +711,7 @@
                                                         '</div>' +
                                                         
                                                         '<div class="col-xs-12 h3_footer">'+
-                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Grafico de barra en "Intervención a realizar"</h3>' +
+                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">NÚMERO DE EDIFICACIONES DEL LOCAL ESCOLAR SEGÚN NIVEL DE INTERVENCIÓN A REALIZAR</h3>' +
                                                             '<div id="gen_clumnaschart" style="width: 500px; height: 500px;"></div>'+
                                                         '</div>'+
                                                         
@@ -730,49 +733,49 @@
                                                 
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;border-radius: 0;">REGISTRO FOTOGRÁFICO</h3>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " />'+
+                                                    '<a href="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_A.png" rel="facebox" class="img_a_fotografico"><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " /></a>'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_B.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_B.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_C.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_C.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_D.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_D.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_E.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_E.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_F.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_F.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_G.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_G.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_H.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_H.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_I.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_I.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_J.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_J.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_K.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_K.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_L.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_L.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_M.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_M.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_N.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_N.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                                 '<div class="col-xs-4">'+
-                                                    '<img src="<?php echo base_url()?>/assets/img/prueba/000043_1_Capitulo_6_O.png" class="foto_img_croqui_toma" />'+
+                                                    '<img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_O.png" class="foto_img_croqui_toma" />'+
                                                 '</div>'+
                                             '</div>' +
                                         '</div>' +

@@ -683,3 +683,7 @@ table.content_infra_table tbody tr td{
 .descargar_info_filtro:hover{
     text-decoration: none;
 }
+.gm-style-iw{
+    height: 600px;
+    min-height: 590px;
+}
