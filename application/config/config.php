@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/georesultados/';
+$config['base_url']	= 'http://172.16.100.61/georesultados/';
 
 /*
 |--------------------------------------------------------------------------

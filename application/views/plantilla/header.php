@@ -709,7 +709,7 @@
                                                         
                                                         '<div class="col-xs-12 h3_footer">'+
                                                             '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Grafico de barra en "Intervención a realizar"</h3>' +
-                                                            '<div id="gen_clumnaschart" style="width: 400px; height: 400px;"></div>'+
+                                                            '<div id="gen_clumnaschart" style="width: 500px; height: 500px;"></div>'+
                                                         '</div>'+
                                                         
                                                         
