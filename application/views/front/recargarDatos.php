@@ -29,7 +29,7 @@
                     ?>
                     <tr>
         <!--                    <td>1</td>-->
-                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');$(document).trigger('close.facebox');"><i class="fa fa-map-marker"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
+                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');$(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
                         <td><?php echo $datoResumen['nivel'] ?></td>
                         <td><?php echo $datoResumen['prop_IE'] ?></td>
