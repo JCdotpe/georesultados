@@ -30,7 +30,7 @@ function validar(e) {
     return patron.test(te);
 }
 
-function filtrarTablaLista(ruta,modulo, envio) {
+function filtrarTablaLista(ruta, modulo, envio) {
 
     url = ruta + modulo + '?envio=1';
     $('div.h3_footer input[type=text]').each(function() {
@@ -46,12 +46,13 @@ function filtrarTablaLista(ruta,modulo, envio) {
     });
     if (envio == 1) {
         $('.mihref').attr('href', url);
-        setTimeout(function(){
+        setTimeout(function() {
             $('.mihref').click();
-        },1000);
+        }, 1000);
     }
 }
 
 function fixedEncodeURIComponent(str) {
     return encodeURIComponent(str).replace(/[!'()*]/g, escape);
 }
+
