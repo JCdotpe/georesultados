@@ -988,7 +988,7 @@ class Csvexport extends CI_Controller
 		// filtro de busqueda
 		if ( $_REQUEST['searchColegio'] != '' )
 		{
-			$parametros .= ' Institución Educativa: ' . $_REQUEST['searchColegio'] . '  - ';
+			$parametros .= ' Institución Educativa: ' . strtoupper($_REQUEST['searchColegio']) . '  - ';
 		}
 		if ( $_REQUEST['searchCodigo'] != '' )
 		{
