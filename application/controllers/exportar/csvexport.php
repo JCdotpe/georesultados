@@ -1008,7 +1008,8 @@ class Csvexport extends CI_Controller
 		}
 
 		$this->cell_value_with_merge('B6', $parametros,'B6:G6');
-		$this->sheet->getStyle('B6:G6')->applyFromArray($style_filter);
+		$this->cell_value_with_merge('H6', 'Total de Resultados: ' . $nro . ' registros','H6:H6');
+		$this->sheet->getStyle('B6:H6')->applyFromArray($style_filter);
 
 
 
