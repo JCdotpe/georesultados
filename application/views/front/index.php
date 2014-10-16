@@ -95,6 +95,7 @@
 
         $("#searchColegio").on("click", function() {
             $(this).select();
+            $("#searchCodigo").val("");
             $('#prov').empty();
             $('#dist').empty();
             $("#prov").append('<option value="">Seleccione</option>');
@@ -108,6 +109,7 @@
 
         $("#searchCodigo").on("click", function() {
             $(this).select();
+            $("#searchColegio").val("");
             $('#prov').empty();
             $('#dist').empty();
             $("#prov").append('<option value="">Seleccione</option>');
