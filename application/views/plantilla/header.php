@@ -640,7 +640,7 @@
                                                             '</div>' +
                                                             
                                                             '<div class="col-xs-12 h3_footer">' +
-                                                                '<h3 class="infra_content_name">Caracteristicas de las edificaciones</h3>' +
+                                                                '<h3 class="infra_content_name">Características de las edificaciones</h3>' +
                                                                 '<div class="panel-group all_acordion" id="accordion">' +
                                                                     '<div class="panel panel-default all_acordion_chidren">' +
                                                                         '<div class="panel-heading all_acordion_title">' +
