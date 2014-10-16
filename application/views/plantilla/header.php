@@ -418,11 +418,11 @@
                                                                         '<div class="panel-body all_acordion_panelBody">' +
                                                                             '<table class="table content_infra_table">' +
                                                                                 '<tr>' +
-                                                                                    '<td width="40%">Nombre de la I.E</td>' +
+                                                                                    '<td width="40%">Nombre de la Institución Educativa</td>' +
                                                                                     '<td width="60%"><strong><span class="gen_nombreIE"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="40%">Nombre del director</td>' +
+                                                                                    '<td width="40%">Nombre del Director</td>' +
                                                                                     '<td width="60%"><strong><span class="gen_dirLocal"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
@@ -434,11 +434,11 @@
                                                                                     '<td width="60%"><strong><span class="gen_nivEducativo"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="40%">Propietario del predio</td>' +
+                                                                                    '<td width="40%">Propietario del Predio</td>' +
                                                                                     '<td width="60%"><strong><span class="gen_proLocal"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="40%">Número de alumnos</td>' +
+                                                                                    '<td width="40%">Número de Alumnos</td>' +
                                                                                     '<td width="60%"><strong><span class="gen_countAlumnos"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                             '</table>' +
