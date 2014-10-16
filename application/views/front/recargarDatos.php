@@ -1,10 +1,6 @@
 <?php
-#echo $datosEnviar['searchColegio'];
-//print_r($_REQUEST);
 $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".$_REQUEST['searchCodigo']."&depa=".$_REQUEST['depa']."&prov=".$_REQUEST['prov']."&dist=".$_REQUEST['dist'];
 ?>
-
-
 <div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Descargar Resultados</a><?php }else{ echo "";} ?></div>
 <div class="cuerpo">
     <?php
@@ -14,7 +10,6 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
         <table class="table table-striped table-hover title_center_table">
             <thead>
                 <tr>
-    <!--                <th>N°</th>-->
                     <th class="text-center">Código del local</th>
                     <th class="text-center">Nombre de la I.E</th>
                     <th class="text-center">Nivel Educativo</th>
@@ -30,8 +25,7 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
                 foreach ($datos_Resumen as $datoResumen) {
                     ?>
                     <tr>
-        <!--                    <td>1</td>-->
-                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');$(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
+                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
                         <td><?php echo $datoResumen['nivel'] ?></td>
                         <td><?php echo $datoResumen['prop_IE'] ?></td>
@@ -42,7 +36,6 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
                     </tr>
                 <?php }
                 ?>
-
             </tbody>
         </table>
     <?php } else { ?>
@@ -56,26 +49,20 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
         var num_local_id = local_id;
         var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + num_local_id;
         $.get(url, function(data) {
-            //console.log(data);
-
             $("#btnDonwload").attr("href", "<?php echo base_url() ?>exportar/csvexport/por_Codigo?idCodigo=" + num_local_id);
             var result = JSON.parse(data);
             $.each(result, function(i, datos) {
                 var latitud = datos.LatitudPunto_UltP;
                 var longitud = datos.LongitudPunto_UltP;
                 var puntokml = datos.cod_dpto + datos.cod_prov + datos.cod_dist;
-                //console.log(puntokml);
                 load_kml_ft(table_dist, puntokml);
-
                 zomCenter = new google.maps.LatLng(latitud, longitud);
                 zom = 8;
                 map.setCenter(zomCenter);
                 map.setZoom(zom);
             });
             var query = " id_local = '" + num_local_id + "' ";
-
             load_fusiontable(query);
-
         });
     }
 </script>

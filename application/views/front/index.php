@@ -19,10 +19,6 @@
                 <div class="col-xs-12">
                     <div class="filtro_map_datos">
                         <!-- Buscador Colegio -->
-                        
-                      
-                        
-                        
                         <div id="dv_searchColegio" class="form-group col-xs-12 topSearchColegio"  style="margin-bottom: 0;">
                             <label class="preguntas_sub2" for="searchColegio">Nombre de la Institución Educativa </label>
                             <div class="form-group  col-xs-12 h3_footer">
@@ -45,7 +41,7 @@
                             <label class="preguntas_sub2" for="depa">departamento</label>
                             <select id="depa" class="col-xs-12 sinpadding select2" name="depa">
                                 <option value="">Seleccione</option>
-                                <option value="-1">TODOS</option>
+<!--                                <option value="-1">TODOS</option>-->
                                 <!-- cargando departamentos -->
                             </select>
                         </div>
@@ -97,7 +93,6 @@
     $("#limpiar_inputs").on("click", function() {
         $("#searchColegio").val("");
         $("#searchCodigo").val("");
-        
         $('#prov').empty();
         $("#prov").append('<option value="">Seleccione</option>');
         $("#dv_prov .select2-chosen").text("Seleccione");

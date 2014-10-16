@@ -109,7 +109,7 @@ table,td,tr,th{
     margin: 0 !important;
     position: absolute;
     height: 100%;
-/*    width: 300px;*/
+    /*    width: 300px;*/
     width: 18%;
     left: 0;
     padding: 0 15px;
@@ -686,4 +686,14 @@ table.content_infra_table tbody tr td{
 .gm-style-iw{
     height: 600px;
     min-height: 590px;
+}
+#facebox .image {
+    text-align: center;
+    width: 600px;
+    /* height: 300px; */
+}
+#facebox .image img {
+    width: 600px;
+    max-height: 450px;
+    /* height: 300px; */
 }
