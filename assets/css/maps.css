@@ -602,6 +602,7 @@ ul.tabs li.active, html ul.tabs li.active a:hover  {
     -ms-transform: scale(1.1);
     transform: scale(1.1);
     cursor: pointer;
+    opacity: 0.8;
 }
 
 table.content_infra_table tbody tr td{
@@ -662,9 +663,6 @@ table.content_infra_table tbody tr td{
     -webkit-border-radius: 0 5px 0 0;
     font-size: 13px;
 }
-
-
-
 .floatCodigo {
     display: inline-block;
     -webkit-transition-duration: 0.3s;
@@ -711,11 +709,12 @@ table.content_infra_table tbody tr td{
 
 #galery_img a span,
 .galery_ima_foto_a span{ 
-    background-image:url(../img/zoom.png); 
+    background-image:url(../img/zoom_1.png); 
     background-repeat:no-repeat; 
-    width:48px; height:48px; 
+    width:30px; 
+    height:30px; 
     position:absolute; 
-    left:15px; 
-    top:15px;
+    left: 18px;
+    top: 3px;
     z-index: 9999999;
 }

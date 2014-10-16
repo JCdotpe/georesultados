@@ -18,16 +18,16 @@ var tour = new Tour({
 // Add your steps
 tour.addSteps([
     {
-        element: "#searchColegio", 
-        title: "<strong>NOMBRE DE LA INSTITUCIÓN EDUCATIVA</strong>",
-        content: "Puede realizar la búsqueda ingresando el nombre completo o parte del nombre de la <strong>Institución Educativa</strong>.",
+        element: "#searchCodigo",
+        title: "<strong>CÓDIGO DE LOCAL</strong>",
+        content: "Puede buscar también por el <strong>Código de Local Escolar</strong>.",
         animation: false,
         backdrop: false
     },
     {
-        element: "#searchCodigo",
-        title: "<strong>CÓDIGO DE LOCAL</strong>",
-        content: "Puede buscar también por el <strong>Código de Local Escolar</strong>.",
+        element: "#searchColegio", 
+        title: "<strong>NOMBRE DE LA INSTITUCIÓN EDUCATIVA</strong>",
+        content: "Puede realizar la búsqueda ingresando el nombre completo o parte del nombre de la <strong>Institución Educativa</strong>.",
         animation: false,
         backdrop: false
     },
