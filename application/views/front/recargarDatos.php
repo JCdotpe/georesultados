@@ -1,7 +1,7 @@
 <?php
 $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".$_REQUEST['searchCodigo']."&depa=".$_REQUEST['depa']."&prov=".$_REQUEST['prov']."&dist=".$_REQUEST['dist'];
 ?>
-<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Exportar Resultados</a><?php }else{ echo "";} ?></div>
+<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo" id="download_filtro_datos"><i class="glyphicon glyphicon-download-alt"></i> Exportar Resultados</a><?php }else{ echo "";} ?></div>
 <div class="cuerpo">
     <?php
     if (count($datos_Resumen) > 0) {
@@ -27,7 +27,7 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
                     <tr>
                         <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
-                        <td><?php echo $datoResumen['nivel'] ?></td>
+                        <td style="text-transform: uppercase"><?php echo $datoResumen['nivel'] ?></td>
                         <td><?php echo $datoResumen['prop_IE'] ?></td>
                         <td><?php echo $datoResumen['Director_IIEE'] ?></td>
                         <td><?php echo $datoResumen['direcc_IE'] ?></td>
@@ -44,7 +44,9 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
     ?>
 </div>
 <div class="pieFacebox">Total encontrados : <?php echo count($datos_Resumen) ?></div>
+
 <script type="text/javascript">
+    
     function llevarMapa(local_id) {
         var num_local_id = local_id;
         var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + num_local_id;
