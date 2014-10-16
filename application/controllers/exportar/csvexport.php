@@ -12,7 +12,7 @@ class Csvexport extends CI_Controller
 		$this->load->model('export_model');
 		$this->load->model('modellocalresumen');
 
-		ini_set("memory_limit","128M");
+		ini_set("memory_limit","512M");
 	}
 
 	public function index()
