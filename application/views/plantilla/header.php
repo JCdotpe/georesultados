@@ -482,7 +482,7 @@
                                                                                     '<td width="70%"><strong><span class="gen_direccionIE"></span></strong></td>' +
                                                                                 '</tr>' + 
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Georreferenciación</td>' +
+                                                                                    '<td width="30%">Georeferenciación</td>' +
                                                                                     '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong style="margin-right:20px"><span class="gen_longitud"></span></strong> Altitud <strong><span class="gen_altitud"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                             '</table>' +
