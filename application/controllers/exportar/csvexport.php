@@ -703,7 +703,7 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('K'.($iHead + 1),'Distrito','K'.($iHead + 1).':K'.($iHead + 5));
 		$this->cell_value_with_merge('L'.($iHead + 1),'Centro Poblado','L'.($iHead + 1).':L'.($iHead + 5));
 		$this->cell_value_with_merge('M'.($iHead + 1),'Área','M'.($iHead + 1).':M'.($iHead + 5));
-		$this->cell_value_with_merge('N'.($iHead + 1),'Propietario del Local','N'.($iHead + 1).':N'.($iHead + 5));
+		$this->cell_value_with_merge('N'.($iHead + 1),'Propietario del Predio','N'.($iHead + 1).':N'.($iHead + 5));
 		$this->sheet->getStyle('B'.($iHead + 1).':N'.($iHead + 5))->applyFromArray($style_indicador);
 
 		$this->cell_value_with_merge('O'.($iHead + 1),'GEORREFERENCIA','O'.($iHead + 1).':Q'.($iHead + 1));
