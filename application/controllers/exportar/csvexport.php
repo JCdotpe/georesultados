@@ -176,7 +176,7 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'C'.($indice+5), strtoupper($row['nivel']), 'C'.($indice+5).':G'.($indice+5) );
 
 			$this->cell_value_with_merge( 'A'.($indice+6), 'Total de Alumnos:', 'A'.($indice+6).':B'.($indice+6) );
-			$this->cell_value_with_merge( 'C'.($indice+6), $row['Talum'].' alumnos', 'C'.($indice+6).':G'.($indice+6) );
+			$this->cell_value_with_merge( 'C'.($indice+6), $row['Talum'].' ALUMNOS', 'C'.($indice+6).':G'.($indice+6) );
 
 			$this->cell_value_with_merge( 'A'.($indice+8), 'Nombre del Director:', 'A'.($indice+8).':B'.($indice+8) );
 			$this->cell_value_with_merge( 'C'.($indice+8), strtoupper($row['Director_IIEE']), 'C'.($indice+8).':G'.($indice+8) );
