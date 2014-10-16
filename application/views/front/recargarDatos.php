@@ -1,7 +1,7 @@
 <?php
 $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".$_REQUEST['searchCodigo']."&depa=".$_REQUEST['depa']."&prov=".$_REQUEST['prov']."&dist=".$_REQUEST['dist'];
 ?>
-<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Descargar Resultados</a><?php }else{ echo "";} ?></div>
+<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo"><i class="glyphicon glyphicon-download-alt"></i> Exportat Resultados</a><?php }else{ echo "";} ?></div>
 <div class="cuerpo">
     <?php
     if (count($datos_Resumen) > 0) {
@@ -11,7 +11,7 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
             <thead>
                 <tr>
                     <th class="text-center">Código del local</th>
-                    <th class="text-center">Nombre de la I.E</th>
+                    <th class="text-center">Nombre de la Institución Educativa</th>
                     <th class="text-center">Nivel Educativo</th>
                     <th class="text-center">Propietario del predio</th>
                     <th class="text-center">Director</th>

@@ -34,21 +34,21 @@ tour.addSteps([
     {
         element: "#dv_dep", 
         title: "<strong>DEPARTAMENTO</strong>",
-        content: "Combo que contienen los <strong>depatarmentos</strong> del Perú. <br>Seleccione un departamento.",
+        content: "Lista desplegable que contienen los <strong>departamentos</strong> del Perú. <br>Seleccione un departamento.",
         animation: false,
         backdrop: false
     },
     {
         element: "#dv_prov", 
         title: "<strong>PROVINCIA</strong>",
-        content: "Combo que contienen las <strong>provincias</strong> de acuerdo al departamento seleccionado. <br>Seleccione una provincia.",
+        content: "Lista desplegable que contienen las <strong>provincias</strong> de acuerdo al departamento seleccionado. <br>Seleccione una provincia.",
         animation: false,
         backdrop: false
     },
     {
         element: "#dv_dist", 
         title: "<strong>DISTRITO</strong>",
-        content: "Combo que contienen los <strong>distritos</strong> de acuerdo a la provincia seleccionada. <br>Seleccione un distrito.",
+        content: "Lista desplegable que contienen los <strong>distritos</strong> de acuerdo a la provincia seleccionada. <br>Seleccione un distrito.",
         animation: false,
         backdrop: false
     },
