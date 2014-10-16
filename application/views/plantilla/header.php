@@ -368,16 +368,32 @@
                                     if( datos.edem== 0){ $('.inf_countEdiDemo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
                                     
                                     //Grafico de Barra
-                                    var data = google.visualization.arrayToDataTable([
+                                    var data = google.visualization.arrayToDataTable([                                        
+                                        
                                         ['', 'Cantidad',{ role: "style" }],
                                         ['Mantenimiento',  parseInt(datos.eman),'#2ecc71'],
                                         ['Reforzamiento',  parseInt(datos.ereh),'#f1c40f'],
                                         ['Demolición',  parseInt(datos.edem),'#e74c3c']
                                     ]);
+                                    
+                                    var max=Math.max(datos.eman,datos.ereh,datos.edem);
+                                    var maxvalue= max / 4;
+                                    var res=Math.floor(maxvalue);
+                                    res=res+1;
+                                    //var remin= max % 4;
+                                    if(res != 0) {
+                                        maxvalue=(res * 4);
+                                    }
+                                    else
+                                        maxvalue= 4;
+                                    
+                                                                       
                                     var options = { 
                                         width: 500,
                                         height: 400,
-                                        legend: { position: "none" }
+                                        legend: { position: "none" },
+                                        //vAxis:{minValue:0,maxValue:5,gridlines:{count:6}}  
+                                        vAxis: {minValue:0, maxValue:maxvalue}
 //                                        title: 'Intervenciones a Realizar'
                                     };
                                     //var node = document.createElement('div'),
