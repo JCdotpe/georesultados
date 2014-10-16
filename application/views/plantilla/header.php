@@ -369,14 +369,20 @@
                                     
                                     //Grafico de Barra
                                     var data = google.visualization.arrayToDataTable([
-                                        ['Año', 'Valor',{ role: "style" }],
+                                        ['', 'Cantidad',{ role: "style" }],
                                         ['Mantenimiento',  parseInt(datos.eman),'#2ecc71'],
                                         ['Reforzamiento',  parseInt(datos.ereh),'#f1c40f'],
-                                        ['demolición',  parseInt(datos.edem),'#e74c3c']
+                                        ['Demolición',  parseInt(datos.edem),'#e74c3c']
                                     ]);
+                                    
+                                    
 
-                                    var options = {
+                                    var options = { 
+                                        width: 500,
+                                        height: 400,
+                                        legend: { position: "none" }
 //                                        title: 'Intervenciones a Realizar'
+                                        
                                     };
                                     //var node = document.createElement('div'),
                                     var node = document.getElementById('gen_clumnaschart');
