@@ -570,6 +570,9 @@ ul.tabs li.active, html ul.tabs li.active a:hover  {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
 }
+.foto_img:hover{
+    opacity: 0.9;
+}
 .foto_img_croqui{
     width:500px;
     height: 280px;
@@ -698,4 +701,21 @@ table.content_infra_table tbody tr td{
     width: 600px;
     max-height: 450px;
     /* height: 300px; */
+}
+
+#galery_img a,
+.galery_ima_foto_a{
+    position:relative; 
+    float:left; 
+}
+
+#galery_img a span,
+.galery_ima_foto_a span{ 
+    background-image:url(../img/zoom.png); 
+    background-repeat:no-repeat; 
+    width:48px; height:48px; 
+    position:absolute; 
+    left:15px; 
+    top:15px;
+    z-index: 9999999;
 }
