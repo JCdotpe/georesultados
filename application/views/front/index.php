@@ -18,23 +18,24 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="filtro_map_datos">
+
+                        <!-- Buscador codigo -->
+                        <div id="dv_searchParent" class="form-group col-xs-12 text-center"  style="margin-bottom: 0;border-bottom: 1px solid #ccc;">
+                            <label class="preguntas_sub2" for="searchCodigo">Código de local</label>
+                            <div class="form-group col-xs-12 h3_footer">
+                                <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Código de local" onKeyPress="return validar(event);"/>
+                            </div>
+                        </div>
+                        <!-- Fin Buscador codigo --> 
+                        
                         <!-- Buscador Colegio -->
-                        <div id="dv_searchColegio" class="form-group col-xs-12 topSearchColegio"  style="margin-bottom: 0;">
+                        <div id="dv_searchColegio" class="form-group col-xs-12 topSearchColegio"  style="margin-bottom: 0;padding-top: 8px;">
                             <label class="preguntas_sub2" for="searchColegio">Nombre de la Institución Educativa </label>
                             <div class="form-group  col-xs-12 h3_footer">
                                 <input type="text" name="searchColegio" class="col-xs-9 form-control input-sm search " id="searchColegio" placeholder="Nombre de la Institución Educativa" />
                             </div>
                         </div>
                         <!-- Fin Buscador Colegio -->
-
-                        <!-- Buscador codigo -->
-                        <div id="dv_searchParent" class="form-group col-xs-12 text-center"  style="margin-bottom: 0;">
-                            <label class="preguntas_sub2" for="searchCodigo">Código de local</label>
-                            <div class="form-group col-xs-12 h3_footer">
-                                <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Código de local" onKeyPress="return validar(event);"/>
-                            </div>
-                        </div>
-                        <!-- Fin Buscador codigo -->                    
 
                         <!-- Departamento -->
                         <div id="dv_dep" class="form-group col-xs-12 text-center coger_valor">
@@ -90,6 +91,26 @@
 </div>
 <!-- Fin Cuerpo -->
 <script type="text/javascript">
+    $("#searchColegio").on("click",function (){
+        $(this).select();
+        $('#prov').empty();
+        $("#prov").append('<option value="">Seleccione</option>');
+        $("#dv_prov .select2-chosen").text("Seleccione");
+        $("#dv_dist .select2-chosen").text("Seleccione");
+        $('#depa option:selected').val("");
+        $("#dv_dep .select2-chosen").text("Seleccione");
+    });
+    
+    $("#searchCodigo").on("click",function (){
+        $(this).select();
+        $('#prov').empty();
+        $("#prov").append('<option value="">Seleccione</option>');
+        $("#dv_prov .select2-chosen").text("Seleccione");
+        $("#dv_dist .select2-chosen").text("Seleccione");
+        $('#depa option:selected').val("");
+        $("#dv_dep .select2-chosen").text("Seleccione");
+    });
+    
     $("#limpiar_inputs").on("click", function() {
         $("#searchColegio").val("");
         $("#searchCodigo").val("");
