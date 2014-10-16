@@ -98,29 +98,29 @@ class Csvexport extends CI_Controller
 			
 
 		// pestaña
-		$sheet = $this->phpexcel->getActiveSheet(0);
+		$this->sheet = $this->phpexcel->getActiveSheet(0);
 
 		////////////////////////////////
 		// Formato de la hoja ( Set Orientation, size and scaling )
 		////////////////////////////////
-		$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_PORTRAIT);// horizontal
-		$sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
-		$sheet->getPageSetup()->setRowsToRepeatAtTop(array(1,5)); // cabecera de impresion
-		// $sheet->getPageSetup()->setFitToPage(false); // ajustar pagina
-		// $sheet->getPageSetup()->setFitToWidth(1);
-		// $sheet->getPageSetup()->setFitToHeight(0);
-		$sheet->getDefaultStyle()->getFont()->setName('Calibri');
-		$sheet->getDefaultStyle()->getFont()->setSize(11);
-		$sheet->getDefaultStyle()->applyFromArray($alignment_general);
-		$sheet->getSheetView()->setZoomScale(100);
-		$sheet->getDefaultColumnDimension()->setWidth(12); //default size column
+		$this->sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_PORTRAIT);// horizontal
+		$this->sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
+		$this->sheet->getPageSetup()->setRowsToRepeatAtTop(array(1,5)); // cabecera de impresion
+		$this->sheet->getDefaultStyle()->getFont()->setName('Calibri');
+		$this->sheet->getDefaultStyle()->getFont()->setSize(11);
+		$this->sheet->getDefaultStyle()->applyFromArray($alignment_general);
+		$this->sheet->getSheetView()->setZoomScale(100);
+		$this->sheet->getDefaultColumnDimension()->setWidth(12); //default size column
+
+		$this->sheet->getRowDimension(9)->setRowHeight(30);
+		$this->sheet->getRowDimension(92)->setRowHeight(27);
 
 
 		////////////////////////////////
 		// Logo
 		////////////////////////////////
 		$objDrawing = new PHPExcel_Worksheet_Drawing();
-		$objDrawing->setWorksheet($sheet);
+		$objDrawing->setWorksheet($this->sheet);
 		$objDrawing->setName("inei");
 		$objDrawing->setDescription("Inei");
 		$objDrawing->setPath("assets/img/inei.jpeg");
@@ -133,11 +133,9 @@ class Csvexport extends CI_Controller
 		////////////////////////////////
 		// Cabecera General
 		////////////////////////////////
-		$sheet->setCellValue('C3','INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA');
-			$sheet->mergeCells('C3:G3');
-		$sheet->setCellValue('C4','CENSO DE INFRAESTRUCTURA EDUCATIVA 2013');
-			$sheet->mergeCells('C4:G4');
-			$sheet->getStyle('C3:G4')->applyFromArray($style_cabecera_general);
+		$this->cell_value_with_merge( 'C3', 'INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA', 'C3:G3' );
+		$this->cell_value_with_merge( 'C4', 'CENSO DE INFRAESTRUCTURA EDUCATIVA 2013', 'C4:G4' );
+		$this->sheet->getStyle('C3:G4')->applyFromArray($style_cabecera_general);
 
 
 		////////////////////////////////
@@ -157,127 +155,88 @@ class Csvexport extends CI_Controller
 			// Información General
 			////////////////////////////////
 
-			$sheet->setCellValue('A'.$indice,'INFORMACIÓN GENERAL DE LA '.$nombre_ie);
-			$sheet->mergeCells('A'.$indice.':G'.($indice+1));
-			$sheet->getStyle('A'.$indice.':G'.($indice+1))->applyFromArray($style_tabs);
+			$this->cell_value_with_merge( 'A'.$indice, 'INFORMACIÓN GENERAL DE LA '.$nombre_ie, 'A'.$indice.':G'.($indice+1) );
+			$this->sheet->getStyle('A'.$indice.':G'.($indice+1))->applyFromArray($style_tabs);
 
-			$sheet->setCellValue('A'.($indice+2),'INFORMACIÓN DEL LOCAL ESCOLAR');
-				$sheet->mergeCells('A'.($indice+2).':G'.($indice+2));
-				$sheet->getStyle('A'.($indice+2).':G'.($indice+2))->applyFromArray($style_subtitulo);
-
-			$sheet->setCellValue('A'.($indice+3),'Nombre de la I.E:');
-				$sheet->mergeCells('A'.($indice+3).':B'.($indice+3));
-				$sheet->getStyle('A'.($indice+3).':B'.($indice+3))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+3),$nombre_ie);
-				$sheet->mergeCells('C'.($indice+3).':G'.($indice+3));
-				$sheet->getStyle('C'.($indice+3).':G'.($indice+3))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+4),'Código del Local:');
-				$sheet->mergeCells('A'.($indice+4).':B'.($indice+4));
-				$sheet->getStyle('A'.($indice+4).':B'.($indice+4))->applyFromArray($style_indicador);
-			$sheet->getCellByColumnAndRow(2, ($indice+4))->setValueExplicit($row['codigo_de_local'],PHPExcel_Cell_DataType::TYPE_STRING);
-				$sheet->mergeCells('C'.($indice+4).':G'.($indice+4));
-				$sheet->getStyle('C'.($indice+4).':G'.($indice+4))->applyFromArray($style_contenido);
-				
-			$sheet->setCellValue('A'.($indice+5),'Nivel Educativo:');
-				$sheet->mergeCells('A'.($indice+5).':B'.($indice+5));
-				$sheet->getStyle('A'.($indice+5).':B'.($indice+5))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+5),$row['nivel']);
-				$sheet->mergeCells('C'.($indice+5).':G'.($indice+5));
-				$sheet->getStyle('C'.($indice+5).':G'.($indice+5))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+6),'Total de Alumnos:');
-				$sheet->mergeCells('A'.($indice+6).':B'.($indice+6));
-				$sheet->getStyle('A'.($indice+6).':B'.($indice+6))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+6),$row['Talum'].' alumnos');
-				$sheet->mergeCells('C'.($indice+6).':G'.($indice+6));
-				$sheet->getStyle('C'.($indice+6).':G'.($indice+6))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+2), 'INFORMACIÓN DEL LOCAL ESCOLAR', 'A'.($indice+2).':G'.($indice+2) );
+			$this->sheet->getStyle('A'.($indice+2).':G'.($indice+2))->applyFromArray($style_subtitulo);
 
 
-			$sheet->setCellValue('A'.($indice+8),'Nombre del Director:');
-				$sheet->mergeCells('A'.($indice+8).':B'.($indice+8));
-				$sheet->getStyle('A'.($indice+8).':B'.($indice+8))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+8),$row['Director_IIEE']);
-				$sheet->mergeCells('C'.($indice+8).':G'.($indice+8));
-				$sheet->getStyle('C'.($indice+8).':G'.($indice+8))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+9),'Teléfono:');
-				$sheet->mergeCells('A'.($indice+9).':B'.($indice+9));
-				$sheet->getStyle('A'.($indice+9).':B'.($indice+9))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+9),$row['tel_IE']);
-				$sheet->mergeCells('C'.($indice+9).':G'.($indice+9));
-				$sheet->getStyle('C'.($indice+9).':G'.($indice+9))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+10),'Dirección:');
-				$sheet->mergeCells('A'.($indice+10).':B'.($indice+10));
-				$sheet->getStyle('A'.($indice+10).':B'.($indice+10))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+10),$row['direcc_IE']);
-				$sheet->mergeCells('C'.($indice+10).':G'.($indice+10));
-				$sheet->getStyle('C'.($indice+10).':G'.($indice+10))->applyFromArray($style_contenido);
-
-
-			$sheet->setCellValue('A'.($indice+12),'Departamento:');
-				$sheet->mergeCells('A'.($indice+12).':B'.($indice+12));
-				$sheet->getStyle('A'.($indice+12).':B'.($indice+12))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+12),$row['dpto_nombre']);
-				$sheet->mergeCells('C'.($indice+12).':G'.($indice+12));
-				$sheet->getStyle('C'.($indice+12).':G'.($indice+12))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+13),'Provincia:');
-				$sheet->mergeCells('A'.($indice+13).':B'.($indice+13));
-				$sheet->getStyle('A'.($indice+13).':B'.($indice+13))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+13),$row['prov_nombre']);
-				$sheet->mergeCells('C'.($indice+13).':G'.($indice+13));
-				$sheet->getStyle('C'.($indice+13).':G'.($indice+13))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+14),'Distrito:');
-				$sheet->mergeCells('A'.($indice+14).':B'.($indice+14));
-				$sheet->getStyle('A'.($indice+14).':B'.($indice+14))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+14),$row['dist_nombre']);
-				$sheet->mergeCells('C'.($indice+14).':G'.($indice+14));
-				$sheet->getStyle('C'.($indice+14).':G'.($indice+14))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+15),'Centro Poblado:');
-				$sheet->mergeCells('A'.($indice+15).':B'.($indice+15));
-				$sheet->getStyle('A'.($indice+15).':B'.($indice+15))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+15),$row['centroPoblado']);
-				$sheet->mergeCells('C'.($indice+15).':G'.($indice+15));
-				$sheet->getStyle('C'.($indice+15).':G'.($indice+15))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+16),'Área Urbana o Rural:');
-				$sheet->mergeCells('A'.($indice+16).':B'.($indice+16));
-				$sheet->getStyle('A'.($indice+16).':B'.($indice+16))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+16),$row['des_area']);
-				$sheet->mergeCells('C'.($indice+16).':G'.($indice+16));
-				$sheet->getStyle('C'.($indice+16).':G'.($indice+16))->applyFromArray($style_contenido);
-
-
-			$sheet->setCellValue('A'.($indice+18),'Propietario Local:');
-				$sheet->mergeCells('A'.($indice+18).':B'.($indice+18));
-				$sheet->getStyle('A'.($indice+18).':B'.($indice+18))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+18),$row['prop_IE']);
-				$sheet->mergeCells('C'.($indice+18).':G'.($indice+18));
-				$sheet->getStyle('C'.($indice+18).':G'.($indice+18))->applyFromArray($style_contenido);
-
-
-			$sheet->setCellValue('A'.($indice+20),'Georeferencia:');
-				$sheet->mergeCells('A'.($indice+20).':B'.($indice+20));
-				$sheet->getStyle('A'.($indice+20).':B'.($indice+20))->applyFromArray($style_indicador);
+			$this->cell_value_with_merge( 'A'.($indice+3), 'Nombre de la Institución Educativa:', 'A'.($indice+3).':B'.($indice+3) );
+			$this->cell_value_with_merge( 'C'.($indice+3), $nombre_ie, 'C'.($indice+3).':G'.($indice+3) );
 			
-			$sheet->setCellValue('B'.($indice+21),'Latitud:');
-				$sheet->getStyle('B'.($indice+21))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+21),$row['LatitudPunto_UltP']);
-				$sheet->getStyle('C'.($indice+21))->applyFromArray($style_contenido);
-			
-			$sheet->setCellValue('D'.($indice+21),'Longitud:');
-				$sheet->getStyle('D'.($indice+21))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+21),$row['LongitudPunto_UltP']);
-				$sheet->getStyle('E'.($indice+21))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+4), 'Código del Local:', 'A'.($indice+4).':B'.($indice+4) );
+			$this->sheet->getCellByColumnAndRow(2, ($indice+4))->setValueExplicit($row['codigo_de_local'],PHPExcel_Cell_DataType::TYPE_STRING);
+			$this->sheet->mergeCells('C'.($indice+4).':G'.($indice+4));
+			$this->sheet->getStyle('C'.($indice+4).':G'.($indice+4))->applyFromArray($style_contenido);
 
-			$sheet->setCellValue('F'.($indice+21),'Altitud:');
-				$sheet->getStyle('F'.($indice+21))->applyFromArray($style_indicador);
-			$sheet->setCellValue('G'.($indice+21),$row['AltitudPunto_UltP']);
-				$sheet->getStyle('G'.($indice+21))->applyFromArray($style_contenido);
+
+			
+			$this->cell_value_with_merge( 'A'.($indice+5), 'Nivel Educativo:', 'A'.($indice+5).':B'.($indice+5) );	
+			$this->cell_value_with_merge( 'C'.($indice+5), $row['nivel'], 'C'.($indice+5).':G'.($indice+5) );
+
+			$this->cell_value_with_merge( 'A'.($indice+6), 'Total de Alumnos:', 'A'.($indice+6).':B'.($indice+6) );
+			$this->cell_value_with_merge( 'C'.($indice+6), $row['Talum'].' alumnos', 'C'.($indice+6).':G'.($indice+6) );
+
+			$this->cell_value_with_merge( 'A'.($indice+8), 'Nombre del Director:', 'A'.($indice+8).':B'.($indice+8) );
+			$this->cell_value_with_merge( 'C'.($indice+8), $row['Director_IIEE'], 'C'.($indice+8).':G'.($indice+8) );
+
+			$this->cell_value_with_merge( 'A'.($indice+9), 'Teléfono:', 'A'.($indice+9).':B'.($indice+9) );
+			$this->cell_value_with_merge( 'C'.($indice+9), $row['tel_IE'], 'C'.($indice+9).':G'.($indice+9) );
+
+			$this->cell_value_with_merge( 'A'.($indice+10), 'Dirección:', 'A'.($indice+10).':B'.($indice+10) );
+			$this->cell_value_with_merge( 'C'.($indice+10), $row['direcc_IE'], 'C'.($indice+10).':G'.($indice+10) );
+
+
+
+			$this->cell_value_with_merge( 'A'.($indice+12), 'Departamento:', 'A'.($indice+12).':B'.($indice+12) );
+			$this->cell_value_with_merge( 'C'.($indice+12), $row['dpto_nombre'], 'C'.($indice+12).':G'.($indice+12) );
+
+			$this->cell_value_with_merge( 'A'.($indice+13), 'Provincia:', 'A'.($indice+13).':B'.($indice+13) );
+			$this->cell_value_with_merge( 'C'.($indice+13), $row['prov_nombre'], 'C'.($indice+13).':G'.($indice+13) );
+
+			$this->cell_value_with_merge( 'A'.($indice+14), 'Distrito:', 'A'.($indice+14).':B'.($indice+14) );
+			$this->cell_value_with_merge( 'C'.($indice+14), $row['dist_nombre'], 'C'.($indice+14).':G'.($indice+14) );
+
+			$this->cell_value_with_merge( 'A'.($indice+15), 'Centro Poblado:', 'A'.($indice+15).':B'.($indice+15) );
+			$this->cell_value_with_merge( 'C'.($indice+15), $row['centroPoblado'], 'C'.($indice+15).':G'.($indice+15) );
+
+			$this->cell_value_with_merge( 'A'.($indice+16), 'Área:', 'A'.($indice+16).':B'.($indice+16) );
+			$this->cell_value_with_merge( 'C'.($indice+16), $row['des_area'], 'C'.($indice+16).':G'.($indice+16) );
+			
+
+
+			$this->cell_value_with_merge( 'A'.($indice+18), 'Propietario del Predio:', 'A'.($indice+18).':B'.($indice+18) );
+			$this->cell_value_with_merge( 'C'.($indice+18), $row['prop_IE'], 'C'.($indice+18).':G'.($indice+18) );
+			
+
+			$this->cell_value_with_merge( 'A'.($indice+20), 'Georreferencia:', 'A'.($indice+20).':B'.($indice+20) );
+
+			
+			$this->sheet->getStyle('C'.($indice+3).':G'.($indice+18))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+3).':B'.($indice+20))->applyFromArray($style_indicador);
+
+
+			
+			$this->sheet->setCellValue('B'.($indice+21),'Latitud:');
+			$this->sheet->setCellValue('C'.($indice+21),$row['LatitudPunto_UltP']);
+			
+			$this->sheet->setCellValue('D'.($indice+21),'Longitud:');
+			$this->sheet->setCellValue('E'.($indice+21),$row['LongitudPunto_UltP']);
+
+			$this->sheet->setCellValue('F'.($indice+21),'Altitud:');
+			$this->sheet->setCellValue('G'.($indice+21),$row['AltitudPunto_UltP']);
+			
+
+			$this->sheet->getStyle('B'.($indice+21))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('D'.($indice+21))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('F'.($indice+21))->applyFromArray($style_indicador);
+
+			$this->sheet->getStyle('C'.($indice+21))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('E'.($indice+21))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('G'.($indice+21))->applyFromArray($style_contenido);
+
+
 
 			////////////////////////////////
 			// Imagen de Local
@@ -301,284 +260,197 @@ class Csvexport extends CI_Controller
 			$get_img = file_put_contents($img, $get_url);
 
 			$objDrawing2 = new PHPExcel_Worksheet_Drawing();
-			$objDrawing2->setWorksheet($sheet);
+			$objDrawing2->setWorksheet($this->sheet);
 			$objDrawing2->setName("Imagen_I.E.");
-			$objDrawing2->setDescription("Imagen de la IE");
+			$objDrawing2->setDescription("Imagen de la Institución Educativa");
 			$objDrawing2->setPath($img);
 			$objDrawing2->setCoordinates('A'.($indice+23));
-			$objDrawing2->setHeight(430);
-			$objDrawing2->setOffsetX(8);
-			$objDrawing2->setOffsetY(5);
+			$objDrawing2->setHeight(415);
+			$objDrawing2->setOffsetX(16);
+			$objDrawing2->setOffsetY(0);
 
 
 			///////////////////////////////////////////
 			// Información de la Infraestructura page 2
 			///////////////////////////////////////////
-
-			$sheet->setCellValue('A'.($indice+45),'INFORMACIÓN DE LA INFRAESTRUCTURA DE LA '.$nombre_ie);
-				$sheet->mergeCells('A'.($indice+45).':G'.($indice+46));
-				$sheet->getStyle('A'.($indice+45).':G'.($indice+46))->applyFromArray($style_tabs);
+			$this->cell_value_with_merge( 'A'.($indice+44), 'INFORMACIÓN DE LA INFRAESTRUCTURA DE LA '.$nombre_ie, 'A'.($indice+44).':G'.($indice+45) );
+			$this->sheet->getStyle('A'.($indice+44).':G'.($indice+45))->applyFromArray($style_tabs);
 
 
-			$sheet->setCellValue('A'.($indice+47),'NÚMERO PREDIOS Y EDIFICACIONES');
-				$sheet->mergeCells('A'.($indice+47).':G'.($indice+47));
-				$sheet->getStyle('A'.($indice+47).':G'.($indice+47))->applyFromArray($style_subtitulo);
+			$this->cell_value_with_merge( 'A'.($indice+46), 'NÚMERO PREDIOS Y EDIFICACIONES', 'A'.($indice+46).':G'.($indice+46) );
+			$this->sheet->getStyle('A'.($indice+46).':G'.($indice+46))->applyFromArray($style_subtitulo);
 
-			$sheet->setCellValue('A'.($indice+48),'Predios:');
-				$sheet->mergeCells('A'.($indice+48).':B'.($indice+48));
-				$sheet->getStyle('A'.($indice+48).':B'.($indice+48))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+48),$row['cPred']);
-			$sheet->setCellValue('D'.($indice+48),'predio(s)');
-				$sheet->mergeCells('D'.($indice+48).':E'.($indice+48));
-				$sheet->getStyle('D'.($indice+48).':E'.($indice+48))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+47), 'Predios:', 'A'.($indice+47).':B'.($indice+47) );
+			$this->sheet->setCellValue('C'.($indice+47), $row['cPred']);
+			$this->cell_value_with_merge( 'D'.($indice+47), 'predio(s)', 'D'.($indice+47).':E'.($indice+47) );
 
-			$sheet->setCellValue('A'.($indice+49),'Edificaciones:');
-				$sheet->mergeCells('A'.($indice+49).':B'.($indice+49));
-				$sheet->getStyle('A'.($indice+49).':B'.($indice+49))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+49),$row['cEdif']);
-			$sheet->setCellValue('D'.($indice+49),'edificación(es)');
-				$sheet->mergeCells('D'.($indice+49).':E'.($indice+49));
-				$sheet->getStyle('D'.($indice+49).':E'.($indice+49))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+48), 'Edificaciones:', 'A'.($indice+48).':B'.($indice+48) );
+			$this->sheet->setCellValue('C'.($indice+48), $row['cEdif']);
+			$this->cell_value_with_merge( 'D'.($indice+48), 'edificación(es)', 'D'.($indice+48).':E'.($indice+48) );
 
-			$sheet->setCellValue('A'.($indice+50),'Total de Pisos:');
-				$sheet->mergeCells('A'.($indice+50).':B'.($indice+50));
-				$sheet->getStyle('A'.($indice+50).':B'.($indice+50))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+50),$row['Piso']);
-			$sheet->setCellValue('D'.($indice+50),'piso(s)');
-				$sheet->mergeCells('D'.($indice+50).':E'.($indice+50));
-				$sheet->getStyle('D'.($indice+50).':E'.($indice+50))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+49), 'Total de Pisos:', 'A'.($indice+49).':B'.($indice+49) );
+			$this->sheet->setCellValue('C'.($indice+49), $row['Piso']);
+			$this->cell_value_with_merge( 'D'.($indice+49), 'piso(s)', 'D'.($indice+49).':E'.($indice+49) );
 
-			$sheet->setCellValue('A'.($indice+51),'Área del Terreno:');
-				$sheet->mergeCells('A'.($indice+51).':B'.($indice+51));
-				$sheet->getStyle('A'.($indice+51).':B'.($indice+51))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+51),$row['P1_B_3_9_At_Local']);
-			$sheet->setCellValue('D'.($indice+51),'m2');
-				$sheet->mergeCells('D'.($indice+51).':E'.($indice+51));
-				$sheet->getStyle('D'.($indice+51).':E'.($indice+51))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+50), 'Área del Terreno:', 'A'.($indice+50).':B'.($indice+50) );
+			$this->sheet->setCellValue('C'.($indice+50), $row['P1_B_3_9_At_Local']);
+			$this->cell_value_with_merge( 'D'.($indice+50), 'm2', 'D'.($indice+50).':E'.($indice+50) );
 
 
-			$sheet->setCellValue('A'.($indice+53),'OTRAS EDIFICACIONES');
-				$sheet->mergeCells('A'.($indice+53).':G'.($indice+53));
-				$sheet->getStyle('A'.($indice+53).':G'.($indice+53))->applyFromArray($style_subtitulo);
-
-			$sheet->setCellValue('A'.($indice+54),'Patio:');
-				$sheet->mergeCells('A'.($indice+54).':B'.($indice+54));
-				$sheet->getStyle('A'.($indice+54).':B'.($indice+54))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+54),$row['P']);
-			$sheet->setCellValue('D'.($indice+54),'patio(s)');
-				$sheet->mergeCells('D'.($indice+54).':E'.($indice+54));
-				$sheet->getStyle('D'.($indice+54).':E'.($indice+54))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+55),'Losa Deportiva:');
-				$sheet->mergeCells('A'.($indice+55).':B'.($indice+55));
-				$sheet->getStyle('A'.($indice+55).':B'.($indice+55))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+55),$row['LD']);
-			$sheet->setCellValue('D'.($indice+55),'losa(s) deportiva(s)');
-				$sheet->mergeCells('D'.($indice+55).':E'.($indice+55));
-				$sheet->getStyle('D'.($indice+55).':E'.($indice+55))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+56),'Cisterna - Tanque:');
-				$sheet->mergeCells('A'.($indice+56).':B'.($indice+56));
-				$sheet->getStyle('A'.($indice+56).':B'.($indice+56))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+56),$row['CTE']);
-			$sheet->setCellValue('D'.($indice+56),'cistena(s) - tanque(s)');
-				$sheet->mergeCells('D'.($indice+56).':E'.($indice+56));
-				$sheet->getStyle('D'.($indice+56).':E'.($indice+56))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+57),'Muro de Contención:');
-				$sheet->mergeCells('A'.($indice+57).':B'.($indice+57));
-				$sheet->getStyle('A'.($indice+57).':B'.($indice+57))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+57),$row['MC']);
-			$sheet->setCellValue('D'.($indice+57),'muro(s) de contención(es)');
-				$sheet->mergeCells('D'.($indice+57).':F'.($indice+57));
-				$sheet->getStyle('D'.($indice+57).':F'.($indice+57))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+47).':B'.($indice+50))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('D'.($indice+47).':E'.($indice+50))->applyFromArray($style_contenido);
 
 
-			$sheet->setCellValue('A'.($indice+59),'SERVICIOS BÁSICOS Y COMUNICACIONES');
-				$sheet->mergeCells('A'.($indice+59).':G'.($indice+59));
-				$sheet->getStyle('A'.($indice+59).':G'.($indice+59))->applyFromArray($style_subtitulo);
 
-			$sheet->setCellValue('A'.($indice+60),'Energía Eléctrica:');
-				$sheet->mergeCells('A'.($indice+60).':B'.($indice+60));
-				$sheet->getStyle('A'.($indice+60).':B'.($indice+60))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+60), ( $row['P2_C_2LocE_1_Energ'] == 1) ? 'TIENE' : 'NO TIENE' );
+			$this->cell_value_with_merge( 'A'.($indice+52), 'OTRAS EDIFICACIONES', 'A'.($indice+52).':G'.($indice+52) );
+			$this->sheet->getStyle('A'.($indice+52).':G'.($indice+52))->applyFromArray($style_subtitulo);
 
-			$sheet->setCellValue('A'.($indice+61),'Agua Potable:');
-				$sheet->mergeCells('A'.($indice+61).':B'.($indice+61));
-				$sheet->getStyle('A'.($indice+61).':B'.($indice+61))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+61), ( $row['P2_C_2LocE_2_Agua'] == 1) ? 'TIENE' : 'NO TIENE' );
+			$this->cell_value_with_merge( 'A'.($indice+53), 'Patio:', 'A'.($indice+53).':B'.($indice+53) );
+			$this->sheet->setCellValue('C'.($indice+53), $row['P']);
+			$this->cell_value_with_merge( 'D'.($indice+53), 'patio(s)', 'D'.($indice+53).':E'.($indice+53) );
 
-			$sheet->setCellValue('A'.($indice+62),'Alcantarillado:');
-				$sheet->mergeCells('A'.($indice+62).':B'.($indice+62));
-				$sheet->getStyle('A'.($indice+62).':B'.($indice+62))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+62), ( $row['P2_C_2LocE_3_Alc'] == 1) ? 'TIENE' : 'NO TIENE' );
+			$this->cell_value_with_merge( 'A'.($indice+54), 'Losa Deportiva:', 'A'.($indice+54).':B'.($indice+54) );
+			$this->sheet->setCellValue('C'.($indice+54), $row['LD']);
+			$this->cell_value_with_merge( 'D'.($indice+54), 'losa(s) deportiva(s)', 'D'.($indice+54).':E'.($indice+54) );
 
-			$sheet->setCellValue('A'.($indice+63),'Telefonía Fija:');
-				$sheet->mergeCells('A'.($indice+63).':B'.($indice+63));
-				$sheet->getStyle('A'.($indice+63).':B'.($indice+63))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+63), ( $row['P2_C_2LocE_4_Tfija'] == 1) ? 'TIENE' : 'NO TIENE' );
+			$this->cell_value_with_merge( 'A'.($indice+55), 'Cisterna - Tanque:', 'A'.($indice+55).':B'.($indice+55) );
+			$this->sheet->setCellValue('C'.($indice+55),$row['CTE']);
+			$this->cell_value_with_merge( 'D'.($indice+55), 'cistena(s) - tanque(s)', 'D'.($indice+55).':E'.($indice+55) );
 
-			$sheet->setCellValue('A'.($indice+64),'Telefonía Móvil:');
-				$sheet->mergeCells('A'.($indice+64).':B'.($indice+64));
-				$sheet->getStyle('A'.($indice+64).':B'.($indice+64))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+64), ( $row['P2_C_2LocE_5_Tmov'] == 1) ? 'TIENE' : 'NO TIENE' );
-
-			$sheet->setCellValue('A'.($indice+65),'Internet:');
-				$sheet->mergeCells('A'.($indice+65).':B'.($indice+65));
-				$sheet->getStyle('A'.($indice+65).':B'.($indice+65))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+65), ( $row['P2_C_2LocE_6_Int'] == 1) ? 'TIENE' : 'NO TIENE' );
-			
-
-			$sheet->setCellValue('A'.($indice+67),'ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES');
-				$sheet->mergeCells('A'.($indice+67).':G'.($indice+67));
-				$sheet->getStyle('A'.($indice+67).':G'.($indice+67))->applyFromArray($style_subtitulo);
-
-			$sheet->setCellValue('A'.($indice+68),'Aula Común:');
-				$sheet->mergeCells('A'.($indice+68).':B'.($indice+68));
-				$sheet->getStyle('A'.($indice+68).':B'.($indice+68))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+68),$row['e_1']);
-			$sheet->setCellValue('D'.($indice+68),'aula(s)');
-				$sheet->mergeCells('D'.($indice+68).':E'.($indice+68));
-				$sheet->getStyle('D'.($indice+68).':E'.($indice+68))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+69),'Pedagógico:');
-				$sheet->mergeCells('A'.($indice+69).':B'.($indice+69));
-				$sheet->getStyle('A'.($indice+69).':B'.($indice+69))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+69),$row['e_2']);
-			$sheet->setCellValue('D'.($indice+69),'espacio(s) pedagógico(s)');
-				$sheet->mergeCells('D'.($indice+69).':E'.($indice+69));
-				$sheet->getStyle('D'.($indice+69).':E'.($indice+69))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+70),'Administrativo:');
-				$sheet->mergeCells('A'.($indice+70).':B'.($indice+70));
-				$sheet->getStyle('A'.($indice+70).':B'.($indice+70))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+70),$row['e_3']);
-			$sheet->setCellValue('D'.($indice+70),'espacio(s) administrativo(s)');
-				$sheet->mergeCells('D'.($indice+70).':E'.($indice+70));
-				$sheet->getStyle('D'.($indice+70).':E'.($indice+70))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+71),'Complementario:');
-				$sheet->mergeCells('A'.($indice+71).':B'.($indice+71));
-				$sheet->getStyle('A'.($indice+71).':B'.($indice+71))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+71),$row['e_4']);
-			$sheet->setCellValue('D'.($indice+71),'espacio(s) complementario(s)');
-				$sheet->mergeCells('D'.($indice+71).':E'.($indice+71));
-				$sheet->getStyle('D'.($indice+71).':E'.($indice+71))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+72),'Servicios:');
-				$sheet->mergeCells('A'.($indice+72).':B'.($indice+72));
-				$sheet->getStyle('A'.($indice+72).':B'.($indice+72))->applyFromArray($style_indicador);
-			$sheet->setCellValue('C'.($indice+72),$row['e_5']);
-			$sheet->setCellValue('D'.($indice+72),'servicio(s)');
-				$sheet->mergeCells('D'.($indice+72).':E'.($indice+72));
-				$sheet->getStyle('D'.($indice+72).':E'.($indice+72))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+56), 'Muro de Contención:', 'A'.($indice+56).':B'.($indice+56) );
+			$this->sheet->setCellValue('C'.($indice+56),$row['MC']);
+			$this->cell_value_with_merge( 'D'.($indice+56), 'muro(s) de contención(es)', 'D'.($indice+56).':F'.($indice+56) );
 
 
-			$sheet->setCellValue('A'.($indice+74),'CARACTERÍSTICAS DE LAS EDIFACIONES');
-				$sheet->mergeCells('A'.($indice+74).':G'.($indice+74));
-				$sheet->getStyle('A'.($indice+74).':G'.($indice+74))->applyFromArray($style_subtitulo);
-
-			$sheet->setCellValue('A'.($indice+75),'EDIFICACIONES POR EJECUTOR DE LA OBRA');
-				$sheet->mergeCells('A'.($indice+75).':D'.($indice+75));
-				$sheet->getStyle('A'.($indice+75).':D'.($indice+75))->applyFromArray($style_subitem);
-
-			$sheet->setCellValue('A'.($indice+76),'Gobierno Nacional / Proyecto Especial:');
-				$sheet->mergeCells('A'.($indice+76).':D'.($indice+76));
-				$sheet->getStyle('A'.($indice+76).':D'.($indice+76))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+76),$row['eo_1']);
-			$sheet->setCellValue('F'.($indice+76),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+76).':G'.($indice+76));
-				$sheet->getStyle('F'.($indice+76).':G'.($indice+76))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+77),'Gobierno Regional / Local:');
-				$sheet->mergeCells('A'.($indice+77).':D'.($indice+77));
-				$sheet->getStyle('A'.($indice+77).':D'.($indice+77))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+77),$row['eo_2']);
-			$sheet->setCellValue('F'.($indice+77),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+77).':G'.($indice+77));
-				$sheet->getStyle('F'.($indice+77).':G'.($indice+77))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+78),'APAFA / Autoconstrucción:');
-				$sheet->mergeCells('A'.($indice+78).':D'.($indice+78));
-				$sheet->getStyle('A'.($indice+78).':D'.($indice+78))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+78),$row['eo_3']);
-			$sheet->setCellValue('F'.($indice+78),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+78).':G'.($indice+78));
-				$sheet->getStyle('F'.($indice+78).':G'.($indice+78))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+79),"Entidades Cooperantes /  ONG'S:");
-				$sheet->mergeCells('A'.($indice+79).':D'.($indice+79));
-				$sheet->getStyle('A'.($indice+79).':D'.($indice+79))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+79),$row['eo_4']);
-			$sheet->setCellValue('F'.($indice+79),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+79).':G'.($indice+79));
-				$sheet->getStyle('F'.($indice+79).':G'.($indice+79))->applyFromArray($style_contenido);
-
-			$sheet->setCellValue('A'.($indice+80),"Empresa Privada:");
-				$sheet->mergeCells('A'.($indice+80).':D'.($indice+80));
-				$sheet->getStyle('A'.($indice+80).':D'.($indice+80))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+80),$row['eo_5']);
-			$sheet->setCellValue('F'.($indice+80),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+80).':G'.($indice+80));
-				$sheet->getStyle('F'.($indice+80).':G'.($indice+80))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+53).':B'.($indice+56))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('D'.($indice+53).':E'.($indice+56))->applyFromArray($style_contenido);
 
 
-			$sheet->setCellValue('A'.($indice+81),'EDIFICACIONES SEGÚN AÑO DE CONSTRUCCIÓN');
-				$sheet->mergeCells('A'.($indice+81).':D'.($indice+81));
-				$sheet->getStyle('A'.($indice+81).':D'.($indice+81))->applyFromArray($style_subitem);
 
-			$sheet->setCellValue('A'.($indice+82),'Antes y Durante 1977:');
-				$sheet->mergeCells('A'.($indice+82).':D'.($indice+82));
-				$sheet->getStyle('A'.($indice+82).':D'.($indice+82))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+82),$row['a_1']);
-			$sheet->setCellValue('F'.($indice+82),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+82).':G'.($indice+82));
-				$sheet->getStyle('F'.($indice+82).':G'.($indice+82))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+58), 'SERVICIOS BÁSICOS Y COMUNICACIONES', 'A'.($indice+58).':G'.($indice+58) );
+			$this->sheet->getStyle('A'.($indice+58).':G'.($indice+58))->applyFromArray($style_subtitulo);
 
-			$sheet->setCellValue('A'.($indice+83),'Entre 1978 Y 1998:');
-				$sheet->mergeCells('A'.($indice+83).':D'.($indice+83));
-				$sheet->getStyle('A'.($indice+83).':D'.($indice+83))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+83),$row['a_2']);
-			$sheet->setCellValue('F'.($indice+83),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+83).':G'.($indice+83));
-				$sheet->getStyle('F'.($indice+83).':G'.($indice+83))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+59), 'Energía Eléctrica:', 'A'.($indice+59).':B'.($indice+59) );
+			$this->sheet->setCellValue( 'C'.($indice+59), ( $row['P2_C_2LocE_1_Energ'] == 1) ? 'TIENE' : 'NO TIENE' );
 
-			$sheet->setCellValue('A'.($indice+84),'Después de 1998:');
-				$sheet->mergeCells('A'.($indice+84).':D'.($indice+84));
-				$sheet->getStyle('A'.($indice+84).':D'.($indice+84))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+84),$row['a_3']);
-			$sheet->setCellValue('F'.($indice+84),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+84).':G'.($indice+84));
-				$sheet->getStyle('F'.($indice+84).':G'.($indice+84))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+60), 'Agua Potable:', 'A'.($indice+60).':B'.($indice+60) );
+			$this->sheet->setCellValue( 'C'.($indice+60), ( $row['P2_C_2LocE_2_Agua'] == 1) ? 'TIENE' : 'NO TIENE' );
+
+			$this->cell_value_with_merge( 'A'.($indice+61), 'Alcantarillado:', 'A'.($indice+61).':B'.($indice+61) );
+			$this->sheet->setCellValue( 'C'.($indice+61), ( $row['P2_C_2LocE_3_Alc'] == 1) ? 'TIENE' : 'NO TIENE' );
+
+			$this->cell_value_with_merge( 'A'.($indice+62), 'Telefonía Fija:', 'A'.($indice+62).':B'.($indice+62) );
+			$this->sheet->setCellValue( 'C'.($indice+62), ( $row['P2_C_2LocE_4_Tfija'] == 1) ? 'TIENE' : 'NO TIENE' );
+
+			$this->cell_value_with_merge( 'A'.($indice+63), 'Telefonía Móvil:', 'A'.($indice+63).':B'.($indice+63) );
+			$this->sheet->setCellValue( 'C'.($indice+63), ( $row['P2_C_2LocE_5_Tmov'] == 1) ? 'TIENE' : 'NO TIENE' );
+
+			$this->cell_value_with_merge( 'A'.($indice+64), 'Internet:', 'A'.($indice+64).':B'.($indice+64) );
+			$this->sheet->setCellValue( 'C'.($indice+64), ( $row['P2_C_2LocE_6_Int'] == 1) ? 'TIENE' : 'NO TIENE' );
 
 
-			$sheet->setCellValue('A'.($indice+85),'INTERVENCIÓN A REALIZAR');
-				$sheet->mergeCells('A'.($indice+85).':D'.($indice+85));
-				$sheet->getStyle('A'.($indice+85).':D'.($indice+85))->applyFromArray($style_subitem);
+			$this->sheet->getStyle('A'.($indice+59).':B'.($indice+64))->applyFromArray($style_indicador);
 
-			$sheet->setCellValue('A'.($indice+86),'Número de Edificaciones para Mantenimiento::');
-				$sheet->mergeCells('A'.($indice+86).':D'.($indice+86));
-				$sheet->getStyle('A'.($indice+86).':D'.($indice+86))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+86),$row['eman']);
-			$sheet->setCellValue('F'.($indice+86),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+86).':G'.($indice+86));
-				$sheet->getStyle('F'.($indice+86).':G'.($indice+86))->applyFromArray($style_contenido);
 
-			$sheet->setCellValue('A'.($indice+87),'Número de Edificaciones para Reforzamiento Estructural:');
-				$sheet->mergeCells('A'.($indice+87).':D'.($indice+87));
-				$sheet->getStyle('A'.($indice+87).':D'.($indice+87))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+87),$row['ereh']);
-			$sheet->setCellValue('F'.($indice+87),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+87).':G'.($indice+87));
-				$sheet->getStyle('F'.($indice+87).':G'.($indice+87))->applyFromArray($style_contenido);
 
-			$sheet->setCellValue('A'.($indice+88),'Número de Edificaciones para Demolición:');
-				$sheet->mergeCells('A'.($indice+88).':D'.($indice+88));
-				$sheet->getStyle('A'.($indice+88).':D'.($indice+88))->applyFromArray($style_indicador);
-			$sheet->setCellValue('E'.($indice+88),$row['edem']);
-			$sheet->setCellValue('F'.($indice+88),'edificación(es)');
-				$sheet->mergeCells('F'.($indice+88).':G'.($indice+88));
-				$sheet->getStyle('F'.($indice+88).':G'.($indice+88))->applyFromArray($style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+66), 'ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES', 'A'.($indice+66).':G'.($indice+66) );
+			$this->sheet->getStyle('A'.($indice+66).':G'.($indice+66))->applyFromArray($style_subtitulo);
+
+			$this->cell_value_with_merge( 'A'.($indice+67), 'Aula Común:', 'A'.($indice+67).':B'.($indice+67) );
+			$this->sheet->setCellValue('C'.($indice+67),$row['e_1']);
+			$this->cell_value_with_merge( 'D'.($indice+67), 'aula(s)', 'D'.($indice+67).':E'.($indice+67) );
+
+			$this->cell_value_with_merge( 'A'.($indice+68), 'Pedagógico:', 'A'.($indice+68).':B'.($indice+68) );
+			$this->sheet->setCellValue('C'.($indice+68),$row['e_2']);
+			$this->cell_value_with_merge( 'D'.($indice+68), 'espacio(s) pedagógico(s)', 'D'.($indice+68).':E'.($indice+68) );
+
+			$this->cell_value_with_merge( 'A'.($indice+69), 'Administrativo:', 'A'.($indice+69).':B'.($indice+69) );
+			$this->sheet->setCellValue('C'.($indice+69),$row['e_3']);
+			$this->cell_value_with_merge( 'D'.($indice+69), 'espacio(s) administrativo(s)', 'D'.($indice+69).':E'.($indice+69) );
+
+			$this->cell_value_with_merge( 'A'.($indice+70), 'Complementario:', 'A'.($indice+70).':B'.($indice+70) );
+			$this->sheet->setCellValue('C'.($indice+70),$row['e_4']);
+			$this->cell_value_with_merge( 'D'.($indice+70), 'espacio(s) complementario(s)', 'D'.($indice+70).':E'.($indice+70) );
+
+			$this->cell_value_with_merge( 'A'.($indice+71), 'Servicios:', 'A'.($indice+71).':B'.($indice+71) );
+			$this->sheet->setCellValue('C'.($indice+71),$row['e_5']);
+			$this->cell_value_with_merge( 'D'.($indice+71), 'servicio(s)', 'D'.($indice+71).':E'.($indice+71) );
+
+
+			$this->sheet->getStyle('A'.($indice+67).':B'.($indice+71))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('D'.($indice+67).':E'.($indice+71))->applyFromArray($style_contenido);
+
+
+
+			$this->cell_value_with_merge( 'A'.($indice+73), 'CARACTERÍSTICAS DE LAS EDIFACIONES', 'A'.($indice+73).':G'.($indice+73) );
+			$this->sheet->getStyle('A'.($indice+73).':G'.($indice+73))->applyFromArray($style_subtitulo);
+
+			$this->cell_value_with_merge( 'A'.($indice+74), 'EDIFICACIONES POR EJECUTOR DE LA OBRA', 'A'.($indice+74).':D'.($indice+74) );
+			$this->sheet->getStyle('A'.($indice+74).':D'.($indice+74))->applyFromArray($style_subitem);
+
+			$this->cell_value_with_merge( 'A'.($indice+75), 'Gobierno Nacional / Proyecto Especial:', 'A'.($indice+75).':D'.($indice+75) );
+			$this->sheet->setCellValue('E'.($indice+75), $row['eo_1']);
+			$this->cell_value_with_merge( 'F'.($indice+75), 'edificación(es)', 'F'.($indice+75).':G'.($indice+75) );
+
+			$this->cell_value_with_merge( 'A'.($indice+76), 'Gobierno Regional / Local:', 'A'.($indice+76).':D'.($indice+76) );
+			$this->sheet->setCellValue('E'.($indice+76), $row['eo_2']);
+			$this->cell_value_with_merge( 'F'.($indice+76),'edificación(es)', 'F'.($indice+76).':G'.($indice+76) );
+
+			$this->cell_value_with_merge( 'A'.($indice+77), 'APAFA / Autoconstrucción:', 'A'.($indice+77).':D'.($indice+77) );
+			$this->sheet->setCellValue('E'.($indice+77), $row['eo_3']);
+			$this->cell_value_with_merge( 'F'.($indice+77),'edificación(es)', 'F'.($indice+77).':G'.($indice+77) );
+
+			$this->cell_value_with_merge( 'A'.($indice+78), 'Entidades Cooperantes /  ONG\'S:', 'A'.($indice+78).':D'.($indice+78) );
+			$this->sheet->setCellValue('E'.($indice+78), $row['eo_4']);
+			$this->cell_value_with_merge( 'F'.($indice+78),'edificación(es)', 'F'.($indice+78).':G'.($indice+78) );
+
+			$this->cell_value_with_merge( 'A'.($indice+79), 'Empresa Privada:', 'A'.($indice+79).':D'.($indice+79) );
+			$this->sheet->setCellValue('E'.($indice+79), $row['eo_5']);
+			$this->cell_value_with_merge( 'F'.($indice+79),'edificación(es)', 'F'.($indice+79).':G'.($indice+79) );
+
+
+			$this->sheet->getStyle('A'.($indice+75).':D'.($indice+79))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('F'.($indice+75).':G'.($indice+79))->applyFromArray($style_contenido);
+
+
+			$this->cell_value_with_merge( 'A'.($indice+80),'EDIFICACIONES SEGÚN AÑO DE CONSTRUCCIÓN', 'A'.($indice+80).':D'.($indice+80) );
+			$this->sheet->getStyle('A'.($indice+80).':D'.($indice+80))->applyFromArray($style_subitem);
+
+			$this->cell_value_with_merge( 'A'.($indice+81), 'Antes y Durante 1977:', 'A'.($indice+81).':D'.($indice+81) );
+			$this->sheet->setCellValue('E'.($indice+81), $row['a_1']);
+			$this->cell_value_with_merge( 'F'.($indice+81),'edificación(es)', 'F'.($indice+81).':G'.($indice+81) );
+
+			$this->cell_value_with_merge( 'A'.($indice+82), 'Entre 1978 Y 1998:', 'A'.($indice+82).':D'.($indice+82) );
+			$this->sheet->setCellValue('E'.($indice+82), $row['a_2']);
+			$this->cell_value_with_merge( 'F'.($indice+82),'edificación(es)', 'F'.($indice+82).':G'.($indice+82) );
+
+			$this->cell_value_with_merge( 'A'.($indice+83), 'Después de 1998:', 'A'.($indice+83).':D'.($indice+83) );
+			$this->sheet->setCellValue('E'.($indice+83), $row['a_3']);
+			$this->cell_value_with_merge( 'F'.($indice+83), 'edificación(es)', 'F'.($indice+83).':G'.($indice+83) );
+
+
+			$this->sheet->getStyle('A'.($indice+81).':D'.($indice+83))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('F'.($indice+81).':G'.($indice+83))->applyFromArray($style_contenido);
+
+
+			$this->cell_value_with_merge( 'A'.($indice+84),'INTERVENCIÓN A REALIZAR', 'A'.($indice+84).':D'.($indice+84) );
+			$this->sheet->getStyle('A'.($indice+84).':D'.($indice+84))->applyFromArray($style_subitem);
+
+			$this->cell_value_with_merge( 'A'.($indice+85), 'Número de Edificaciones para Mantenimiento:', 'A'.($indice+85).':D'.($indice+85) );
+			$this->sheet->setCellValue('E'.($indice+85), $row['eman']);
+			$this->cell_value_with_merge( 'F'.($indice+85), 'edificación(es)', 'F'.($indice+85).':G'.($indice+85) );
+
+			$this->cell_value_with_merge( 'A'.($indice+86), 'Número de Edificaciones para Reforzamiento Estructural:', 'A'.($indice+86).':D'.($indice+86) );
+			$this->sheet->setCellValue('E'.($indice+86), $row['ereh']);
+			$this->cell_value_with_merge( 'F'.($indice+86), 'edificación(es)', 'F'.($indice+86).':G'.($indice+86) );
+
+			$this->cell_value_with_merge( 'A'.($indice+87), 'Número de Edificaciones para Demolición:', 'A'.($indice+87).':D'.($indice+87) );
+			$this->sheet->setCellValue('E'.($indice+87), $row['edem']);
+			$this->cell_value_with_merge( 'F'.($indice+87), 'edificación(es)', 'F'.($indice+87).':G'.($indice+87) );
+
+
+			$this->sheet->getStyle('A'.($indice+85).':D'.($indice+87))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('F'.($indice+85).':G'.($indice+87))->applyFromArray($style_contenido);
 
 		}
 
@@ -586,7 +458,7 @@ class Csvexport extends CI_Controller
 		////////////////////////////////
 		// SALIDA EXCEL ( Propiedades del archivo excel )
 		////////////////////////////////
-		$sheet->setTitle("CIE 2013");
+		$this->sheet->setTitle("CIE 2013");
 		$this->phpexcel->getProperties()
 		->setTitle("INEI - CIE2013")
 		->setDescription("CIE2013");
@@ -819,7 +691,7 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('B'.$iHead,'INFORMACIÓN GENERAL','B'.$iHead.':Q'.$iHead);
 		$this->sheet->getStyle('B'.$iHead.':Q'.$iHead)->applyFromArray($style_tabs);
 
-		$this->cell_value_with_merge('B'.($iHead + 1),'Nombre de la I.E.','B'.($iHead + 1).':B'.($iHead + 5));
+		$this->cell_value_with_merge('B'.($iHead + 1),'Nombre de la Institución Educativa','B'.($iHead + 1).':B'.($iHead + 5));
 		$this->cell_value_with_merge('C'.($iHead + 1),'Código de Local','C'.($iHead + 1).':C'.($iHead + 5));
 		$this->cell_value_with_merge('D'.($iHead + 1),'Nivel Educativo','D'.($iHead + 1).':D'.($iHead + 5));
 		$this->cell_value_with_merge('E'.($iHead + 1),'Total de Alumnos','E'.($iHead + 1).':E'.($iHead + 5));
@@ -830,11 +702,11 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('J'.($iHead + 1),'Provincia','J'.($iHead + 1).':J'.($iHead + 5));
 		$this->cell_value_with_merge('K'.($iHead + 1),'Distrito','K'.($iHead + 1).':K'.($iHead + 5));
 		$this->cell_value_with_merge('L'.($iHead + 1),'Centro Poblado','L'.($iHead + 1).':L'.($iHead + 5));
-		$this->cell_value_with_merge('M'.($iHead + 1),'Área Urbana o Rural','M'.($iHead + 1).':M'.($iHead + 5));
+		$this->cell_value_with_merge('M'.($iHead + 1),'Área','M'.($iHead + 1).':M'.($iHead + 5));
 		$this->cell_value_with_merge('N'.($iHead + 1),'Propietario del Local','N'.($iHead + 1).':N'.($iHead + 5));
 		$this->sheet->getStyle('B'.($iHead + 1).':N'.($iHead + 5))->applyFromArray($style_indicador);
 
-		$this->cell_value_with_merge('O'.($iHead + 1),'GEOREFERENCIA','O'.($iHead + 1).':Q'.($iHead + 1));
+		$this->cell_value_with_merge('O'.($iHead + 1),'GEORREFERENCIA','O'.($iHead + 1).':Q'.($iHead + 1));
 		$this->sheet->getStyle('O'.($iHead + 1).':Q'.($iHead + 1))->applyFromArray($style_subtitulo);
 		$this->cell_value_with_merge('O'.($iHead + 2),'Latitud','O'.($iHead + 2).':O'.($iHead + 5));
 		$this->cell_value_with_merge('P'.($iHead + 2),'Longitud','P'.($iHead + 2).':P'.($iHead + 5));
