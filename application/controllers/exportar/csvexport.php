@@ -163,7 +163,7 @@ class Csvexport extends CI_Controller
 
 
 			$this->cell_value_with_merge( 'A'.($indice+3), 'Nombre de la Institución Educativa:', 'A'.($indice+3).':B'.($indice+3) );
-			$this->cell_value_with_merge( 'C'.($indice+3), $nombre_ie, 'C'.($indice+3).':G'.($indice+3) );
+			$this->cell_value_with_merge( 'C'.($indice+3), strtoupper($nombre_ie), 'C'.($indice+3).':G'.($indice+3) );
 			
 			$this->cell_value_with_merge( 'A'.($indice+4), 'Código del Local:', 'A'.($indice+4).':B'.($indice+4) );
 			$this->sheet->getCellByColumnAndRow(2, ($indice+4))->setValueExplicit($row['codigo_de_local'],PHPExcel_Cell_DataType::TYPE_STRING);
@@ -173,41 +173,41 @@ class Csvexport extends CI_Controller
 
 			
 			$this->cell_value_with_merge( 'A'.($indice+5), 'Nivel Educativo:', 'A'.($indice+5).':B'.($indice+5) );	
-			$this->cell_value_with_merge( 'C'.($indice+5), $row['nivel'], 'C'.($indice+5).':G'.($indice+5) );
+			$this->cell_value_with_merge( 'C'.($indice+5), strtoupper($row['nivel']), 'C'.($indice+5).':G'.($indice+5) );
 
 			$this->cell_value_with_merge( 'A'.($indice+6), 'Total de Alumnos:', 'A'.($indice+6).':B'.($indice+6) );
 			$this->cell_value_with_merge( 'C'.($indice+6), $row['Talum'].' alumnos', 'C'.($indice+6).':G'.($indice+6) );
 
 			$this->cell_value_with_merge( 'A'.($indice+8), 'Nombre del Director:', 'A'.($indice+8).':B'.($indice+8) );
-			$this->cell_value_with_merge( 'C'.($indice+8), $row['Director_IIEE'], 'C'.($indice+8).':G'.($indice+8) );
+			$this->cell_value_with_merge( 'C'.($indice+8), strtoupper($row['Director_IIEE']), 'C'.($indice+8).':G'.($indice+8) );
 
 			$this->cell_value_with_merge( 'A'.($indice+9), 'Teléfono:', 'A'.($indice+9).':B'.($indice+9) );
 			$this->cell_value_with_merge( 'C'.($indice+9), $row['tel_IE'], 'C'.($indice+9).':G'.($indice+9) );
 
 			$this->cell_value_with_merge( 'A'.($indice+10), 'Dirección:', 'A'.($indice+10).':B'.($indice+10) );
-			$this->cell_value_with_merge( 'C'.($indice+10), $row['direcc_IE'], 'C'.($indice+10).':G'.($indice+10) );
+			$this->cell_value_with_merge( 'C'.($indice+10), strtoupper($row['direcc_IE']), 'C'.($indice+10).':G'.($indice+10) );
 
 
 
 			$this->cell_value_with_merge( 'A'.($indice+12), 'Departamento:', 'A'.($indice+12).':B'.($indice+12) );
-			$this->cell_value_with_merge( 'C'.($indice+12), $row['dpto_nombre'], 'C'.($indice+12).':G'.($indice+12) );
+			$this->cell_value_with_merge( 'C'.($indice+12), strtoupper($row['dpto_nombre']), 'C'.($indice+12).':G'.($indice+12) );
 
 			$this->cell_value_with_merge( 'A'.($indice+13), 'Provincia:', 'A'.($indice+13).':B'.($indice+13) );
-			$this->cell_value_with_merge( 'C'.($indice+13), $row['prov_nombre'], 'C'.($indice+13).':G'.($indice+13) );
+			$this->cell_value_with_merge( 'C'.($indice+13), strtoupper($row['prov_nombre']), 'C'.($indice+13).':G'.($indice+13) );
 
 			$this->cell_value_with_merge( 'A'.($indice+14), 'Distrito:', 'A'.($indice+14).':B'.($indice+14) );
-			$this->cell_value_with_merge( 'C'.($indice+14), $row['dist_nombre'], 'C'.($indice+14).':G'.($indice+14) );
+			$this->cell_value_with_merge( 'C'.($indice+14), strtoupper($row['dist_nombre']), 'C'.($indice+14).':G'.($indice+14) );
 
 			$this->cell_value_with_merge( 'A'.($indice+15), 'Centro Poblado:', 'A'.($indice+15).':B'.($indice+15) );
-			$this->cell_value_with_merge( 'C'.($indice+15), $row['centroPoblado'], 'C'.($indice+15).':G'.($indice+15) );
+			$this->cell_value_with_merge( 'C'.($indice+15), strtoupper($row['centroPoblado']), 'C'.($indice+15).':G'.($indice+15) );
 
 			$this->cell_value_with_merge( 'A'.($indice+16), 'Área:', 'A'.($indice+16).':B'.($indice+16) );
-			$this->cell_value_with_merge( 'C'.($indice+16), $row['des_area'], 'C'.($indice+16).':G'.($indice+16) );
+			$this->cell_value_with_merge( 'C'.($indice+16), strtoupper($row['des_area']), 'C'.($indice+16).':G'.($indice+16) );
 			
 
 
 			$this->cell_value_with_merge( 'A'.($indice+18), 'Propietario del Predio:', 'A'.($indice+18).':B'.($indice+18) );
-			$this->cell_value_with_merge( 'C'.($indice+18), $row['prop_IE'], 'C'.($indice+18).':G'.($indice+18) );
+			$this->cell_value_with_merge( 'C'.($indice+18), strtoupper($row['prop_IE']), 'C'.($indice+18).':G'.($indice+18) );
 			
 
 			$this->cell_value_with_merge( 'A'.($indice+20), 'Georreferencia:', 'A'.($indice+20).':B'.($indice+20) );
@@ -799,24 +799,24 @@ class Csvexport extends CI_Controller
 		foreach ($query as $key => $row)
 		{
 
-			$departamento = $row['dpto_nombre'];
-			$provincia = $row['prov_nombre'];
-			$distrito = $row['dist_nombre'];
+			$departamento = strtoupper( $row['dpto_nombre'] );
+			$provincia = strtoupper( $row['prov_nombre'] );
+			$distrito = strtoupper( $row['dist_nombre'] );
 
 			$this->sheet->setCellValue('A'.$indice, ++$nro );
-			$this->sheet->setCellValue('B'.$indice, $row['nombres_IIEE'] );
+			$this->sheet->setCellValue('B'.$indice, strtoupper( $row['nombres_IIEE'] ) );
 			$this->sheet->getCellByColumnAndRow(2, $indice)->setValueExplicit($row['codigo_de_local'],PHPExcel_Cell_DataType::TYPE_STRING);
-			$this->sheet->setCellValue('D'.$indice, $row['nivel'] );
+			$this->sheet->setCellValue('D'.$indice, strtoupper( $row['nivel'] ) );
 			$this->sheet->setCellValue('E'.$indice, $row['Talum'] );
-			$this->sheet->setCellValue('F'.$indice, $row['Director_IIEE'] );
+			$this->sheet->setCellValue('F'.$indice, strtoupper( $row['Director_IIEE'] ) );
 			$this->sheet->setCellValue('G'.$indice, $row['tel_IE'] );
-			$this->sheet->setCellValue('H'.$indice, $row['direcc_IE'] );
+			$this->sheet->setCellValue('H'.$indice, strtoupper( $row['direcc_IE'] ) );
 			$this->sheet->setCellValue('I'.$indice, $departamento );
 			$this->sheet->setCellValue('J'.$indice, $provincia );
 			$this->sheet->setCellValue('K'.$indice, $distrito );
-			$this->sheet->setCellValue('L'.$indice, $row['centroPoblado'] );
-			$this->sheet->setCellValue('M'.$indice, $row['des_area'] );
-			$this->sheet->setCellValue('N'.$indice, $row['prop_IE'] );
+			$this->sheet->setCellValue('L'.$indice, strtoupper( $row['centroPoblado'] ) );
+			$this->sheet->setCellValue('M'.$indice, strtoupper( $row['des_area'] ) );
+			$this->sheet->setCellValue('N'.$indice, strtoupper( $row['prop_IE'] ) );
 			$this->sheet->setCellValue('O'.$indice, $row['LatitudPunto_UltP'] );
 			$this->sheet->setCellValue('P'.$indice, $row['LongitudPunto_UltP'] );
 			$this->sheet->setCellValue('Q'.$indice, $row['AltitudPunto_UltP'] );
