@@ -113,6 +113,8 @@ table,td,tr,th{
     width: 18%;
     left: 0;
     padding: 0 15px;
+    min-width: 300px;
+    z-index: 999;
 }
 
 .coordenadas_map {

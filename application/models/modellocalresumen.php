@@ -10,7 +10,7 @@ class ModelLocalResumen extends CI_Model {
     }
 
     public function getDatosLocales($idCodigo) {
-        $this->db->where('pc_c_2_Rfinal_resul','1');
+        $this->db->where('pc_c_2_Rfinal_resul', '1');
         $this->db->where('codigo_de_local', $idCodigo);
         $sql = $this->db->get('Local_Resumen');
         return $this->convert_utf8->convert_result($sql);
@@ -20,17 +20,21 @@ class ModelLocalResumen extends CI_Model {
     public function getIESearch($params) {
 
 
-        if (isset($params['searchColegio']) and $params['searchColegio'] != "") {
+        if ((isset($params['searchColegio']) and $params['searchColegio'] != "") and (isset($params['searchCodigo']) and $params['searchCodigo'] != "")) {
+            $likeColegio = " AND (nombres_IIEE like '%" . $params['searchColegio'] . "%' OR codigo_de_local = '" . $params['searchCodigo'] . "')";
+        } else if (isset($params['searchColegio']) and $params['searchColegio'] != "" and $params['searchCodigo'] == "") {
             $likeColegio = " AND nombres_IIEE like '%" . $params['searchColegio'] . "%' ";
+        } else if (isset($params['searchCodigo']) and $params['searchCodigo'] != "" and $params['searchColegio'] == "") {
+            $likeColegio = " AND codigo_de_local = '" . $params['searchCodigo'] . "' ";
         } else {
             $likeColegio = " ";
         }
 
-        if (isset($params['searchCodigo']) and $params['searchCodigo'] != "") {
-            $filterCodigo = " AND codigo_de_local = '" . $params['searchCodigo'] . "' ";
-        } else {
-            $filterCodigo = " ";
-        }
+//        if (isset($params['searchCodigo']) and $params['searchCodigo'] != "") {
+//            $filterCodigo = " AND codigo_de_local = '" . $params['searchCodigo'] . "' ";
+//        } else {
+//            $filterCodigo = " ";
+//        }
 
         if (isset($params['depa']) and $params['depa'] != "") {
             $filterDepa = " AND cod_dpto ='" . $params['depa'] . "' ";
@@ -55,7 +59,7 @@ class ModelLocalResumen extends CI_Model {
                                 FROM 
                                     Local_Resumen 
                                 WHERE 
-                                    1=1 AND pc_c_2_Rfinal_resul ='1' " . $likeColegio . $filterCodigo . $filterDepa . $filterProv . $filterDist);
+                                    1=1 AND pc_c_2_Rfinal_resul ='1' " . $likeColegio . $filterDepa . $filterProv . $filterDist);
         return $this->convert_utf8->convert_result($sql);
 
         //return $sql;

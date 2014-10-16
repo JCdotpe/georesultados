@@ -311,26 +311,26 @@
                                     
                                     //--Insitución educativa que presta servicios en el lcal escolar
                                     $('.gen_codLocal').append(datos.codigo_de_local);
-                                    $('.gen_nombreIE').append(datos.nombres_IIEE);
-                                    $('.gen_direccionIE').append(datos.direcc_IE);
+                                    $('.gen_nombreIE').append((datos.nombres_IIEE).toUpperCase());
+                                    $('.gen_direccionIE').append((datos.direcc_IE).toUpperCase());
                                     if( datos.tel_IE == null){$('.gen_telLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
-                                    $('.gen_nivEducativo').append(datos.nivel);
-                                    if( datos.prop_IE == null){$('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_proLocal').append(datos.prop_IE);}
+                                    $('.gen_nivEducativo').append((datos.nivel).toUpperCase());
+                                    if( datos.prop_IE == null){$('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_proLocal').append((datos.prop_IE).toUpperCase());}
                                     if( datos.Talum == 0 ){$('.gen_countAlumnos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_countAlumnos').append(datos.Talum);}
                                     
                                     //--Ubicación geografica                                    
-                                    $('.gen_departLocal').append(datos.dpto_nombre);
-                                    $('.gen_provLocal').append(datos.prov_nombre);
-                                    $('.gen_distLocal').append(datos.dist_nombre);
-                                    $('.micentropoblado').append(datos.centroPoblado);
-                                    $('.gen_areaLocal').append(datos.des_area);
-                                    $('.gen_dirLocal').append(datos.Director_IIEE);
+                                    $('.gen_departLocal').append((datos.dpto_nombre).toUpperCase());
+                                    $('.gen_provLocal').append((datos.prov_nombre).toUpperCase());
+                                    $('.gen_distLocal').append((datos.dist_nombre).toUpperCase());
+                                    $('.micentropoblado').append((datos.centroPoblado).toUpperCase());
+                                    $('.gen_areaLocal').append((datos.des_area).toUpperCase());
+                                    $('.gen_dirLocal').append((datos.Director_IIEE).toUpperCase());
                                     $('.gen_latitud').append(datos.LatitudPunto_UltP);
                                     $('.gen_longitud').append(datos.LongitudPunto_UltP);
                                     $('.gen_altitud').append(datos.AltitudPunto_UltP+" msnm");
                                     
                                     //-- Fotografía del local escolar
-                                    if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></div></div>');}else{$('.gen_rutaFoto').append('');}
+                                    if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center"><h3 class="general_content_name text-center" style="margin-bottom:10px">Fotografía del Local Escolar</h3><a href="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'"" rel="facebox" class="foto_general_img"><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></a></div></div>');}else{$('.gen_rutaFoto').append('');}
                                     
                                     //Infraestructura
                                     //--Numero de predios y edificaciones
@@ -374,15 +374,11 @@
                                         ['Reforzamiento',  parseInt(datos.ereh),'#f1c40f'],
                                         ['Demolición',  parseInt(datos.edem),'#e74c3c']
                                     ]);
-                                    
-                                    
-
                                     var options = { 
                                         width: 500,
                                         height: 400,
                                         legend: { position: "none" }
 //                                        title: 'Intervenciones a Realizar'
-                                        
                                     };
                                     //var node = document.createElement('div'),
                                     var node = document.getElementById('gen_clumnaschart');
@@ -390,6 +386,7 @@
                                     chart = new google.visualization.ColumnChart(node);
                                     chart.draw(data, options);
                                     $('.img_a_fotografico').facebox();
+                                    $('.foto_general_img').facebox();
                                 });
                             });
 
