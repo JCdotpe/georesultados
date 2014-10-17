@@ -7,7 +7,7 @@
     </div>
     <div class="oted">
         <!--<span>Oficina Técnica de Estadísticas Departamentales - OTED</span>-->
-    </div>	
+    </div>
 </div>
 <!-- Cuerpo -->
 <div id="cuerpo" >
@@ -40,7 +40,7 @@
                                 <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Código de local" onKeyPress="return validar(event);"/>
                             </div>
                         </div>
-                        <!-- Fin Buscador codigo --> 
+                        <!-- Fin Buscador codigo -->
 
 
                         <!-- Buscador Colegio -->
@@ -69,8 +69,8 @@
                             <div id="dv_prov" class="form-group col-xs-12 text-center coger_valor">
                                 <label class="preguntas_sub2" for="prov">provincia</label>
                                 <div class="controls">
-                                    <select id="prov" class="col-xs-12 sinpadding select2" name="prov">                            
-                                        <option  value="">Seleccione</option>                                
+                                    <select id="prov" class="col-xs-12 sinpadding select2" name="prov">
+                                        <option  value="">Seleccione</option>
                                         <!-- cargando provincias -->
                                     </select>
                                 </div>
@@ -83,7 +83,7 @@
                                 <select id="dist" class="col-xs-12 sinpadding select2" name="dist">
                                     <option  value="">Seleccione</option>
                                     <!-- cargando distritos -->
-                                </select>                            
+                                </select>
                             </div>
                             <!-- Fin Distrito -->
                         </div>
@@ -113,11 +113,16 @@
         $("#dv_searchParent").hide();
         $("#div-colegio").hide();
         $("#boton_accion").hide();
+        $('.mihref').attr('href','');
 
         $("#optCodigo").on("click", function() {
+
+            $(".mihref").removeAttr('href');
             $("#div-colegio").hide();
             $("#dv_searchParent").show();
-            $("#searchCodigo").select().val("");
+            $("#searchCodigo").val("");
+            $("#searchColegio").val("");
+
             $("#boton_accion").show();
             $('#prov').empty();
             $('#dist').empty();
@@ -129,11 +134,14 @@
             $("#dv_prov .select2-chosen").text("Seleccione");
             $("#dv_dist .select2-chosen").text("Seleccione");
         });
-        
+
         $("#optColegio").on("click", function() {
+
+            $(".mihref").removeAttr('href');
             $("#dv_searchParent").hide();
             $("#div-colegio").show();
-            $("#searchColegio").select().val("");
+            $("#searchCodigo").val("");
+            $("#searchColegio").val("");
             $("#boton_accion").show();
         });
 
