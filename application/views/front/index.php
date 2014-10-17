@@ -91,21 +91,6 @@
 <!-- Fin Cuerpo -->
 <script type="text/javascript">
     $(function() {
-        
-
-        $("#searchColegio").on("click", function() {
-            $(this).select();
-            $("#searchCodigo").val("");
-            $('#prov').empty();
-            $('#dist').empty();
-            $("#prov").append('<option value="">Seleccione</option>');
-            $("#dist").append('<option value="">Seleccione</option>');
-            $("#dv_dep .select2-chosen").text("Seleccione");
-            $('#depa').prop('selectedIndex',0);
-            $("#depa").val("");
-            $("#dv_prov .select2-chosen").text("Seleccione");
-            $("#dv_dist .select2-chosen").text("Seleccione");
-        });
 
         $("#searchCodigo").on("click", function() {
             $(this).select();
@@ -115,10 +100,30 @@
             $("#prov").append('<option value="">Seleccione</option>');
             $("#dist").append('<option value="">Seleccione</option>');
             $("#dv_dep .select2-chosen").text("Seleccione");
-            $('#depa').prop('selectedIndex',0);
+            $('#depa').prop('selectedIndex', 0);
             $("#depa").val("");
             $("#dv_prov .select2-chosen").text("Seleccione");
             $("#dv_dist .select2-chosen").text("Seleccione");
+            $("#depa").attr("disabled",true);
+            $("#prov").attr("disabled",true);
+            $("#dist").attr("disabled",true);
+        });
+
+        $("#searchColegio").on("click", function() {
+            $(this).select();
+            $("#searchCodigo").val("");
+            $('#prov').empty();
+            $('#dist').empty();
+            $("#prov").append('<option value="">Seleccione</option>');
+            $("#dist").append('<option value="">Seleccione</option>');
+            $("#dv_dep .select2-chosen").text("Seleccione");
+            $('#depa').prop('selectedIndex', 0);
+            $("#depa").val("");
+            $("#dv_prov .select2-chosen").text("Seleccione");
+            $("#dv_dist .select2-chosen").text("Seleccione");
+            $("#depa").attr("disabled",false);
+            $("#prov").attr("disabled",false);
+            $("#dist").attr("disabled",false);
         });
 
         $("#limpiar_inputs").on("click", function() {
@@ -129,12 +134,14 @@
             $("#prov").append('<option value="">Seleccione</option>');
             $("#dist").append('<option value="">Seleccione</option>');
             $("#dv_dep .select2-chosen").text("Seleccione");
-            $('#depa').prop('selectedIndex',0);
+            $('#depa').prop('selectedIndex', 0);
             $("#depa").val("");
             $("#dv_prov .select2-chosen").text("Seleccione");
             $("#dv_dist .select2-chosen").text("Seleccione");
+            $("#depa").attr("disabled",false);
+            $("#prov").attr("disabled",false);
+            $("#dist").attr("disabled",false);
+            $("#searchCodigo").focus();
         });
     });
-
-
 </script>

@@ -1,12 +1,16 @@
 <?php
-$filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".$_REQUEST['searchCodigo']."&depa=".$_REQUEST['depa']."&prov=".$_REQUEST['prov']."&dist=".$_REQUEST['dist'];
+$filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodigo=" . $_REQUEST['searchCodigo'] . "&depa=" . $_REQUEST['depa'] . "&prov=" . $_REQUEST['prov'] . "&dist=" . $_REQUEST['dist'];
 ?>
-<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0){?> <a href="<?php echo base_url()?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda;?>" class="descargar_info_filtro floatCodigo" id="download_filtro_datos"><i class="glyphicon glyphicon-download-alt"></i> Exportar Resultados</a><?php }else{ echo "";} ?></div>
+<div class="titulo">Censo de Infraestructura Educativa 2013 - Resultados de los datos filtrados <?php if (count($datos_Resumen) > 0) { ?> <a href="<?php echo base_url() ?>exportar/csvexport/por_ubigeo?envio=1<?php echo $filtroBusqueda; ?>" class="fileDownload-data" id="download_filtro_datos" ><i  class="fa fa-download"></i> Exportar Resultados</a><?php
+    } else {
+        echo "";
+    }
+    ?></div>
 <div class="cuerpo">
     <?php
     if (count($datos_Resumen) > 0) {
         ?>
-    <label class="text-muted">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
+        <label class="text-muted">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
         <table class="table table-striped table-hover title_center_table">
             <thead>
                 <tr>
@@ -25,7 +29,8 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
                 foreach ($datos_Resumen as $datoResumen) {
                     ?>
                     <tr>
-                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
+                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');
+                                        jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
                         <td style="text-transform: uppercase"><?php echo $datoResumen['nivel'] ?></td>
                         <td><?php echo $datoResumen['prop_IE'] ?></td>
@@ -44,9 +49,27 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
     ?>
 </div>
 <div class="pieFacebox">Total encontrados : <?php echo count($datos_Resumen) ?></div>
-
 <script type="text/javascript">
-    
+    $(function() {
+        $("#download_filtro_datos").click(function() {
+            var url_donwload = $("#download_filtro_datos").attr('href');
+            $.ajax({
+                url: url_donwload,
+                type: 'POST',
+                beforeSend: function() {
+                    $('#download_filtro_datos').addClass("span_a_download");
+                    $('#download_filtro_datos').html("<i id='change_carga' class='fa fa-spinner fa-spin fa-2x'></i> Exportando Resultados");
+                },
+                success: function(data) {
+                    if (data) {
+                        $('#download_filtro_datos').removeClass("span_a_download");
+                        $('#download_filtro_datos').html("<i id='change_carga' class='fa fa-download'></i> Exportar Resultados");
+                    }
+                }
+            });
+        });
+    });
+
     function llevarMapa(local_id) {
         var num_local_id = local_id;
         var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + num_local_id;
@@ -68,4 +91,3 @@ $filtroBusqueda = "&searchColegio=".$_REQUEST['searchColegio']."&searchCodigo=".
         });
     }
 </script>
-

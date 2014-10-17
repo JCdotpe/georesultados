@@ -32,7 +32,7 @@ class Home extends CI_Controller {
 
 
     public function getSearchIE() {
-        $_REQUEST['searchColegio'] = $_GET['searchColegio'];
+        $_REQUEST['searchColegio'] = trim($_GET['searchColegio']);
         $_REQUEST['searchCodigo'] = $_GET['searchCodigo'];
         $_REQUEST['depa'] = $_GET['depa'];
         $_REQUEST['prov'] = $_GET['prov'];
