@@ -108,6 +108,9 @@
             $("#prov").attr("disabled",true);
             $("#dist").attr("disabled",true);
         });
+        
+        
+        
 
         $("#searchColegio").on("click", function() {
             $(this).select();

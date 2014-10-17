@@ -21,7 +21,7 @@ class ModelLocalResumen extends CI_Model {
 
 
         if ((isset($params['searchColegio']) and $params['searchColegio'] != "") and (isset($params['searchCodigo']) and $params['searchCodigo'] != "")) {
-            $likeColegio = " AND (nombres_IIEE like '%" . $params['searchColegio'] . "%' OR codigo_de_local = '" . $params['searchCodigo'] . "')";
+            $likeColegio = " AND codigo_de_local = '" . $params['searchCodigo'] . "'";
         } else if (isset($params['searchColegio']) and $params['searchColegio'] != "" and $params['searchCodigo'] == "") {
             $likeColegio = " AND nombres_IIEE like '%" . $params['searchColegio'] . "%' ";
         } else if (isset($params['searchCodigo']) and $params['searchCodigo'] != "" and $params['searchColegio'] == "") {
