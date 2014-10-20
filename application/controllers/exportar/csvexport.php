@@ -3,6 +3,23 @@
 class Csvexport extends CI_Controller
 {
 	private $sheet;
+	private $alignment_general;
+	private $style_cabecera_general;
+	private $style_tabs;
+	private $style_tabs_all;
+	private $style_subtitulo;
+	private $style_subtitulo_all;
+	private $style_subitem;
+	private $style_subitem_all;
+	private $style_indicador;
+	private $style_indicador_all;
+	private $style_contenido;
+	private $style_contenido_all;
+	private $marco;
+	private $divisoria;
+	private $style_impar;
+	private $style_filter;
+
 	
 	function __construct()
 	{
@@ -20,15 +37,10 @@ class Csvexport extends CI_Controller
 		echo 'hola';
 	}
 
-	public function por_codigo()
+	public function set_styles()
 	{
 
-		$idCodigo = $_GET['idCodigo'];
-
-		////////////////////////////////
-		//Colores y Estilos
-		////////////////////////////////
-		$alignment_general = array(
+		$this->alignment_general = array(
 			'alignment' => array(
 				'wrap' => true,
 				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
@@ -36,14 +48,15 @@ class Csvexport extends CI_Controller
 			),
 		);
 
-		$style_cabecera_general = array(
+		$this->style_cabecera_general = array(
 			'font' => array(
 				'bold' => true,
 				'size' => 13
 			)
 		);
 
-		$style_tabs  = array(
+
+		$this->style_tabs  = array(
 			'fill' => array(
 				'type' => PHPExcel_Style_Fill::FILL_SOLID,
 				'color' => array('rgb' => 'BFBFBF')
@@ -54,7 +67,23 @@ class Csvexport extends CI_Controller
 			)
 		);
 
-		$style_subtitulo  = array(
+		$this->style_tabs_all  = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => 'BFBFBF')
+			),
+			'font' => array(
+				'bold' => true,
+				'size' => 12
+			),
+			'borders' => array(
+				'allborders' => array(
+					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+				)
+			)
+		);
+
+		$this->style_subtitulo  = array(
 			'fill' => array(
 				'type' => PHPExcel_Style_Fill::FILL_SOLID,
 				'color' => array('rgb' => '1F497D')
@@ -66,7 +95,24 @@ class Csvexport extends CI_Controller
 			)
 		);
 
-		$style_subitem  = array(
+		$this->style_subtitulo_all  = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => '1F497D')
+			),
+			'font' => array(
+				'bold' => true,
+				'size' => 12,
+				'color' => array('rgb' => 'FFFFFF')
+			),
+			'borders' => array(
+				'allborders' => array(
+					'style' => PHPExcel_Style_Border::BORDER_THIN
+				)
+			)
+		);
+
+		$this->style_subitem  = array(
 			'fill' => array(
 				'type' => PHPExcel_Style_Fill::FILL_SOLID,
 				'color' => array('rgb' => '538DD5')
@@ -78,9 +124,25 @@ class Csvexport extends CI_Controller
 				'color' => array('rgb' => 'FFFFFF')
 			)
 		);
-		
 
-		$style_indicador = array(
+		$this->style_subitem_all  = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => '538DD5')
+			),
+			'font' => array(
+				'bold' => true,
+				'size' => 11,
+				'color' => array('rgb' => 'FFFFFF')
+			),
+			'borders' => array(
+				'allborders' => array(
+					'style' => PHPExcel_Style_Border::BORDER_THIN
+				)
+			)
+		);
+
+		$this->style_indicador = array(
 			'alignment' => array(
 				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT
 			),
@@ -89,13 +151,89 @@ class Csvexport extends CI_Controller
 			)
 		);
 
-		$style_contenido = array(
+		$this->style_indicador_all = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => 'CCECFF')
+			),
+			'font' => array(
+				'bold' => true
+			),
+			'borders' => array(
+				'allborders' => array(
+					'style' => PHPExcel_Style_Border::BORDER_THIN
+				)
+			)
+		);
+
+		$this->style_contenido = array(
 			'alignment' => array(
 				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT
 			),
 		);
 
-			
+		$this->style_contenido_all = array(
+			'borders' => array(
+				'allborders' => array(
+					'style' => PHPExcel_Style_Border::BORDER_THIN
+				)
+			)
+		);
+
+
+		$this->marco = array(
+			'borders' => array(
+				'top' => array(
+					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+				),
+				'left' => array(
+					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+				),
+				'right' => array(
+					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+				),
+				'bottom' => array(
+					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+				)
+			)
+		);
+
+		$this->divisoria = array(
+			'borders' => array(
+				'right' => array(
+					'style' => PHPExcel_Style_Border::BORDER_MEDIUM,
+					'color' => array('rgb' => '4F81BD')
+				)
+			)
+		);
+
+		$this->style_impar = array(
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => 'DAEEF3')
+			)
+		);
+
+		$this->style_filter = array(
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+			),
+			'font' => array(
+				'bold' => true
+			)
+		);
+
+	}
+
+	public function por_codigo()
+	{
+
+		$idCodigo = $_GET['idCodigo'];
+
+		////////////////////////////////
+		//Colores y Estilos
+		////////////////////////////////
+		$this->set_styles();
 
 		// pestaña
 		$this->sheet = $this->phpexcel->getActiveSheet(0);
@@ -108,7 +246,7 @@ class Csvexport extends CI_Controller
 		$this->sheet->getPageSetup()->setRowsToRepeatAtTop(array(1,5)); // cabecera de impresion
 		$this->sheet->getDefaultStyle()->getFont()->setName('Calibri');
 		$this->sheet->getDefaultStyle()->getFont()->setSize(11);
-		$this->sheet->getDefaultStyle()->applyFromArray($alignment_general);
+		$this->sheet->getDefaultStyle()->applyFromArray($this->alignment_general);
 		$this->sheet->getSheetView()->setZoomScale(100);
 		$this->sheet->getDefaultColumnDimension()->setWidth(12); //default size column
 
@@ -135,7 +273,7 @@ class Csvexport extends CI_Controller
 		////////////////////////////////
 		$this->cell_value_with_merge( 'C3', 'INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA', 'C3:G3' );
 		$this->cell_value_with_merge( 'C4', 'CENSO DE INFRAESTRUCTURA EDUCATIVA 2013', 'C4:G4' );
-		$this->sheet->getStyle('C3:G4')->applyFromArray($style_cabecera_general);
+		$this->sheet->getStyle('C3:G4')->applyFromArray($this->style_cabecera_general);
 
 
 		////////////////////////////////
@@ -156,10 +294,10 @@ class Csvexport extends CI_Controller
 			////////////////////////////////
 
 			$this->cell_value_with_merge( 'A'.$indice, 'INFORMACIÓN GENERAL DE LA '.$nombre_ie, 'A'.$indice.':G'.($indice+1) );
-			$this->sheet->getStyle('A'.$indice.':G'.($indice+1))->applyFromArray($style_tabs);
+			$this->sheet->getStyle('A'.$indice.':G'.($indice+1))->applyFromArray($this->style_tabs);
 
 			$this->cell_value_with_merge( 'A'.($indice+2), 'INFORMACIÓN DEL LOCAL ESCOLAR', 'A'.($indice+2).':G'.($indice+2) );
-			$this->sheet->getStyle('A'.($indice+2).':G'.($indice+2))->applyFromArray($style_subtitulo);
+			$this->sheet->getStyle('A'.($indice+2).':G'.($indice+2))->applyFromArray($this->style_subtitulo);
 
 
 			$this->cell_value_with_merge( 'A'.($indice+3), 'Nombre de la Institución Educativa:', 'A'.($indice+3).':B'.($indice+3) );
@@ -168,7 +306,7 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'A'.($indice+4), 'Código del Local:', 'A'.($indice+4).':B'.($indice+4) );
 			$this->sheet->getCellByColumnAndRow(2, ($indice+4))->setValueExplicit($row['codigo_de_local'],PHPExcel_Cell_DataType::TYPE_STRING);
 			$this->sheet->mergeCells('C'.($indice+4).':G'.($indice+4));
-			$this->sheet->getStyle('C'.($indice+4).':G'.($indice+4))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('C'.($indice+4).':G'.($indice+4))->applyFromArray($this->style_contenido);
 
 
 			
@@ -213,8 +351,8 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'A'.($indice+20), 'Georreferencia:', 'A'.($indice+20).':B'.($indice+20) );
 
 			
-			$this->sheet->getStyle('C'.($indice+3).':G'.($indice+18))->applyFromArray($style_contenido);
-			$this->sheet->getStyle('A'.($indice+3).':B'.($indice+20))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('C'.($indice+3).':G'.($indice+18))->applyFromArray($this->style_contenido);
+			$this->sheet->getStyle('A'.($indice+3).':B'.($indice+20))->applyFromArray($this->style_indicador);
 
 
 			
@@ -228,13 +366,13 @@ class Csvexport extends CI_Controller
 			$this->sheet->setCellValue('G'.($indice+21),$row['AltitudPunto_UltP']);
 			
 
-			$this->sheet->getStyle('B'.($indice+21))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('D'.($indice+21))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('F'.($indice+21))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('B'.($indice+21))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('D'.($indice+21))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('F'.($indice+21))->applyFromArray($this->style_indicador);
 
-			$this->sheet->getStyle('C'.($indice+21))->applyFromArray($style_contenido);
-			$this->sheet->getStyle('E'.($indice+21))->applyFromArray($style_contenido);
-			$this->sheet->getStyle('G'.($indice+21))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('C'.($indice+21))->applyFromArray($this->style_contenido);
+			$this->sheet->getStyle('E'.($indice+21))->applyFromArray($this->style_contenido);
+			$this->sheet->getStyle('G'.($indice+21))->applyFromArray($this->style_contenido);
 
 
 
@@ -274,11 +412,11 @@ class Csvexport extends CI_Controller
 			// Información de la Infraestructura page 2
 			///////////////////////////////////////////
 			$this->cell_value_with_merge( 'A'.($indice+44), 'INFORMACIÓN DE LA INFRAESTRUCTURA DE LA '.$nombre_ie, 'A'.($indice+44).':G'.($indice+45) );
-			$this->sheet->getStyle('A'.($indice+44).':G'.($indice+45))->applyFromArray($style_tabs);
+			$this->sheet->getStyle('A'.($indice+44).':G'.($indice+45))->applyFromArray($this->style_tabs);
 
 
 			$this->cell_value_with_merge( 'A'.($indice+46), 'NÚMERO PREDIOS Y EDIFICACIONES', 'A'.($indice+46).':G'.($indice+46) );
-			$this->sheet->getStyle('A'.($indice+46).':G'.($indice+46))->applyFromArray($style_subtitulo);
+			$this->sheet->getStyle('A'.($indice+46).':G'.($indice+46))->applyFromArray($this->style_subtitulo);
 
 			$this->cell_value_with_merge( 'A'.($indice+47), 'Predios:', 'A'.($indice+47).':B'.($indice+47) );
 			$this->sheet->setCellValue('C'.($indice+47), $row['cPred']);
@@ -297,13 +435,13 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'D'.($indice+50), 'm2', 'D'.($indice+50).':E'.($indice+50) );
 
 
-			$this->sheet->getStyle('A'.($indice+47).':B'.($indice+50))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('D'.($indice+47).':E'.($indice+50))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+47).':B'.($indice+50))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('D'.($indice+47).':E'.($indice+50))->applyFromArray($this->style_contenido);
 
 
 
 			$this->cell_value_with_merge( 'A'.($indice+52), 'OTRAS EDIFICACIONES', 'A'.($indice+52).':G'.($indice+52) );
-			$this->sheet->getStyle('A'.($indice+52).':G'.($indice+52))->applyFromArray($style_subtitulo);
+			$this->sheet->getStyle('A'.($indice+52).':G'.($indice+52))->applyFromArray($this->style_subtitulo);
 
 			$this->cell_value_with_merge( 'A'.($indice+53), 'Patio:', 'A'.($indice+53).':B'.($indice+53) );
 			$this->sheet->setCellValue('C'.($indice+53), $row['P']);
@@ -322,13 +460,13 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'D'.($indice+56), 'muro(s) de contención(es)', 'D'.($indice+56).':F'.($indice+56) );
 
 
-			$this->sheet->getStyle('A'.($indice+53).':B'.($indice+56))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('D'.($indice+53).':E'.($indice+56))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+53).':B'.($indice+56))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('D'.($indice+53).':E'.($indice+56))->applyFromArray($this->style_contenido);
 
 
 
 			$this->cell_value_with_merge( 'A'.($indice+58), 'SERVICIOS BÁSICOS Y COMUNICACIONES', 'A'.($indice+58).':G'.($indice+58) );
-			$this->sheet->getStyle('A'.($indice+58).':G'.($indice+58))->applyFromArray($style_subtitulo);
+			$this->sheet->getStyle('A'.($indice+58).':G'.($indice+58))->applyFromArray($this->style_subtitulo);
 
 			$this->cell_value_with_merge( 'A'.($indice+59), 'Energía Eléctrica:', 'A'.($indice+59).':B'.($indice+59) );
 			$this->sheet->setCellValue( 'C'.($indice+59), ( $row['P2_C_2LocE_1_Energ'] == 1) ? 'TIENE' : 'NO TIENE' );
@@ -349,12 +487,12 @@ class Csvexport extends CI_Controller
 			$this->sheet->setCellValue( 'C'.($indice+64), ( $row['P2_C_2LocE_6_Int'] == 1) ? 'TIENE' : 'NO TIENE' );
 
 
-			$this->sheet->getStyle('A'.($indice+59).':B'.($indice+64))->applyFromArray($style_indicador);
+			$this->sheet->getStyle('A'.($indice+59).':B'.($indice+64))->applyFromArray($this->style_indicador);
 
 
 
 			$this->cell_value_with_merge( 'A'.($indice+66), 'ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES', 'A'.($indice+66).':G'.($indice+66) );
-			$this->sheet->getStyle('A'.($indice+66).':G'.($indice+66))->applyFromArray($style_subtitulo);
+			$this->sheet->getStyle('A'.($indice+66).':G'.($indice+66))->applyFromArray($this->style_subtitulo);
 
 			$this->cell_value_with_merge( 'A'.($indice+67), 'Aula Común:', 'A'.($indice+67).':B'.($indice+67) );
 			$this->sheet->setCellValue('C'.($indice+67),$row['e_1']);
@@ -377,16 +515,16 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'D'.($indice+71), 'servicio(s)', 'D'.($indice+71).':E'.($indice+71) );
 
 
-			$this->sheet->getStyle('A'.($indice+67).':B'.($indice+71))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('D'.($indice+67).':E'.($indice+71))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+67).':B'.($indice+71))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('D'.($indice+67).':E'.($indice+71))->applyFromArray($this->style_contenido);
 
 
 
 			$this->cell_value_with_merge( 'A'.($indice+73), 'CARACTERÍSTICAS DE LAS EDIFACIONES', 'A'.($indice+73).':G'.($indice+73) );
-			$this->sheet->getStyle('A'.($indice+73).':G'.($indice+73))->applyFromArray($style_subtitulo);
+			$this->sheet->getStyle('A'.($indice+73).':G'.($indice+73))->applyFromArray($this->style_subtitulo);
 
 			$this->cell_value_with_merge( 'A'.($indice+74), 'EDIFICACIONES POR EJECUTOR DE LA OBRA', 'A'.($indice+74).':D'.($indice+74) );
-			$this->sheet->getStyle('A'.($indice+74).':D'.($indice+74))->applyFromArray($style_subitem);
+			$this->sheet->getStyle('A'.($indice+74).':D'.($indice+74))->applyFromArray($this->style_subitem);
 
 			$this->cell_value_with_merge( 'A'.($indice+75), 'Gobierno Nacional / Proyecto Especial:', 'A'.($indice+75).':D'.($indice+75) );
 			$this->sheet->setCellValue('E'.($indice+75), $row['eo_1']);
@@ -409,12 +547,12 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'F'.($indice+79),'edificación(es)', 'F'.($indice+79).':G'.($indice+79) );
 
 
-			$this->sheet->getStyle('A'.($indice+75).':D'.($indice+79))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('F'.($indice+75).':G'.($indice+79))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+75).':D'.($indice+79))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('F'.($indice+75).':G'.($indice+79))->applyFromArray($this->style_contenido);
 
 
 			$this->cell_value_with_merge( 'A'.($indice+80),'EDIFICACIONES SEGÚN AÑO DE CONSTRUCCIÓN', 'A'.($indice+80).':D'.($indice+80) );
-			$this->sheet->getStyle('A'.($indice+80).':D'.($indice+80))->applyFromArray($style_subitem);
+			$this->sheet->getStyle('A'.($indice+80).':D'.($indice+80))->applyFromArray($this->style_subitem);
 
 			$this->cell_value_with_merge( 'A'.($indice+81), 'Antes y Durante 1977:', 'A'.($indice+81).':D'.($indice+81) );
 			$this->sheet->setCellValue('E'.($indice+81), $row['a_1']);
@@ -429,12 +567,12 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'F'.($indice+83), 'edificación(es)', 'F'.($indice+83).':G'.($indice+83) );
 
 
-			$this->sheet->getStyle('A'.($indice+81).':D'.($indice+83))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('F'.($indice+81).':G'.($indice+83))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+81).':D'.($indice+83))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('F'.($indice+81).':G'.($indice+83))->applyFromArray($this->style_contenido);
 
 
 			$this->cell_value_with_merge( 'A'.($indice+84),'INTERVENCIÓN A REALIZAR', 'A'.($indice+84).':D'.($indice+84) );
-			$this->sheet->getStyle('A'.($indice+84).':D'.($indice+84))->applyFromArray($style_subitem);
+			$this->sheet->getStyle('A'.($indice+84).':D'.($indice+84))->applyFromArray($this->style_subitem);
 
 			$this->cell_value_with_merge( 'A'.($indice+85), 'Número de Edificaciones para Mantenimiento:', 'A'.($indice+85).':D'.($indice+85) );
 			$this->sheet->setCellValue('E'.($indice+85), $row['eman']);
@@ -449,8 +587,8 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'F'.($indice+87), 'edificación(es)', 'F'.($indice+87).':G'.($indice+87) );
 
 
-			$this->sheet->getStyle('A'.($indice+85).':D'.($indice+87))->applyFromArray($style_indicador);
-			$this->sheet->getStyle('F'.($indice+85).':G'.($indice+87))->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.($indice+85).':D'.($indice+87))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('F'.($indice+85).':G'.($indice+87))->applyFromArray($this->style_contenido);
 
 		}
 
@@ -480,135 +618,7 @@ class Csvexport extends CI_Controller
 		////////////////////////////////
 		//Colores y Estilos
 		////////////////////////////////
-		$alignment_general = array(
-			'alignment' => array(
-				'wrap' => true,
-				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-				'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
-			),
-		);
-
-		$style_cabecera_general = array(
-			'font' => array(
-				'bold' => true,
-				'size' => 13
-			)
-		);
-
-		$style_tabs  = array(
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => 'BFBFBF')
-			),
-			'font' => array(
-				'bold' => true,
-				'size' => 12
-			),
-			'borders' => array(
-				'allborders' => array(
-					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
-				)
-			)
-		);
-
-		$style_subtitulo  = array(
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => '1F497D')
-			),
-			'font' => array(
-				'bold' => true,
-				'size' => 12,
-				'color' => array('rgb' => 'FFFFFF')
-			),
-			'borders' => array(
-				'allborders' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN
-				)
-			)
-		);
-
-		$style_subitem  = array(
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => '538DD5')
-			),
-			'font' => array(
-				'bold' => true,
-				'size' => 11,
-				'color' => array('rgb' => 'FFFFFF')
-			),
-			'borders' => array(
-				'allborders' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN
-				)
-			)
-		);
-
-		$style_indicador = array(
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => 'CCECFF')
-			),
-			'font' => array(
-				'bold' => true
-			),
-			'borders' => array(
-				'allborders' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN
-				)
-			)
-		);
-
-		$marco = array(
-			'borders' => array(
-				'top' => array(
-					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
-				),
-				'left' => array(
-					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
-				),
-				'right' => array(
-					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
-				),
-				'bottom' => array(
-					'style' => PHPExcel_Style_Border::BORDER_MEDIUM
-				)
-			)
-		);
-
-		$divisoria = array(
-			'borders' => array(
-				'right' => array(
-					'style' => PHPExcel_Style_Border::BORDER_MEDIUM,
-					'color' => array('rgb' => '4F81BD')
-				)
-			)
-		);
-
-		$style_contenido = array(
-			'borders' => array(
-				'allborders' => array(
-					'style' => PHPExcel_Style_Border::BORDER_THIN
-				)
-			)
-		);
-
-		$style_impar = array(
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => 'DAEEF3')
-			)
-		);
-
-		$style_filter = array(
-			'alignment' => array(
-				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-			),
-			'font' => array(
-				'bold' => true
-			)
-		);
+		$this->set_styles();
 
 		// pestaña
 		$this->sheet = $this->phpexcel->getActiveSheet(0);
@@ -621,7 +631,7 @@ class Csvexport extends CI_Controller
 		// $this->sheet->getPageSetup()->setRowsToRepeatAtTop(array(1,5)); // cabecera de impresion
 		$this->sheet->getDefaultStyle()->getFont()->setName('Calibri');
 		$this->sheet->getDefaultStyle()->getFont()->setSize(11);
-		$this->sheet->getDefaultStyle()->applyFromArray($alignment_general);
+		$this->sheet->getDefaultStyle()->applyFromArray($this->alignment_general);
 		$this->sheet->getSheetView()->setZoomScale(100);
 		$this->sheet->getDefaultColumnDimension()->setWidth(12); //default size column
 
@@ -679,17 +689,17 @@ class Csvexport extends CI_Controller
 		////////////////////////////////
 		$this->cell_value_with_merge('B3','INSTITUTO NACIONAL DE ESTADÍSTICA E INFORMÁTICA','B3:F3');
 		$this->cell_value_with_merge('B4','CENSO DE INFRAESTRUCTURA EDUCATIVA 2013','B4:F4');
-		$this->sheet->getStyle('B3:F4')->applyFromArray($style_cabecera_general);
+		$this->sheet->getStyle('B3:F4')->applyFromArray($this->style_cabecera_general);
 
 		////////////////////////////////
 		// Cabecera Tabla
 		////////////////////////////////
 		$iHead = 8;
 		$this->cell_value_with_merge('A'.$iHead,'NRO','A'.$iHead.':A'.($iHead + 5));
-		$this->sheet->getStyle('A'.$iHead.':A'.($iHead + 5))->applyFromArray($style_tabs);
+		$this->sheet->getStyle('A'.$iHead.':A'.($iHead + 5))->applyFromArray($this->style_tabs_all);
 
 		$this->cell_value_with_merge('B'.$iHead,'INFORMACIÓN GENERAL','B'.$iHead.':Q'.$iHead);
-		$this->sheet->getStyle('B'.$iHead.':Q'.$iHead)->applyFromArray($style_tabs);
+		$this->sheet->getStyle('B'.$iHead.':Q'.$iHead)->applyFromArray($this->style_tabs_all);
 
 		$this->cell_value_with_merge('B'.($iHead + 1),'Nombre de la Institución Educativa','B'.($iHead + 1).':B'.($iHead + 5));
 		$this->cell_value_with_merge('C'.($iHead + 1),'Código de Local','C'.($iHead + 1).':C'.($iHead + 5));
@@ -704,36 +714,36 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('L'.($iHead + 1),'Centro Poblado','L'.($iHead + 1).':L'.($iHead + 5));
 		$this->cell_value_with_merge('M'.($iHead + 1),'Área','M'.($iHead + 1).':M'.($iHead + 5));
 		$this->cell_value_with_merge('N'.($iHead + 1),'Propietario del Predio','N'.($iHead + 1).':N'.($iHead + 5));
-		$this->sheet->getStyle('B'.($iHead + 1).':N'.($iHead + 5))->applyFromArray($style_indicador);
+		$this->sheet->getStyle('B'.($iHead + 1).':N'.($iHead + 5))->applyFromArray($this->style_indicador_all);
 
 		$this->cell_value_with_merge('O'.($iHead + 1),'GEORREFERENCIA','O'.($iHead + 1).':Q'.($iHead + 1));
-		$this->sheet->getStyle('O'.($iHead + 1).':Q'.($iHead + 1))->applyFromArray($style_subtitulo);
+		$this->sheet->getStyle('O'.($iHead + 1).':Q'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
 		$this->cell_value_with_merge('O'.($iHead + 2),'Latitud','O'.($iHead + 2).':O'.($iHead + 5));
 		$this->cell_value_with_merge('P'.($iHead + 2),'Longitud','P'.($iHead + 2).':P'.($iHead + 5));
 		$this->cell_value_with_merge('Q'.($iHead + 2),'Altitud','Q'.($iHead + 2).':Q'.($iHead + 5));
-		$this->sheet->getStyle('O'.($iHead + 2).':Q'.($iHead + 5))->applyFromArray($style_indicador);
+		$this->sheet->getStyle('O'.($iHead + 2).':Q'.($iHead + 5))->applyFromArray($this->style_indicador_all);
 
 
 
 		$this->cell_value_with_merge('R'.$iHead,'INFORMACIÓN DE LA INFRAESTRUCTURA','R'.$iHead.':AP'.$iHead);
-		$this->sheet->getStyle('R'.$iHead.':AP'.$iHead)->applyFromArray($style_tabs);
+		$this->sheet->getStyle('R'.$iHead.':AP'.$iHead)->applyFromArray($this->style_tabs_all);
 		
 		$this->cell_value_with_merge('R'.($iHead + 1),'NÚMERO DE PREDIOS Y EDIFICACIONES','R'.($iHead + 1).':U'.($iHead + 1));
-		$this->sheet->getStyle('R'.($iHead + 1).':U'.($iHead + 1))->applyFromArray($style_subtitulo);
+		$this->sheet->getStyle('R'.($iHead + 1).':U'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
 		$this->cell_value_with_merge('R'.($iHead + 2),'Predios','R'.($iHead + 2).':R'.($iHead + 5));
 		$this->cell_value_with_merge('S'.($iHead + 2),'Edificaciones','S'.($iHead + 2).':S'.($iHead + 5));
 		$this->cell_value_with_merge('T'.($iHead + 2),'Total de Pisos','T'.($iHead + 2).':T'.($iHead + 5));
 		$this->cell_value_with_merge('U'.($iHead + 2),'Área del Terreno','U'.($iHead + 2).':U'.($iHead + 5));
 
 		$this->cell_value_with_merge('V'.($iHead + 1),'OTRAS EDIFICACIONES','V'.($iHead + 1).':Y'.($iHead + 1));
-		$this->sheet->getStyle('V'.($iHead + 1).':Y'.($iHead + 1))->applyFromArray($style_subtitulo);
+		$this->sheet->getStyle('V'.($iHead + 1).':Y'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
 		$this->cell_value_with_merge('V'.($iHead + 2),'Patio','V'.($iHead + 2).':V'.($iHead + 5));
 		$this->cell_value_with_merge('W'.($iHead + 2),'Losa Deportiva','W'.($iHead + 2).':W'.($iHead + 5));
 		$this->cell_value_with_merge('X'.($iHead + 2),'Cisterna - Tanque','X'.($iHead + 2).':X'.($iHead + 5));
 		$this->cell_value_with_merge('Y'.($iHead + 2),'Muro de Contención','Y'.($iHead + 2).':Y'.($iHead + 5));
 
 		$this->cell_value_with_merge('Z'.($iHead + 1),'SERVICIOS BÁSICOS Y COMUNICACIONES','Z'.($iHead + 1).':AE'.($iHead + 1));
-		$this->sheet->getStyle('Z'.($iHead + 1).':AE'.($iHead + 1))->applyFromArray($style_subtitulo);
+		$this->sheet->getStyle('Z'.($iHead + 1).':AE'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
 		$this->cell_value_with_merge('Z'.($iHead + 2),'Energía Eléctrica','Z'.($iHead + 2).':Z'.($iHead + 5));
 		$this->cell_value_with_merge('AA'.($iHead + 2),'Agua Potable','AA'.($iHead + 2).':AA'.($iHead + 5));
 		$this->cell_value_with_merge('AB'.($iHead + 2),'Alcantarillado','AB'.($iHead + 2).':AB'.($iHead + 5));
@@ -741,14 +751,14 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('AD'.($iHead + 2),'Telefonía Móvil','AD'.($iHead + 2).':AD'.($iHead + 5));
 		$this->cell_value_with_merge('AE'.($iHead + 2),'Internet','AE'.($iHead + 2).':AE'.($iHead + 5));
 
-		$this->sheet->getStyle('R'.($iHead + 2).':AE'.($iHead + 5))->applyFromArray($style_indicador);
+		$this->sheet->getStyle('R'.($iHead + 2).':AE'.($iHead + 5))->applyFromArray($this->style_indicador_all);
 
 	
 		$this->cell_value_with_merge('AF'.($iHead + 1),'ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES','AF'.($iHead + 1).':AP'.($iHead + 1));
-		$this->sheet->getStyle('AF'.($iHead + 1).':AP'.($iHead + 1))->applyFromArray($style_subtitulo);
+		$this->sheet->getStyle('AF'.($iHead + 1).':AP'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
 
 		$this->cell_value_with_merge('AF'.($iHead + 2),'EDIFICACIONES POR EJECUTOR DE LA OBRA','AF'.($iHead + 2).':AJ'.($iHead + 3));
-		$this->sheet->getStyle('AF'.($iHead + 2).':AJ'.($iHead + 3))->applyFromArray($style_subitem);
+		$this->sheet->getStyle('AF'.($iHead + 2).':AJ'.($iHead + 3))->applyFromArray($this->style_subitem_all);
 		$this->cell_value_with_merge('AF'.($iHead + 4),'Gobierno Nacional / Proyecto Especial','AF'.($iHead + 4).':AF'.($iHead + 5));
 		$this->cell_value_with_merge('AG'.($iHead + 4),'Gobierno Regional / Local','AG'.($iHead + 4).':AG'.($iHead + 5));
 		$this->cell_value_with_merge('AH'.($iHead + 4),'APAFA / Autoconstrucción','AH'.($iHead + 4).':AH'.($iHead + 5));
@@ -756,30 +766,31 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('AJ'.($iHead + 4),'Empresa Privada','AJ'.($iHead + 4).':AJ'.($iHead + 5));
 
 		$this->cell_value_with_merge('AK'.($iHead + 2),'EDIFICACIONES SEGÚN AÑO DE CONSTRUCCIÓN','AK'.($iHead + 2).':AM'.($iHead + 3));
-		$this->sheet->getStyle('AK'.($iHead + 2).':AM'.($iHead + 3))->applyFromArray($style_subitem);
+		$this->sheet->getStyle('AK'.($iHead + 2).':AM'.($iHead + 3))->applyFromArray($this->style_subitem_all);
 		$this->cell_value_with_merge('AK'.($iHead + 4),'Antes y Durante 1977','AK'.($iHead + 4).':AK'.($iHead + 5));
 		$this->cell_value_with_merge('AL'.($iHead + 4),'Entre 1978 Y 1998','AL'.($iHead + 4).':AL'.($iHead + 5));
 		$this->cell_value_with_merge('AM'.($iHead + 4),'Después de 1998','AM'.($iHead + 4).':AM'.($iHead + 5));
 
 		$this->cell_value_with_merge('AN'.($iHead + 2),'INTERVENCIÓN A REALIZAR','AN'.($iHead + 2).':AP'.($iHead + 3));
-		$this->sheet->getStyle('AN'.($iHead + 2).':AP'.($iHead + 3))->applyFromArray($style_subitem);
+		$this->sheet->getStyle('AN'.($iHead + 2).':AP'.($iHead + 3))->applyFromArray($this->style_subitem_all);
 		$this->cell_value_with_merge('AN'.($iHead + 4),'Número de Edificaciones para Mantenimiento','AN'.($iHead + 4).':AN'.($iHead + 5));
 		$this->cell_value_with_merge('AO'.($iHead + 4),'Número de Edificaciones para Reforzamiento Estructural','AO'.($iHead + 4).':AO'.($iHead + 5));
 		$this->cell_value_with_merge('AP'.($iHead + 4),'Número de Edificaciones para Demolición','AP'.($iHead + 4).':AP'.($iHead + 5));
 
-		$this->sheet->getStyle('AF'.($iHead + 4).':AP'.($iHead + 5))->applyFromArray($style_indicador);
+		$this->sheet->getStyle('AF'.($iHead + 4).':AP'.($iHead + 5))->applyFromArray($this->style_indicador_all);
 
-		$this->sheet->getStyle('A'.$iHead.':AP'.($iHead + 5))->applyFromArray($marco);
+		$this->sheet->getStyle('A'.$iHead.':AP'.($iHead + 5))->applyFromArray($this->marco);
 		
 
 		////////////////////////////////
 		// Cuerpo
 		////////////////////////////////
-		$_REQUEST['searchColegio'] =  $_GET['searchColegio'];
+		$_REQUEST['searchColegio'] = trim($_GET['searchColegio']);
 		$_REQUEST['searchCodigo'] = $_GET['searchCodigo'];
 		$_REQUEST['depa'] = $_GET['depa'];
 		$_REQUEST['prov'] = $_GET['prov'];
 		$_REQUEST['dist'] = $_GET['dist'];
+
 
 		// $_REQUEST['searchColegio'] = '';
 		// $_REQUEST['searchCodigo'] = '';
@@ -848,14 +859,14 @@ class Csvexport extends CI_Controller
 
 			if ( $indice % 2 != 0 )
 			{
-				$this->sheet->getStyle('A'.$indice.':AP'.$indice)->applyFromArray($style_impar);
+				$this->sheet->getStyle('A'.$indice.':AP'.$indice)->applyFromArray($this->style_impar);
 			}
-			$this->sheet->getStyle('A'.$indice.':AP'.$indice)->applyFromArray($style_contenido);
+			$this->sheet->getStyle('A'.$indice.':AP'.$indice)->applyFromArray($this->style_contenido_all);
 
 			$indice++;
 		}
 		
-		$this->sheet->getStyle('Q'.$iHead.':Q'.($indice - 1))->applyFromArray($divisoria);
+		$this->sheet->getStyle('Q'.$iHead.':Q'.($indice - 1))->applyFromArray($this->divisoria);
 
 		// filtro de busqueda
 		if ( $_REQUEST['searchColegio'] != '' )
@@ -881,7 +892,7 @@ class Csvexport extends CI_Controller
 
 		$this->cell_value_with_merge('B6', $parametros,'B6:G6');
 		$this->cell_value_with_merge('H6', 'Total de Resultados: ' . $nro . ' registros','H6:H6');
-		$this->sheet->getStyle('B6:H6')->applyFromArray($style_filter);
+		$this->sheet->getStyle('B6:H6')->applyFromArray($this->style_filter);
 
 
 
