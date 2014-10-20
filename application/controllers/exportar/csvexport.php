@@ -303,7 +303,7 @@ class Csvexport extends CI_Controller
 			$this->cell_value_with_merge( 'A'.($indice+3), 'Nombre de la Institución Educativa:', 'A'.($indice+3).':B'.($indice+3) );
 			$this->cell_value_with_merge( 'C'.($indice+3), strtoupper($nombre_ie), 'C'.($indice+3).':G'.($indice+3) );
 			
-			$this->cell_value_with_merge( 'A'.($indice+4), 'Código del Local:', 'A'.($indice+4).':B'.($indice+4) );
+			$this->cell_value_with_merge( 'A'.($indice+4), 'Código del Local Escolar:', 'A'.($indice+4).':B'.($indice+4) );
 			$this->sheet->getCellByColumnAndRow(2, ($indice+4))->setValueExplicit($row['codigo_de_local'],PHPExcel_Cell_DataType::TYPE_STRING);
 			$this->sheet->mergeCells('C'.($indice+4).':G'.($indice+4));
 			$this->sheet->getStyle('C'.($indice+4).':G'.($indice+4))->applyFromArray($this->style_contenido);
@@ -639,7 +639,7 @@ class Csvexport extends CI_Controller
 		// column width
 		$this->sheet->getColumnDimension('A')->setWidth(7);
 		$this->sheet->getColumnDimension('B')->setWidth(35);
-		$this->sheet->getColumnDimension('C')->setWidth(10);
+		$this->sheet->getColumnDimension('C')->setWidth(13);
 		$this->sheet->getColumnDimension('D')->setWidth(20);
 		$this->sheet->getColumnDimension('E')->setWidth(10);
 		$this->sheet->getColumnDimension('F')->setWidth(35);
@@ -702,7 +702,7 @@ class Csvexport extends CI_Controller
 		$this->sheet->getStyle('B'.$iHead.':Q'.$iHead)->applyFromArray($this->style_tabs_all);
 
 		$this->cell_value_with_merge('B'.($iHead + 1),'Nombre de la Institución Educativa','B'.($iHead + 1).':B'.($iHead + 5));
-		$this->cell_value_with_merge('C'.($iHead + 1),'Código de Local','C'.($iHead + 1).':C'.($iHead + 5));
+		$this->cell_value_with_merge('C'.($iHead + 1),'Código del Local Escolar','C'.($iHead + 1).':C'.($iHead + 5));
 		$this->cell_value_with_merge('D'.($iHead + 1),'Nivel Educativo','D'.($iHead + 1).':D'.($iHead + 5));
 		$this->cell_value_with_merge('E'.($iHead + 1),'Total de Alumnos','E'.($iHead + 1).':E'.($iHead + 5));
 		$this->cell_value_with_merge('F'.($iHead + 1),'Nombre del Director','F'.($iHead + 1).':F'.($iHead + 5));
