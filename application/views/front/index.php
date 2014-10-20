@@ -34,10 +34,10 @@
                         <!-- Fin Tipo -->
 
                         <!-- Buscador codigo -->
-                        <div id="dv_searchParent" class="form-group col-xs-12 text-center"  style="margin-bottom: 0;">
+                        <div id="dv_searchParent" class="form-group col-xs-12 "  style="margin-bottom: 0;">
                             <label class="preguntas_sub2" for="searchCodigo">Código de local</label>
                             <div class="form-group col-xs-12 h3_footer">
-                                <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm text-center" maxlength="6" id="searchCodigo" placeholder="Código de local" onKeyPress="return validar(event);"/>
+                                <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm " maxlength="6" id="searchCodigo" placeholder="Código de local" onKeyPress="return validar(event);"/>
                             </div>
                         </div>
                         <!-- Fin Buscador codigo -->
@@ -56,7 +56,7 @@
                             <!-- Fin Buscador Colegio -->
 
                             <!-- Departamento -->
-                            <div id="dv_dep" class="form-group col-xs-12 text-center coger_valor">
+                            <div id="dv_dep" class="form-group col-xs-12  coger_valor">
                                 <label class="preguntas_sub2" for="depa">departamento</label>
                                 <select id="depa" class="col-xs-12 sinpadding select2" name="depa">
                                     <option value="">Seleccione</option>
@@ -66,7 +66,7 @@
                             <!-- Fin Departamento -->
 
                             <!-- Provincia -->
-                            <div id="dv_prov" class="form-group col-xs-12 text-center coger_valor">
+                            <div id="dv_prov" class="form-group col-xs-12 coger_valor">
                                 <label class="preguntas_sub2" for="prov">provincia</label>
                                 <div class="controls">
                                     <select id="prov" class="col-xs-12 sinpadding select2" name="prov">
@@ -78,7 +78,7 @@
                             <!-- fin provincia-->
 
                             <!-- Distrito -->
-                            <div id="dv_dist" class="form-group col-xs-12 text-center coger_valor">
+                            <div id="dv_dist" class="form-group col-xs-12  coger_valor">
                                 <label class="preguntas_sub2" for="dist">distrito</label>
                                 <select id="dist" class="col-xs-12 sinpadding select2" name="dist">
                                     <option  value="">Seleccione</option>
@@ -89,9 +89,9 @@
                         </div>
                         <a rel="facebox" href="" class="mihref"></a>
                         <!-- botones de envio -->
-                        <div id="boton_accion" class="form-group col-xs-12 text-center clase_boton_accion">
+                        <div id="boton_accion" class="form-group col-xs-12 clase_boton_accion">
                             <!--                            <div class="col-xs-6">-->
-                            <button name="sendSearch" id="filtrar" class="btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" >Buscar</button>
+                            <button name="sendSearch" id="filtrar" class="col-xs-12 btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" >Buscar</button>
                             <!--                            </div>-->
                             <!--                            <div class="col-xs-6">
                                                             <button id="limpiar_inputs" class="btn btn-danger " name="sendSearch" >Limpiar</button>

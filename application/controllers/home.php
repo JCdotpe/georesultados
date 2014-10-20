@@ -32,7 +32,9 @@ class Home extends CI_Controller {
     }
     
     public function listImagen() {
-        
+        $datos['titulo'] = "Lista de imagenes";
+        $datos['contenido'] = "front/listimagen";
+        $this->load->view('plantilla/plantilla', $datos);
     }
     
 

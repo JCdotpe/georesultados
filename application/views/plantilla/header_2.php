@@ -7,8 +7,8 @@
         <title><?php echo (isset($titulo) and $titulo != "") ? $titulo . " | " : ""; ?>INEI</title>
         <!-- Enlace a estilos -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/info.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/maps.css">
         <!-- Enlace a Javascript -->
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.10.2.js"></script>
     </head>
     <body>
