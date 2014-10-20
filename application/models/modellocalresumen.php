@@ -14,7 +14,6 @@ class ModelLocalResumen extends CI_Model {
         $this->db->where('codigo_de_local', $idCodigo);
         $sql = $this->db->get('Local_Resumen');
         return $this->convert_utf8->convert_result($sql);
-        //return $sql->result();
     }
 
     public function getIESearch($params) {
@@ -61,9 +60,6 @@ class ModelLocalResumen extends CI_Model {
                                 WHERE 
                                     1=1 AND pc_c_2_Rfinal_resul ='1' " . $likeColegio . $filterDepa . $filterProv . $filterDist);
         return $this->convert_utf8->convert_result($sql);
-
-        //return $sql;
-        //return $sql->result();
     }
 
 }

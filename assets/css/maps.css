@@ -742,3 +742,14 @@ table.content_infra_table tbody tr td{
     pointer-events: none;
     cursor: default;
 } 
+
+.orderRadioButton{
+    margin-bottom: 0px;
+    font-size: 13px;
+    text-align: left;
+}
+.div_searchTipo{
+    text-align: center;
+    margin-bottom: -6px;
+    border-bottom: 1px solid #ccc;
+}

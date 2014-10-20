@@ -5,7 +5,8 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
     } else {
         echo "";
     }
-    ?></div>
+    ?>
+</div>
 <div class="cuerpo">
     <?php
     if (count($datos_Resumen) > 0) {
@@ -55,7 +56,7 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
             var url_donwload = $("#download_filtro_datos").attr('href');
             $.ajax({
                 url: url_donwload,
-                type: 'POST',
+                type: 'GET',
                 beforeSend: function() {
                     $('#download_filtro_datos').addClass("span_a_download");
                     $('#download_filtro_datos').html("<i id='change_carga' class='fa fa-spinner fa-spin fa-2x'></i> Exportando Resultados");

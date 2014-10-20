@@ -20,9 +20,9 @@
                     <div class="filtro_map_datos">
 
                         <!-- Tipo -->
-                        <div id="dv_searchTipo" class="form-group col-xs-12 text-center" style="margin-bottom: -6px;border-bottom: 1px solid #ccc;">
+                        <div id="dv_searchTipo" class="form-group col-xs-12 div_searchTipo">
                             <label class="preguntas_sub2" for="searchCodigo">Tipo de búsqueda por:</label>
-                            <div class="form-group"  style="margin-bottom: 0px;font-size: 13px;">
+                            <div class="form-group orderRadioButton">
                                 <div class="radio"  style="margin-top: 0px;">
                                     <label><input type="radio" name="optTipoBusqueda" id="optCodigo" value="cod">Código de local</label>
                                 </div>
@@ -90,12 +90,12 @@
                         <a rel="facebox" href="" class="mihref"></a>
                         <!-- botones de envio -->
                         <div id="boton_accion" class="form-group col-xs-12 text-center clase_boton_accion">
-<!--                            <div class="col-xs-6">-->
-                                <button name="sendSearch" id="filtrar" class="btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" >Buscar</button>
-<!--                            </div>-->
-<!--                            <div class="col-xs-6">
-                                <button id="limpiar_inputs" class="btn btn-danger " name="sendSearch" >Limpiar</button>
-                            </div>-->
+                            <!--                            <div class="col-xs-6">-->
+                            <button name="sendSearch" id="filtrar" class="btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" >Buscar</button>
+                            <!--                            </div>-->
+                            <!--                            <div class="col-xs-6">
+                                                            <button id="limpiar_inputs" class="btn btn-danger " name="sendSearch" >Limpiar</button>
+                                                        </div>-->
                         </div>
                         <!-- Fin botones de envio -->
                     </div>
@@ -113,16 +113,14 @@
         $("#dv_searchParent").hide();
         $("#div-colegio").hide();
         $("#boton_accion").hide();
-        $('.mihref').attr('href','');
+        $('.mihref').attr('href', '');
 
         $("#optCodigo").on("click", function() {
-
             $(".mihref").removeAttr('href');
             $("#div-colegio").hide();
             $("#dv_searchParent").show();
             $("#searchCodigo").val("");
             $("#searchColegio").val("");
-
             $("#boton_accion").show();
             $('#prov').empty();
             $('#dist').empty();
@@ -133,16 +131,17 @@
             $("#depa").val("");
             $("#dv_prov .select2-chosen").text("Seleccione");
             $("#dv_dist .select2-chosen").text("Seleccione");
+            $("#searchCodigo").focus();
         });
 
         $("#optColegio").on("click", function() {
-
             $(".mihref").removeAttr('href');
             $("#dv_searchParent").hide();
             $("#div-colegio").show();
             $("#searchCodigo").val("");
             $("#searchColegio").val("");
             $("#boton_accion").show();
+            $("#searchColegio").focus();
         });
 
 
@@ -178,24 +177,6 @@
 //            $("#depa").attr("disabled", false);
 //            $("#prov").attr("disabled", false);
 //            $("#dist").attr("disabled", false);
-//        });
-
-//        $("#limpiar_inputs").on("click", function() {
-//            $("#searchColegio").val("");
-//            $("#searchCodigo").val("");
-//            $('#prov').empty();
-//            $('#dist').empty();
-//            $("#prov").append('<option value="">Seleccione</option>');
-//            $("#dist").append('<option value="">Seleccione</option>');
-//            $("#dv_dep .select2-chosen").text("Seleccione");
-//            $('#depa').prop('selectedIndex', 0);
-//            $("#depa").val("");
-//            $("#dv_prov .select2-chosen").text("Seleccione");
-//            $("#dv_dist .select2-chosen").text("Seleccione");
-//            $("#depa").attr("disabled", false);
-//            $("#prov").attr("disabled", false);
-//            $("#dist").attr("disabled", false);
-//            $("#searchCodigo").focus();
 //        });
     });
 </script>
