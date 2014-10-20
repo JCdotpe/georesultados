@@ -15,14 +15,14 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
         <table class="table table-striped table-hover title_center_table">
             <thead>
                 <tr>
-                    <th class="text-center">Código del local</th>
+                    <th class="text-center"  style="width: 80px;">Código del Local Escolar</th>
                     <th class="text-center">Nombre de la Institución Educativa</th>
                     <th class="text-center">Nivel Educativo</th>
                     <th class="text-center">Propietario del predio</th>
-                    <th class="text-center">Director</th>
+                    <th class="text-center">Nombre del Director</th>
                     <th class="text-center">Dirección</th>
                     <th class="text-center">Departamento / Provincia / Distrito</th>
-                    <th class="text-center">Total Alumnos</th>
+                    <th class="text-center">Total de Alumnos</th>
                 </tr>
             </thead>
             <tbody>

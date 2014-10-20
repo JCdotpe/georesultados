@@ -15,6 +15,10 @@ class ModelLocalResumen extends CI_Model {
         $sql = $this->db->get('Local_Resumen');
         return $this->convert_utf8->convert_result($sql);
     }
+    
+    public function getListImagen() {
+        
+    }
 
     public function getIESearch($params) {
 

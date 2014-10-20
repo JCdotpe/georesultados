@@ -30,6 +30,11 @@ class Home extends CI_Controller {
         $datos['datos_Resumen'] = $this->modeloResumen->getIESearch($_REQUEST);
         $this->load->view("front/recargarDatos", $datos);
     }
+    
+    public function listImagen() {
+        
+    }
+    
 
 }
 
