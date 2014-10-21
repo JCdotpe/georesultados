@@ -37,6 +37,13 @@ class Home extends CI_Controller {
         $this->load->view('plantilla/plantilla', $datos);
     }
     
+    public function list2() {
+        $datos['titulo'] = "Lista de imagenes";
+        $datos['contenido'] = "front/list2";
+        $datos['ruta'] = "C:/CarlosLevano/01/";
+        $this->load->view('plantilla/plantilla', $datos);
+    }
+    
 
 }
 

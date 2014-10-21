@@ -17,10 +17,10 @@ echo '<h2>' . $path . '</h2>';
 <table class="table table-striped table-hover title_center_table">
     <thead>
         <tr>
-            <td>RUTA imagen</td>
-            <td>Ancho</td>
-            <td>Alto</td>
-            <td>Peso </td>
+            <td>RUTA IMAGEN</td>
+            <td>ANCHO</td>
+            <td>ALTO</td>
+            <td>PESO</td>
         </tr>
     </thead>
     <tbody>
