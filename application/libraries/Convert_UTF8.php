@@ -25,7 +25,6 @@ class Convert_UTF8 {
         return $converted_data;
     }
 
-    
 }
 
 ?>

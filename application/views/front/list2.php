@@ -1,7 +1,7 @@
-<form action="<?php echo base_url()?>ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
+<!--<form action="<?php echo base_url()?>ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
     <p>Exportar a Excel  <img src="<?php echo base_url()?>assets/img/icono/export_to_excel.gif" class="botonExcel" /></p>
     <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
-</form>
+</form>-->
 
 <table  class="table table-striped table-hover title_center_table" id="Exportar_a_Excel">
     <thead>
@@ -18,12 +18,12 @@
         $dato = "D:/01_1";
         leer_archivos_y_directorios($dato);
 
-        function leer_archivos_y_directorios($ruta) {
-            if (is_dir($ruta)) {
-                if ($aux = opendir($ruta)) {
+        function leer_archivos_y_directorios($dato) {
+            if (is_dir($dato)) {
+                if ($aux = opendir($dato)) {
                     while (($archivo = readdir($aux)) !== false) {
                         if ($archivo != "." && $archivo != "..") {
-                            $ruta_completa = $ruta . '/' . $archivo;
+                            $ruta_completa = $dato . '/' . $archivo;
                             if (is_dir($ruta_completa)) {
                                 //echo "<br /><strong>Directorio:</strong> " . $ruta_completa;
                                 leer_archivos_y_directorios($ruta_completa);

@@ -24,7 +24,7 @@
             <tbody>
                 <?php
                 //$dato = "D:/01";
-                $dato = "D:/01";
+                $dato = "D:/01_1";
                 leer_archivos_y_directorios($dato);
 
                 function leer_archivos_y_directorios($ruta) {
