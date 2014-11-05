@@ -29,7 +29,7 @@ class Csvexport extends CI_Controller
 		$this->load->model('export_model');
 		$this->load->model('modellocalresumen');
 
-		ini_set("memory_limit","512M");
+		ini_set("memory_limit","1024M");
 	}
 
 	public function index()
@@ -386,15 +386,16 @@ class Csvexport extends CI_Controller
 			$img = 'assets/img/temporal/'.$name_foto;
 
 			///////// proxy ////////
-			$aContext = array(
+			/*$aContext = array(
 				'http' => array(
 					'proxy' => 'tcp://172.16.100.1:3128',
 					'request_fulluri' => true,
 				),
 			);
 			$cxContext = stream_context_create($aContext);
-			$get_url = file_get_contents($url_external, false, $cxContext);
-			// $get_url = file_get_contents($url_external); // sin proxy
+			$get_url = file_get_contents($url_external, false, $cxContext);*/
+			///////// -- proxy  -- ////////
+			$get_url = file_get_contents($url_external); // sin proxy
 			$get_img = file_put_contents($img, $get_url);
 
 			$objDrawing2 = new PHPExcel_Worksheet_Drawing();

@@ -46,4 +46,3 @@ $RECYCLE.BIN/
 application/config/config.php
 application/config/database.php
 uploads
-assets/img/temporal/*
