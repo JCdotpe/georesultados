@@ -19,7 +19,6 @@
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/facebox/src/facebox.js"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         
-        
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/global.js"></script>
         
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -28,10 +27,10 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('a[rel*=facebox]').facebox();
+                $('#facebox').draggable({handle:'div.titulo'});
                 $(".tooltip_info").tooltip({
                     placement: 'right'
                 });
-                $('#facebox').draggable({handle:'div.titulo'});
             });
         </script>
         <!-- script para traer los valores -->
@@ -360,6 +359,8 @@
                                     if( datos.eo_1== 0){ $('.inf_gobNacional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobNacional').append(datos.eo_1);}
                                     if( datos.eo_2== 0){ $('.inf_gobLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobLocal').append(datos.eo_2);}
                                     if( datos.eo_3== 0){ $('.inf_apafa').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_apafa').append(datos.eo_3); }
+                                    if( datos.eo_4== 0){ $('.inf_ong').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_ong').append(datos.eo_4); }
+                                    if( datos.eo_5== 0){ $('.inf_privada').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_privada').append(datos.eo_5); }
                                     if( datos.a_1== 0){ $('.inf_antes').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_antes').append(datos.a_1);}
                                     if( datos.a_2== 0){ $('.inf_entre').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_entre').append(datos.a_2);}
                                     if( datos.a_3== 0){ $('.inf_despues').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_despues').append(datos.a_3);}
@@ -384,10 +385,10 @@
                                     if(res != 0) {
                                         maxvalue=(res * 4);
                                     }
-                                    else
+                                    else{
                                         maxvalue= 4;
-                                    
-                                                                       
+                                    }
+
                                     var options = { 
                                         width: 500,
                                         height: 400,
@@ -401,10 +402,21 @@
                                     //infoWindow  = new google.maps.InfoWindow(),
                                     chart = new google.visualization.ColumnChart(node);
                                     chart.draw(data, options);
-                                    $('.img_a_fotografico').facebox();
+                                    //$('.img_a_fotografico').facebox();
                                     $('.foto_general_img').facebox();
                                 });
                             });
+                            
+                            var urlFotos = "<?php echo base_url() ?>home/getSchoolPhotos?codigoFoto=" + codigoid;
+                            $.get(urlFotos, function(data) {
+                                var resultFoto = JSON.parse(data);
+                                $.each(resultFoto, function(i, datos) {
+                                    //$('.fot_traido').append(datos.id_local);
+                                    $('.fot_traido').append('<div class="col-xs-4 galery_ima_foto_a "><a href="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" rel="facebox"  class="img_a_fotografico foto_indice_'+datos.P9_F_Nro+'"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" class="foto_img_croqui_toma" /></a></div>');
+                                    $('.foto_indice_'+datos.P9_F_Nro).facebox();
+                                });
+                            });
+                            
 
                             contentString += '<ul class="tabs">' +
                                     '<li class="active"><a href="#tab1">GENERAL</a></li>' +
@@ -417,8 +429,8 @@
                                                 '<div class="general">' +
                                                     '<div class="general_content">' +
                                                         '<div class="col-xs-12 h3_footer">'+
-                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Características generales del local escolar - n° <span class="gen_codLocal"></span></h3>' +
-                                                            '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Características generales del local escolar<br>n° <span class="gen_codLocal"></span></h3>' +
+                                                            '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id="" style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                                         '</div>'+
                                                         '<div class="col-xs-12 h3_footer">'+
                                                             '<div class="panel-group all_acordion" id="accordion_gen">' +
@@ -520,7 +532,7 @@
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
                                                     '<div class="col-xs-12 h3_footer"  style="margin-left: -4px;">'+
-                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar código - n° <span class="gen_codLocal"></span></h3>' +
+                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar código<br>n° <span class="gen_codLocal"></span></h3>' +
                                                             '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                                         '</div>'+
                                                 
@@ -665,6 +677,14 @@
                                                                                         '<td width="90%">Apafa / Autoconstrucción</td>' +
                                                                                         '<td width="10%" class="text-center"><strong><span class="inf_apafa"></span></strong></td>' +
                                                                                     '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Entidades cooperantes / ONG\'s</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_ong"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Empresa privada</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_privada"></span></strong></td>' +
+                                                                                    '</tr>' +
                                                                                 '</table>' +
                                                                             '</div>' +
                                                                         '</div>' +
@@ -732,11 +752,6 @@
                                                             '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">NÚMERO DE EDIFICACIONES DEL LOCAL ESCOLAR SEGÚN NIVEL DE INTERVENCIÓN A REALIZAR</h3>' +
                                                             '<div id="gen_clumnaschart" style="width: 500px; height: 500px;"></div>'+
                                                         '</div>'+
-                                                        
-                                                        
-//                                                        '<div class="col-xs-12 h3_footer" >' +
-//                                                            '<h3 class="infra_content_name text-center" style="border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;">Fuente instituto nacional de estadística e informatica - Censo e infraestructura educativa 2013</h3>' +
-//                                                        '</div>' +
                                                    '</div>' +
                                                 '</div>' +
                                             '</div>' +
@@ -744,57 +759,12 @@
                                         
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
                                             '<div class="col-xs-12 ">'+
-                                                '<h3 class=" col-xs-9 general_content_name_general text-center">Tomas fotografícas del local escolar - n° <span class="gen_codLocal"></span></h3>' +
+                                                '<h3 class=" col-xs-9 general_content_name_general text-center">Tomas fotografícas del local escolar<br>n° <span class="gen_codLocal"></span></h3>' +
                                                 '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                             '</div>'+
                                             '<div class="col-xs-12 text-center">'+
-                                                
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;border-radius: 0;">REGISTRO FOTOGRÁFICO</h3>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_A.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_A.png" class="foto_img_croqui_toma " /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_B.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_B.png" class="foto_img_croqui_toma" /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_C.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_C.png" class="foto_img_croqui_toma" /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_D.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_D.png" class="foto_img_croqui_toma" /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_E.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_E.png" class="foto_img_croqui_toma" /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_F.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_F.png" class="foto_img_croqui_toma" /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_G.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_G.png" class="foto_img_croqui_toma" /></a>'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_H.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_H.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_I.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_I.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_J.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_J.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_K.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_K.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_L.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_L.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_M.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_M.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_N.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_N.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
-                                                '<div class="col-xs-4 galery_ima_foto_a">'+
-                                                    '<a href="assets/img/prueba/000043_1_Capitulo_6_O.png" rel="facebox" class="img_a_fotografico"><span></span><img src="<?php echo base_url()?>assets/img/prueba/000043_1_Capitulo_6_O.png" class="foto_img_croqui_toma" />'+
-                                                '</div>'+
+                                                '<div class="fot_traido"></div>'+
                                             '</div>' +
                                         '</div>' +
                                     '</div>';

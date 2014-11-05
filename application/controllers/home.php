@@ -21,6 +21,13 @@ class Home extends CI_Controller {
         $locales = $this->modeloResumen->getDatosLocales($idCodigo);
         echo json_encode($locales);
     }
+    
+    public function getSchoolPhotos() {
+        $idCodigo = $_REQUEST['codigoFoto'];
+        $locales = $this->modeloResumen->getListSchoolPhotos($idCodigo);
+        echo json_encode($locales);
+    }
+
     public function getSearchIE() {
         $_REQUEST['searchColegio'] = trim($_GET['searchColegio']);
         $_REQUEST['searchCodigo'] = $_GET['searchCodigo'];
@@ -30,20 +37,19 @@ class Home extends CI_Controller {
         $datos['datos_Resumen'] = $this->modeloResumen->getIESearch($_REQUEST);
         $this->load->view("front/recargarDatos", $datos);
     }
-    
+
     public function listImagen() {
         $datos['titulo'] = "Lista de imagenes";
         $datos['contenido'] = "front/listimagen";
         $this->load->view('plantilla/plantilla', $datos);
     }
-    
+
     public function list2() {
         $datos['titulo'] = "Lista de imagenes";
         $datos['contenido'] = "front/list2";
         //$datos['ruta'] = "C:/CarlosLevano/01/";
         $this->load->view('plantilla/plantilla', $datos);
     }
-    
 
 }
 

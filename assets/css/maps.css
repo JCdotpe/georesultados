@@ -267,7 +267,7 @@ html, body, h1, h2, h3, h4, h5 { font-family: 'Open Sans', sans-serif; }
 .topSearchColegio{
     margin-bottom: 0;
     padding-top: 20px;
-    
+
 }
 
 
@@ -318,7 +318,7 @@ html, body, h1, h2, h3, h4, h5 { font-family: 'Open Sans', sans-serif; }
     border-radius: 5px 0 0 0;
     -webkit-border-radius: 5px 0 0 0;
     -moz-border-radius: 5px 0 0 0;
-    padding: 10px 0;
+    padding: 10px;
     margin-top: 0;
     font-size: 14px;
 }
@@ -749,7 +749,10 @@ table.content_infra_table tbody tr td{
     text-align: left;
 }
 .div_searchTipo{
-    
+
     margin-bottom: -6px;
     border-bottom: 1px solid #ccc;
+}
+#filtrar i.fa.fa-search {
+    margin-right: 10px;
 }

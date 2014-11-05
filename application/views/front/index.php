@@ -18,7 +18,6 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="filtro_map_datos">
-
                         <!-- Tipo -->
                         <div id="dv_searchTipo" class="form-group col-xs-12 div_searchTipo">
                             <label class="preguntas_sub2" for="searchCodigo">Tipo de búsqueda por:</label>
@@ -41,7 +40,6 @@
                             </div>
                         </div>
                         <!-- Fin Buscador codigo -->
-
 
                         <!-- Buscador Colegio -->
                         <div id='div-colegio'>
@@ -90,12 +88,7 @@
                         <a rel="facebox" href="" class="mihref"></a>
                         <!-- botones de envio -->
                         <div id="boton_accion" class="form-group col-xs-12 clase_boton_accion">
-                            <!--                            <div class="col-xs-6">-->
-                            <button name="sendSearch" id="filtrar" class="col-xs-12 btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" >Buscar</button>
-                            <!--                            </div>-->
-                            <!--                            <div class="col-xs-6">
-                                                            <button id="limpiar_inputs" class="btn btn-danger " name="sendSearch" >Limpiar</button>
-                                                        </div>-->
+                            <button name="sendSearch" id="filtrar" class="col-xs-12 btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" ><i class="fa fa-search"></i> Buscar</button>
                         </div>
                         <!-- Fin botones de envio -->
                     </div>

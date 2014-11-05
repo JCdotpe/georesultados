@@ -15,9 +15,11 @@ class ModelLocalResumen extends CI_Model {
         $sql = $this->db->get('Local_Resumen');
         return $this->convert_utf8->convert_result($sql);
     }
-    
-    public function getListImagen() {
-        
+
+    public function getListSchoolPhotos($idCodigo) {
+        $sql = " SELECT * FROM P9_F_Resumen WHERE id_local = '" . $idCodigo . "'";
+        $query = $this->db->query($sql);
+        return $query->result();
     }
 
     public function getIESearch($params) {

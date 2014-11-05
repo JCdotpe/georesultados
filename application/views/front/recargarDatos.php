@@ -14,8 +14,8 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
         <label class="text-muted">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
         <table class="table table-striped table-hover title_center_table">
             <thead>
-                <tr>
-                    <th class="text-center"  style="width: 80px;">Código del Local Escolar</th>
+                <tr class="text-uppercase">
+                    <th class="text-center" style="width: 80px;">Código del Local Escolar</th>
                     <th class="text-center">Nombre de la Institución Educativa</th>
                     <th class="text-center">Nivel Educativo</th>
                     <th class="text-center">Propietario del predio</th>
@@ -26,22 +26,19 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
                 </tr>
             </thead>
             <tbody>
-                <?php
-                foreach ($datos_Resumen as $datoResumen) {
-                    ?>
+                <?php foreach ($datos_Resumen as $datoResumen) { ?>
                     <tr>
                         <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');
                                         jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
-                        <td style="text-transform: uppercase"><?php echo $datoResumen['nivel'] ?></td>
-                        <td><?php echo $datoResumen['prop_IE'] ?></td>
+                        <td ><?php echo $datoResumen['nivel'] ?></td>
+                        <td class="text-center"><?php echo $datoResumen['prop_IE'] ?></td>
                         <td><?php echo $datoResumen['Director_IIEE'] ?></td>
                         <td><?php echo $datoResumen['direcc_IE'] ?></td>
                         <td><?php echo $datoResumen['dpto_nombre'] ?> / <?php echo $datoResumen['prov_nombre'] ?> / <?php echo $datoResumen['dist_nombre'] ?></td>
                         <td class="text-center"><?php echo $datoResumen['Talum'] ?></td>
                     </tr>
-                <?php }
-                ?>
+                <?php } ?>
             </tbody>
         </table>
     <?php } else { ?>
