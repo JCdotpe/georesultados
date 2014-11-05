@@ -11,14 +11,14 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
     <?php
     if (count($datos_Resumen) > 0) {
         ?>
-        <label class="text-muted">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código de Local"</label>
+        <label class="text-muted">Podrá ver el detalle del filtro haciendo clic en este simbolo <i class="fa fa-map-marker text-primary"></i> que se encuentra al costado del número de "Código del Local Escolar"</label>
         <table class="table table-striped table-hover title_center_table">
             <thead>
                 <tr class="text-uppercase">
                     <th class="text-center" style="width: 80px;">Código del Local Escolar</th>
                     <th class="text-center">Nombre de la Institución Educativa</th>
                     <th class="text-center">Nivel Educativo</th>
-                    <th class="text-center">Propietario del predio</th>
+                    <th class="text-center" style="width: 100px;">Propietario del predio</th>
                     <th class="text-center">Nombre del Director</th>
                     <th class="text-center">Dirección</th>
                     <th class="text-center">Departamento / Provincia / Distrito</th>
@@ -28,8 +28,8 @@ $filtroBusqueda = "&searchColegio=" . $_REQUEST['searchColegio'] . "&searchCodig
             <tbody>
                 <?php foreach ($datos_Resumen as $datoResumen) { ?>
                     <tr>
-                        <td class="text-center"><a href="javascript:;" class="details_eyes floatCodigo close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');
-                                        jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
+                        <td class="text-center"><a href="javascript:;" class="details_eyes  close_image" onclick="llevarMapa('<?php echo $datoResumen['codigo_de_local'] ?>');
+                                        jQuery(document).trigger('close.facebox');"><i class="fa fa-map-marker fa-2x floatCodigo"></i> <?php echo $datoResumen['codigo_de_local'] ?></a></td>
                         <td><?php echo $datoResumen['nombres_IIEE'] ?></td>
                         <td ><?php echo $datoResumen['nivel'] ?></td>
                         <td class="text-center"><?php echo $datoResumen['prop_IE'] ?></td>

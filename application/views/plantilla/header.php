@@ -18,6 +18,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/facebox/src/facebox.js"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        <script src="<?php echo base_url() ?>assets/js/Am2_SimpleSlider.js" type="text/javascript"></script>
         
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/global.js"></script>
         
@@ -412,16 +413,20 @@
                                 var resultFoto = JSON.parse(data);
                                 $.each(resultFoto, function(i, datos) {
                                     //$('.fot_traido').append(datos.id_local);
-                                    $('.fot_traido').append('<div class="col-xs-4 galery_ima_foto_a "><a href="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" rel="facebox"  class="img_a_fotografico foto_indice_'+datos.P9_F_Nro+'"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" class="foto_img_croqui_toma" /></a></div>');
-                                    $('.foto_indice_'+datos.P9_F_Nro).facebox();
+//                                    $('.fot_traido').append('<div class="col-xs-4 galery_ima_foto_a "><a href="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" rel="facebox"  class="img_a_fotografico foto_indice_'+datos.P9_F_Nro+'"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" class="foto_img_croqui_toma" /></a></div>');
+//                                    $('.foto_indice_'+datos.P9_F_Nro).facebox();
+                                    
+                                    $('.product-gallery').append('<div class="col-xs-4 galery_ima_foto_a gallery-img"><a class="img_a_fotografico"><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" alt=""  class="foto_img_croqui_toma"></a><div data-desc="asd"></div></div>');
+                                    
+                                    $('.gallery-img').Am2_SimpleSlider();
                                 });
                             });
                             
 
                             contentString += '<ul class="tabs">' +
-                                    '<li class="active"><a href="#tab1">GENERAL</a></li>' +
-                                    '<li><a href="#tab2">INFRAESTRUCTURA</a></li>' +
-                                    '<li><a href="#tab4">TOMAS FOTOGRÁFICAS</a></li>' +
+                                    '<li class="active"><a href="#tab1"><i class="glyphicon glyphicon-fire"></i> GENERAL</a></li>' +
+                                    '<li><a href="#tab2"><i class="fa fa-building"></i> INFRAESTRUCTURA</a></li>' +
+                                    '<li><a href="#tab4"><i class="fa fa-camera"></i> TOMAS FOTOGRÁFICAS</a></li>' +
                                     '</ul>' +
                                     '<div class="tab_container">' +
                                         '<div id="tab1" class="tab_content">' +
@@ -437,7 +442,7 @@
                                                                 '<div class="panel  panel-default all_acordion_chidren">' +
                                                                     '<div class="panel-heading all_acordion_title">' +
                                                                         '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseOne_gen_1">' +
-                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                            '<h5 class="panel-title infra_content_name_collapse"><i class="fa fa-institution derecha5"></i>' +
                                                                                 'Institución educativa que presta servicios en el local escolar' +
                                                                             '</h5>' +
                                                                         '</a>' +
@@ -477,8 +482,8 @@
                                                                 '<div class="panel panel-default all_acordion_chidren">' +
                                                                     '<div class="panel-heading all_acordion_title">' +
                                                                         '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_gen" href="#collapseTwo_gen_2">' +
-                                                                            '<h5 class="panel-title infra_content_name_collapse">' +
-                                                                                'Ubicación geográfica' +
+                                                                            '<h5 class="panel-title infra_content_name_collapse"><i class="fa fa-map-marker derecha5"></i>' +
+                                                                                ' Ubicación geográfica' +
                                                                             '</h5>' +
                                                                         '</a>' +
                                                                     '</div>' +
@@ -764,8 +769,9 @@
                                             '</div>'+
                                             '<div class="col-xs-12 text-center">'+
                                                 '<h3 class="general_content_name text-center" style="margin-bottom: 10px;border-radius: 0;">REGISTRO FOTOGRÁFICO</h3>'+
-                                                '<div class="fot_traido"></div>'+
+                                                '<div class="product-gallery" id=""></div>'+
                                             '</div>' +
+                                            
                                         '</div>' +
                                     '</div>';
                             contentString += "<div>";
