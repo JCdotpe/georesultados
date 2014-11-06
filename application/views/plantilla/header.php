@@ -416,7 +416,7 @@
 //                                    $('.fot_traido').append('<div class="col-xs-4 galery_ima_foto_a "><a href="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" rel="facebox"  class="img_a_fotografico foto_indice_'+datos.P9_F_Nro+'"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" class="foto_img_croqui_toma" /></a></div>');
 //                                    $('.foto_indice_'+datos.P9_F_Nro).facebox();
                                     
-                                    $('.product-gallery').append('<div class="col-xs-4 galery_ima_foto_a gallery-img"><a class="img_a_fotografico"><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" alt=""  class="foto_img_croqui_toma"></a><div data-desc="asd"></div></div>');
+                                    $('.product-gallery').append('<div class="col-xs-4 galery_ima_foto_a gallery-img"><a class="img_a_fotografico"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" alt=""  class="foto_img_croqui_toma"></a><div data-desc="asd"></div></div>');
                                     
                                     $('.gallery-img').Am2_SimpleSlider();
                                 });
