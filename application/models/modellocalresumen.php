@@ -35,12 +35,6 @@ class ModelLocalResumen extends CI_Model {
             $likeColegio = " ";
         }
 
-//        if (isset($params['searchCodigo']) and $params['searchCodigo'] != "") {
-//            $filterCodigo = " AND codigo_de_local = '" . $params['searchCodigo'] . "' ";
-//        } else {
-//            $filterCodigo = " ";
-//        }
-
         if (isset($params['depa']) and $params['depa'] != "") {
             $filterDepa = " AND cod_dpto ='" . $params['depa'] . "' ";
         } else {

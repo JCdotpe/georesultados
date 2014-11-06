@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo (isset($titulo) and $titulo != "") ? $titulo . " | " : ""; ?>INEI</title>
-        <!-- Enlace a estilos -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />
         <link type="text/css" href="<?php echo base_url() ?>assets/css/bootswatch.min.css" rel="stylesheet" />
         <link type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap-tour.min.css" rel="stylesheet" />
@@ -14,14 +13,11 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/maps.css" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
         
-        <!-- Enlace a Javascript -->
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/facebox/src/facebox.js"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <script src="<?php echo base_url() ?>assets/js/Am2_SimpleSlider.js" type="text/javascript"></script>
-        
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/global.js"></script>
-        
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/global.js"></script>      
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
@@ -34,7 +30,6 @@
                 });
             });
         </script>
-        <!-- script para traer los valores -->
         <script type="text/javascript">
             google.load('visualization', '1', {'packages': ['corechart', 'table', 'geomap']});
             var kmlArray = [];
@@ -46,10 +41,8 @@
             var table_prov = '1tmpbIqHGt8ymHU_L_qTEOpzcMHTOh3i_zzvWB7ZQ';
             var table_dist = '1Qvu7A-6HA7TCPVTAJ6xgld_3J7UFBr2SIlbQBz4w';
             var infowindow = new google.maps.InfoWindow({
-                //size: new google.maps.Size(650, 750)
                 maxWidth: 600 ,
                 minHeight: 782
-//                maxHeight: 782
             });
             function checkGoogleMap() {
                 var msg = document.getElementById('msg');
@@ -113,88 +106,6 @@
                 });
                 $('.select2').select2();
                 carga_departamento();
-
-//                $("#btnFindCodLocal").click(function() {
-//                    var codLocal = $('#searchCodigo').val();
-//                    if (codLocal == "") {
-//                        alert("Ingrese código");
-//                        $('#searchCodigo').focus();
-//                    } else {
-//                        $('#prov').empty();
-//                        $("#prov").append('<option value="">Seleccione</option>');
-//                        $("#dv_prov .select2-chosen").text("Seleccione");
-//                        $("#dv_dist .select2-chosen").text("Seleccione");
-//                        $('#depa option:selected').val("");
-//                        $("#dv_dep .select2-chosen").text("Seleccione");
-//                        carga_departamento();
-//                        var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal;
-//                        $.get(url, function(data) {
-//                            if(data.length==2){
-//                                alert("Código incorrecto");
-//                                $('#searchCodigo').focus().select();
-//                                initialize();
-//                            }else{
-//                                $("#dv_download").slideDown('slow');
-//                                $("#btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codLocal);
-//                                var result = JSON.parse(data);
-//                                $.each(result, function(i, datos) {
-//                                    var latitud = datos.LatitudPunto_UltP;
-//                                    var longitud = datos.LongitudPunto_UltP;
-//                                    var puntokml = datos.cod_dpto+datos.cod_prov+datos.cod_dist;
-//                                    console.log(puntokml);
-//                                    load_kml_ft(table_dist, puntokml);
-//
-//                                    zomCenter = new google.maps.LatLng(latitud, longitud);
-//                                    zom = 8;
-//                                    map.setCenter(zomCenter);
-//                                    map.setZoom(zom);
-//                                });
-//                                var query = " id_local = '" + codLocal + "' ";
-//
-//                                load_fusiontable(query);
-//                            }
-//                        });
-//                    }
-//                });
-                
-//                $("#btnFindColegio").click(function(){
-//                
-//                    var codLocal_1 = $('.hiddenColegioCodigo').text().trim();
-//                    //alert(codLocal_1);
-//                    if (codLocal_1 == "") {
-//                        alert("Ingrese el nombre de la Institución");
-//                        $('.searchColegio').focus();
-//                    } else {
-//                        $('#prov').empty();
-//                        $("#prov").append('<option value="">Seleccione</option>');
-//                        $("#dv_prov .select2-chosen").text("Seleccione");
-//                        $("#dv_dist .select2-chosen").text("Seleccione");
-//                        $('#depa option:selected').val("");
-//                        $("#dv_dep .select2-chosen").text("Seleccione");
-//                        carga_departamento();
-//                        var url_1 = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codLocal_1;
-//                        $.get(url_1, function(data_1) {
-//                            var result_1 = JSON.parse(data_1);
-//                            $.each(result_1, function(i, datos_1) {
-//                                var latitud_1 = datos_1.LatitudPunto_UltP;
-//                                var longitud_1 = datos_1.LongitudPunto_UltP;
-//                                var puntokml_1 = datos_1.cod_dpto+datos_1.cod_prov+datos_1.cod_dist;
-//                                console.log(codLocal_1+" ");
-//                                console.log(puntokml_1);
-//                                load_kml_ft(table_dist, puntokml_1);
-//
-//                                zomCenter_1 = new google.maps.LatLng(latitud_1, longitud_1);
-//                                zom_1 = 8;
-//                                map.setCenter(zomCenter_1);
-//                                map.setZoom(zom_1);
-//                            });
-//                            var query = " id_local = '" + codLocal_1 + "' ";
-//
-//                            load_fusiontable(query);
-//                            
-//                        });
-//                    }
-//                });
                 
                 $('#depa').change(function() {
                     var cod_ubigeo;
@@ -202,19 +113,10 @@
                     $("#prov").append('<option value="">Seleccione</option>');
                     $("#dv_prov .select2-chosen").text("Seleccione");
                     $("#dv_dist .select2-chosen").text("Seleccione");
-                    //if ($(this).val() != "" && $(this).val() != -1) {
                     if ($(this).val() != "") {
                         load_ubigeo('PROV');
                     }
                     $('#dist').html('<option value="">Seleccione</option>');
-//                    if ($(this).val() != "" && $(this).val() != -1) {
-////                        cod_ubigeo = $(this).val();
-//
-//                        //load_kml_ft(table_dpto, cod_ubigeo);
-//                    } else if ($(this).val() == -1) {
-//                        carga_departamento();
-//                    }
-                    //load_fusiontable();
                 });
                 $('#prov').change(function() {
                     var cod_ubigeo;
@@ -224,28 +126,8 @@
                     if ($(this).val() != "") {
                         load_ubigeo('DIST');
                     }
-//                    if ($(this).val() != "") {
-//                        cod_ubigeo = $('#depa').val() + $(this).val();
-//
-//                        load_kml_ft(table_prov, cod_ubigeo);
-//                    } else {
-//                        load_kml_ft(table_dpto, $('#depa').val());
-//                    }
-                    //load_fusiontable();
                 });
-                $('#dist').change(function() {
-//                    var cod_ubigeo;
-//                    if ($(this).val() != "") {
-//                        cod_ubigeo = $('#depa').val() + $('#prov').val() + $(this).val();
-//
-//                        load_kml_ft(table_dist, cod_ubigeo);
-//                    } else {
-//                        cod_ubigeo = $('#depa').val() + $('#prov').val();
-//
-//                        load_kml_ft(table_prov, cod_ubigeo);
-//                    }
-//                    load_fusiontable();
-                });
+                $('#dist').change(function() {});
             });
 
             function load_fusiontable(query) {
@@ -253,7 +135,7 @@
                 if (layer != undefined) {
                     layer.setMap(null);
                 }
-                //if($('#searchCodigo').val() !="" && $('#depa').val() == ""){
+                
                 if($('#searchCodigo').val() !=""){
                     maploaded = false;
                     checkGoogleMap();
@@ -268,20 +150,15 @@
                     cargar_tabs();
                 }
                 
-                
                 if ($('#depa').val() != "") {
                     maploaded = false;
                     checkGoogleMap();
                     condicion = query;
-//                    condicion = ($('#depa').val() != "" && $('#depa').val() != -1) ? " CCDD = '" + $('#depa').val() + "'" : '';
-//                    condicion += ($('#prov').val() != "") ? " AND CCPP = '" + $('#prov').val() + "'" : '';
-//                    condicion += ($('#dist').val() != "") ? " AND CCDI = '" + $('#dist').val() + "'" : '';
                     cargar_tabs();
                 }
             }
 
             function cargar_tabs(zoom){
-//                zoom = zoom || false;
                 var interval = setInterval(function() {
                         clearInterval(interval);
                         layer = new google.maps.FusionTablesLayer({
@@ -306,10 +183,8 @@
                                 var result = JSON.parse(data);
                                 $.each(result, function(i, datos) {
                                     //General
-                                    /*'<img src="http://jc.pe/portafolio/cie/cap3/'+codigoid+'/PRED_1/CAP3/'+codigoid+'_1_GPS.jpg" class="foto_img" />'+ */
                                     $(".btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
                                     
-                                    //--Insitución educativa que presta servicios en el lcal escolar
                                     $('.gen_codLocal').append(datos.codigo_de_local);
                                     $('.gen_nombreIE').append((datos.nombres_IIEE).toUpperCase());
                                     $('.gen_direccionIE').append((datos.direcc_IE).toUpperCase());
@@ -318,7 +193,6 @@
                                     if( datos.prop_IE == null){$('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_proLocal').append((datos.prop_IE).toUpperCase());}
                                     if( datos.Talum == 0 ){$('.gen_countAlumnos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_countAlumnos').append(datos.Talum);}
                                     
-                                    //--Ubicación geografica                                    
                                     $('.gen_departLocal').append((datos.dpto_nombre).toUpperCase());
                                     $('.gen_provLocal').append((datos.prov_nombre).toUpperCase());
                                     $('.gen_distLocal').append((datos.dist_nombre).toUpperCase());
@@ -329,34 +203,31 @@
                                     $('.gen_longitud').append(datos.LongitudPunto_UltP);
                                     $('.gen_altitud').append(datos.AltitudPunto_UltP+" msnm");
                                     
-                                    //-- Fotografía del local escolar
                                     if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center" id="galery_img"><h3 class="general_content_name text-center"  style="margin-bottom:10px">Fotografía del Local Escolar</h3><a href="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'"" rel="facebox" class="foto_general_img"><span></span><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></a></div></div>');}else{$('.gen_rutaFoto').append('');}
                                     
-                                    //Infraestructura
-                                    //--Numero de predios y edificaciones
                                     if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
                                     if( datos.cEdif== 0){ $('.inf_numEdificaciones').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
                                     if( (datos.Piso ==null) || (datos.Piso== 0)){ $('.inf_countPiso').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_countPiso').append(datos.Piso); }
                                     if( datos.P1_B_3_9_At_Local== null){ $('.inf_areTerreno').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local+" m<sup>2</sup>");}                                    
-                                    //--Otras edificaciones
+                                    
                                     if( datos.P== 0){ $('.inf_numPatios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numPatios').append(datos.P);}
                                     if( datos.LD== 0){ $('.inf_numLosDeportivas').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numLosDeportivas').append(datos.LD);}
                                     if( datos.CTE== 0){ $('.inf_numCisTanques').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numCisTanques').append(datos.CTE);}
                                     if( datos.MC== 0){$('.inf_numMurContencion').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numMurContencion').append(datos.MC);}
-                                    //--Servicios basicos y comunicaciones
+                                    
                                     if( (datos.P2_C_2LocE_1_Energ== null) || (datos.P2_C_2LocE_1_Energ ==2)){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>'); }
                                     if( (datos.P2_C_2LocE_2_Agua== null) || (datos.P2_C_2LocE_2_Agua ==2)){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
                                     if( (datos.P2_C_2LocE_3_Alc== null) || (datos.P2_C_2LocE_3_Alc ==2)){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
                                     if( (datos.P2_C_2LocE_4_Tfija== null) || (datos.P2_C_2LocE_4_Tfija ==2)){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
                                     if( (datos.P2_C_2LocE_5_Tmov== null) || (datos.P2_C_2LocE_5_Tmov ==2)){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
                                     if( (datos.P2_C_2LocE_6_Int== null) || (datos.P2_C_2LocE_6_Int ==2)){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
-                                    //--Espacios educativos que funcionan en las edificaciones
+                                    
                                     if( datos.e_1== 0){ $('.inf_aulComun').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_aulComun').append(datos.e_1);}
                                     if( datos.e_2== 0){ $('.inf_pedagogico').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_pedagogico').append(datos.e_2);}
                                     if( datos.e_3== 0){ $('.inf_administrativo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_administrativo').append(datos.e_3);}
                                     if( datos.e_4== 0){ $('.inf_complementario').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_complementario').append(datos.e_4);}
                                     if( datos.e_5== 0){ $('.inf_servicio').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_servicio').append(datos.e_5);}
-                                    //--Características de las edificaciones
+                                    
                                     if( datos.eo_1== 0){ $('.inf_gobNacional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobNacional').append(datos.eo_1);}
                                     if( datos.eo_2== 0){ $('.inf_gobLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobLocal').append(datos.eo_2);}
                                     if( datos.eo_3== 0){ $('.inf_apafa').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_apafa').append(datos.eo_3); }
@@ -369,9 +240,7 @@
                                     if( datos.ereh== 0){ $('.inf_countEdiEstruc').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiEstruc').append(datos.ereh);}
                                     if( datos.edem== 0){ $('.inf_countEdiDemo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
                                     
-                                    //Grafico de Barra
                                     var data = google.visualization.arrayToDataTable([                                        
-                                        
                                         ['', 'Cantidad',{ role: "style" }],
                                         ['Mantenimiento',  parseInt(datos.eman),'#2ecc71'],
                                         ['Reforzamiento',  parseInt(datos.ereh),'#f1c40f'],
@@ -382,7 +251,7 @@
                                     var maxvalue= max / 4;
                                     var res=Math.floor(maxvalue);
                                     res=res+1;
-                                    //var remin= max % 4;
+                                    
                                     if(res != 0) {
                                         maxvalue=(res * 4);
                                     }
@@ -394,16 +263,11 @@
                                         width: 500,
                                         height: 400,
                                         legend: { position: "none" },
-                                        //vAxis:{minValue:0,maxValue:5,gridlines:{count:6}}  
                                         vAxis: {minValue:0, maxValue:maxvalue}
-//                                        title: 'Intervenciones a Realizar'
                                     };
-                                    //var node = document.createElement('div'),
                                     var node = document.getElementById('gen_clumnaschart');
-                                    //infoWindow  = new google.maps.InfoWindow(),
                                     chart = new google.visualization.ColumnChart(node);
                                     chart.draw(data, options);
-                                    //$('.img_a_fotografico').facebox();
                                     $('.foto_general_img').facebox();
                                 });
                             });
@@ -412,16 +276,10 @@
                             $.get(urlFotos, function(data) {
                                 var resultFoto = JSON.parse(data);
                                 $.each(resultFoto, function(i, datos) {
-                                    //$('.fot_traido').append(datos.id_local);
-//                                    $('.fot_traido').append('<div class="col-xs-4 galery_ima_foto_a "><a href="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" rel="facebox"  class="img_a_fotografico foto_indice_'+datos.P9_F_Nro+'"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" class="foto_img_croqui_toma" /></a></div>');
-//                                    $('.foto_indice_'+datos.P9_F_Nro).facebox();
-                                    
                                     $('.product-gallery').append('<div class="col-xs-4 galery_ima_foto_a gallery-img"><a class="img_a_fotografico"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" alt=""  class="foto_img_croqui_toma"></a><div data-desc="asd"></div></div>');
-                                    
                                     $('.gallery-img').Am2_SimpleSlider();
                                 });
                             });
-                            
 
                             contentString += '<ul class="tabs">' +
                                     '<li class="active"><a href="#tab1"><i class="glyphicon glyphicon-fire"></i> GENERAL</a></li>' +
@@ -782,12 +640,12 @@
                             infowindow.open(map);
                             google.maps.event.addListener(infowindow, 'domready', function() {
                                 $("ul.tabs li").click(function() {
-                                    $("ul.tabs li").removeClass("active"); //remuevo la clase active de todos
-                                    $(this).addClass("active"); //añado a la actual la clase active
-                                    $(".tab_content").hide(); //escondo todo el contenido
-                                    var content = $(this).find("a").attr("href"); //obtengo atributo href del link
-                                    $(content).fadeIn(); // muestro el contenido
-                                    return false; //devuelvo false para el evento click
+                                    $("ul.tabs li").removeClass("active"); 
+                                    $(this).addClass("active");
+                                    $(".tab_content").hide();
+                                    var content = $(this).find("a").attr("href");
+                                    $(content).fadeIn();
+                                    return false;
                                 });
                             });
                         });
@@ -795,8 +653,7 @@
                         setTimeout('checkGoogleMap()', 1000);
                     }, 3000);
             }
-
-            //creado por calevano
+            
             function carga_departamento() {
                 $('#prov').empty();
                 $('#prov').html('<option value="">Seleccione</option>');
@@ -825,7 +682,7 @@
                 map.setCenter(zomCenter);
                 map.setZoom(zom);
             }
-            //Fin creado por calevano
+            
             function load_ubigeo(name) {
                 var depaSelect = $('#depa option:selected').attr('id');
                 var provSelect = $('#prov option:selected').attr('id');
@@ -875,7 +732,6 @@
                 }
                 FTresponse = response;
                 var kml = FTresponse.getDataTable().getValue(0, 1);
-                // create a geoXml3 parser for the click handlers
                 var geoXml = new geoXML3.parser({
                     map: map,
                     zoom: false
