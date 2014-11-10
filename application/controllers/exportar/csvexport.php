@@ -251,7 +251,9 @@ class Csvexport extends CI_Controller
 		$this->sheet->getDefaultColumnDimension()->setWidth(12); //default size column
 
 		$this->sheet->getRowDimension(9)->setRowHeight(30);
-		$this->sheet->getRowDimension(92)->setRowHeight(27);
+		$this->sheet->getRowDimension(91)->setRowHeight(27);
+		$this->sheet->getRowDimension(97)->setRowHeight(27);
+		$this->sheet->getRowDimension(101)->setRowHeight(27);
 
 
 		////////////////////////////////
@@ -572,24 +574,64 @@ class Csvexport extends CI_Controller
 			$this->sheet->getStyle('F'.($indice+81).':G'.($indice+83))->applyFromArray($this->style_contenido);
 
 
-			$this->cell_value_with_merge( 'A'.($indice+84),'INTERVENCIÓN A REALIZAR', 'A'.($indice+84).':D'.($indice+84) );
+			$this->cell_value_with_merge( 'A'.($indice+84),'EDIFICACIONES SEGÚN SISTEMA ESTRUCTURAL PREDOMINANTE', 'A'.($indice+84).':D'.($indice+84) );
 			$this->sheet->getStyle('A'.($indice+84).':D'.($indice+84))->applyFromArray($this->style_subitem);
 
-			$this->cell_value_with_merge( 'A'.($indice+85), 'Número de Edificaciones para Mantenimiento:', 'A'.($indice+85).':D'.($indice+85) );
-			$this->sheet->setCellValue('E'.($indice+85), $row['eman']);
-			$this->cell_value_with_merge( 'F'.($indice+85), 'edificación(es)', 'F'.($indice+85).':G'.($indice+85) );
+			$this->cell_value_with_merge( 'A'.($indice+85), 'Pórticos de concreto armado y/o muros de albañilería (dual):', 'A'.($indice+85).':D'.($indice+85) );
+			// $this->sheet->setCellValue('E'.($indice+85), $row['estruc_1']);
+			$this->cell_value_with_merge( 'F'.($indice+85),'edificación(es)', 'F'.($indice+85).':G'.($indice+85) );
 
-			$this->cell_value_with_merge( 'A'.($indice+86), 'Número de Edificaciones para Reforzamiento Estructural:', 'A'.($indice+86).':D'.($indice+86) );
-			$this->sheet->setCellValue('E'.($indice+86), $row['ereh']);
-			$this->cell_value_with_merge( 'F'.($indice+86), 'edificación(es)', 'F'.($indice+86).':G'.($indice+86) );
+			$this->cell_value_with_merge( 'A'.($indice+86), 'Albañilería confinada o armada:', 'A'.($indice+86).':D'.($indice+86) );
+			// $this->sheet->setCellValue('E'.($indice+86), $row['estruc_2']);
+			$this->cell_value_with_merge( 'F'.($indice+86),'edificación(es)', 'F'.($indice+86).':G'.($indice+86) );
 
-			$this->cell_value_with_merge( 'A'.($indice+87), 'Número de Edificaciones para Demolición:', 'A'.($indice+87).':D'.($indice+87) );
-			$this->sheet->setCellValue('E'.($indice+87), $row['edem']);
+			$this->cell_value_with_merge( 'A'.($indice+87), 'Estructura de acero:', 'A'.($indice+87).':D'.($indice+87) );
+			// $this->sheet->setCellValue('E'.($indice+87), $row['estruc_3']);
 			$this->cell_value_with_merge( 'F'.($indice+87), 'edificación(es)', 'F'.($indice+87).':G'.($indice+87) );
 
+			$this->cell_value_with_merge( 'A'.($indice+88), 'Madera (normalizada):', 'A'.($indice+88).':D'.($indice+88) );
+			// $this->sheet->setCellValue('E'.($indice+88), $row['estruc_4']);
+			$this->cell_value_with_merge( 'F'.($indice+88), 'edificación(es)', 'F'.($indice+88).':G'.($indice+88) );
 
-			$this->sheet->getStyle('A'.($indice+85).':D'.($indice+87))->applyFromArray($this->style_indicador);
-			$this->sheet->getStyle('F'.($indice+85).':G'.($indice+87))->applyFromArray($this->style_contenido);
+			$this->cell_value_with_merge( 'A'.($indice+89), 'Adobe:', 'A'.($indice+89).':D'.($indice+89) );
+			// $this->sheet->setCellValue('E'.($indice+89), $row['estruc_5']);
+			$this->cell_value_with_merge( 'F'.($indice+89), 'edificación(es)', 'F'.($indice+89).':G'.($indice+89) );
+
+			$this->cell_value_with_merge( 'A'.($indice+90), 'Albañilería sin confinar:', 'A'.($indice+90).':D'.($indice+90) );
+			// $this->sheet->setCellValue('E'.($indice+90), $row['estruc_6']);
+			$this->cell_value_with_merge( 'F'.($indice+90), 'edificación(es)', 'F'.($indice+90).':G'.($indice+90) );
+
+			$this->cell_value_with_merge( 'A'.($indice+91), 'Construcciones precarias (triplay, quincha, tapial, similares):', 'A'.($indice+91).':D'.($indice+91) );
+			// $this->sheet->setCellValue('E'.($indice+91), $row['estruc_7']);
+			$this->cell_value_with_merge( 'F'.($indice+91), 'edificación(es)', 'F'.($indice+91).':G'.($indice+91) );
+
+			$this->cell_value_with_merge( 'A'.($indice+92), 'Aulas provisionales:', 'A'.($indice+92).':D'.($indice+92) );
+			// $this->sheet->setCellValue('E'.($indice+92), $row['estruc_8']);
+			$this->cell_value_with_merge( 'F'.($indice+92), 'edificación(es)', 'F'.($indice+92).':G'.($indice+92) );
+
+
+			$this->sheet->getStyle('A'.($indice+84).':D'.($indice+92))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('F'.($indice+84).':G'.($indice+92))->applyFromArray($this->style_contenido);
+
+
+			$this->cell_value_with_merge( 'A'.($indice+93),'INTERVENCIÓN A REALIZAR', 'A'.($indice+93).':D'.($indice+93) );
+			$this->sheet->getStyle('A'.($indice+93).':D'.($indice+93))->applyFromArray($this->style_subitem);
+
+			$this->cell_value_with_merge( 'A'.($indice+94), 'Número de Edificaciones para Mantenimiento:', 'A'.($indice+94).':D'.($indice+94) );
+			$this->sheet->setCellValue('E'.($indice+94), $row['eman']);
+			$this->cell_value_with_merge( 'F'.($indice+94), 'edificación(es)', 'F'.($indice+94).':G'.($indice+94) );
+
+			$this->cell_value_with_merge( 'A'.($indice+95), 'Número de Edificaciones para Reforzamiento Estructural:', 'A'.($indice+95).':D'.($indice+95) );
+			$this->sheet->setCellValue('E'.($indice+95), $row['ereh']);
+			$this->cell_value_with_merge( 'F'.($indice+95), 'edificación(es)', 'F'.($indice+95).':G'.($indice+95) );
+
+			$this->cell_value_with_merge( 'A'.($indice+96), 'Número de Edificaciones para Demolición:', 'A'.($indice+96).':D'.($indice+96) );
+			$this->sheet->setCellValue('E'.($indice+96), $row['edem']);
+			$this->cell_value_with_merge( 'F'.($indice+96), 'edificación(es)', 'F'.($indice+96).':G'.($indice+96) );
+
+
+			$this->sheet->getStyle('A'.($indice+93).':D'.($indice+96))->applyFromArray($this->style_indicador);
+			$this->sheet->getStyle('F'.($indice+93).':G'.($indice+96))->applyFromArray($this->style_contenido);
 
 		}
 
@@ -666,9 +708,19 @@ class Csvexport extends CI_Controller
 		$this->sheet->getColumnDimension('AI')->setWidth(25);
 		$this->sheet->getColumnDimension('AJ')->setWidth(20);
 
-		$this->sheet->getColumnDimension('AN')->setWidth(25);
-		$this->sheet->getColumnDimension('AO')->setWidth(30);
-		$this->sheet->getColumnDimension('AP')->setWidth(25);
+		$this->sheet->getColumnDimension('AN')->setWidth(30);
+		$this->sheet->getColumnDimension('AO')->setWidth(20);
+		$this->sheet->getColumnDimension('AP')->setWidth(20);
+		$this->sheet->getColumnDimension('AQ')->setWidth(20);
+		$this->sheet->getColumnDimension('AR')->setWidth(20);
+		$this->sheet->getColumnDimension('AS')->setWidth(20);
+		$this->sheet->getColumnDimension('AT')->setWidth(30);
+		$this->sheet->getColumnDimension('AU')->setWidth(20);
+
+		$this->sheet->getColumnDimension('AV')->setWidth(25);
+		$this->sheet->getColumnDimension('AW')->setWidth(30);
+		$this->sheet->getColumnDimension('AX')->setWidth(25);
+
 
 
 		////////////////////////////////
@@ -726,8 +778,8 @@ class Csvexport extends CI_Controller
 
 
 
-		$this->cell_value_with_merge('R'.$iHead,'INFORMACIÓN DE LA INFRAESTRUCTURA','R'.$iHead.':AP'.$iHead);
-		$this->sheet->getStyle('R'.$iHead.':AP'.$iHead)->applyFromArray($this->style_tabs_all);
+		$this->cell_value_with_merge('R'.$iHead,'INFORMACIÓN DE LA INFRAESTRUCTURA','R'.$iHead.':AX'.$iHead);
+		$this->sheet->getStyle('R'.$iHead.':AX'.$iHead)->applyFromArray($this->style_tabs_all);
 		
 		$this->cell_value_with_merge('R'.($iHead + 1),'NÚMERO DE PREDIOS Y EDIFICACIONES','R'.($iHead + 1).':U'.($iHead + 1));
 		$this->sheet->getStyle('R'.($iHead + 1).':U'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
@@ -755,8 +807,8 @@ class Csvexport extends CI_Controller
 		$this->sheet->getStyle('R'.($iHead + 2).':AE'.($iHead + 5))->applyFromArray($this->style_indicador_all);
 
 	
-		$this->cell_value_with_merge('AF'.($iHead + 1),'ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES','AF'.($iHead + 1).':AP'.($iHead + 1));
-		$this->sheet->getStyle('AF'.($iHead + 1).':AP'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
+		$this->cell_value_with_merge('AF'.($iHead + 1),'ESPACIOS EDUCATIVOS QUE FUNCIONAN EN LAS EDIFICACIONES','AF'.($iHead + 1).':AX'.($iHead + 1));
+		$this->sheet->getStyle('AF'.($iHead + 1).':AX'.($iHead + 1))->applyFromArray($this->style_subtitulo_all);
 
 		$this->cell_value_with_merge('AF'.($iHead + 2),'EDIFICACIONES POR EJECUTOR DE LA OBRA','AF'.($iHead + 2).':AJ'.($iHead + 3));
 		$this->sheet->getStyle('AF'.($iHead + 2).':AJ'.($iHead + 3))->applyFromArray($this->style_subitem_all);
@@ -772,15 +824,26 @@ class Csvexport extends CI_Controller
 		$this->cell_value_with_merge('AL'.($iHead + 4),'Entre 1978 Y 1998','AL'.($iHead + 4).':AL'.($iHead + 5));
 		$this->cell_value_with_merge('AM'.($iHead + 4),'Después de 1998','AM'.($iHead + 4).':AM'.($iHead + 5));
 
-		$this->cell_value_with_merge('AN'.($iHead + 2),'INTERVENCIÓN A REALIZAR','AN'.($iHead + 2).':AP'.($iHead + 3));
-		$this->sheet->getStyle('AN'.($iHead + 2).':AP'.($iHead + 3))->applyFromArray($this->style_subitem_all);
-		$this->cell_value_with_merge('AN'.($iHead + 4),'Número de Edificaciones para Mantenimiento','AN'.($iHead + 4).':AN'.($iHead + 5));
-		$this->cell_value_with_merge('AO'.($iHead + 4),'Número de Edificaciones para Reforzamiento Estructural','AO'.($iHead + 4).':AO'.($iHead + 5));
-		$this->cell_value_with_merge('AP'.($iHead + 4),'Número de Edificaciones para Demolición','AP'.($iHead + 4).':AP'.($iHead + 5));
+		$this->cell_value_with_merge('AN'.($iHead + 2),'EDIFICACIONES SEGÚN SISTEMA ESTRUCTURAL PREDOMINANTE','AN'.($iHead + 2).':AU'.($iHead + 3));
+		$this->sheet->getStyle('AN'.($iHead + 2).':AU'.($iHead + 3))->applyFromArray($this->style_subitem_all);
+		$this->cell_value_with_merge('AN'.($iHead + 4),'Pórticos de concreto armado y/o muros de albañilería (dual)','AN'.($iHead + 4).':AN'.($iHead + 5));
+		$this->cell_value_with_merge('AO'.($iHead + 4),'Albañilería confinada o armada','AO'.($iHead + 4).':AO'.($iHead + 5));
+		$this->cell_value_with_merge('AP'.($iHead + 4),'Estructura de acero','AP'.($iHead + 4).':AP'.($iHead + 5));
+		$this->cell_value_with_merge('AQ'.($iHead + 4),'Madera (normalizada)','AQ'.($iHead + 4).':AQ'.($iHead + 5));
+		$this->cell_value_with_merge('AR'.($iHead + 4),'Adobe','AR'.($iHead + 4).':AR'.($iHead + 5));
+		$this->cell_value_with_merge('AS'.($iHead + 4),'Albañilería sin confinar','AS'.($iHead + 4).':AS'.($iHead + 5));
+		$this->cell_value_with_merge('AT'.($iHead + 4),'Construcciones precarias (triplay, quincha, tapial, similares)','AT'.($iHead + 4).':AT'.($iHead + 5));
+		$this->cell_value_with_merge('AU'.($iHead + 4),'Aulas provisionales','AU'.($iHead + 4).':AU'.($iHead + 5));
 
-		$this->sheet->getStyle('AF'.($iHead + 4).':AP'.($iHead + 5))->applyFromArray($this->style_indicador_all);
+		$this->cell_value_with_merge('AV'.($iHead + 2),'INTERVENCIÓN A REALIZAR','AV'.($iHead + 2).':AX'.($iHead + 3));
+		$this->sheet->getStyle('AV'.($iHead + 2).':AX'.($iHead + 3))->applyFromArray($this->style_subitem_all);
+		$this->cell_value_with_merge('AV'.($iHead + 4),'Número de Edificaciones para Mantenimiento','AV'.($iHead + 4).':AV'.($iHead + 5));
+		$this->cell_value_with_merge('AW'.($iHead + 4),'Número de Edificaciones para Reforzamiento Estructural','AW'.($iHead + 4).':AW'.($iHead + 5));
+		$this->cell_value_with_merge('AX'.($iHead + 4),'Número de Edificaciones para Demolición','AX'.($iHead + 4).':AX'.($iHead + 5));
 
-		$this->sheet->getStyle('A'.$iHead.':AP'.($iHead + 5))->applyFromArray($this->marco);
+		$this->sheet->getStyle('AF'.($iHead + 4).':AX'.($iHead + 5))->applyFromArray($this->style_indicador_all);
+
+		$this->sheet->getStyle('A'.$iHead.':AX'.($iHead + 5))->applyFromArray($this->marco);
 		
 
 		////////////////////////////////
@@ -854,15 +917,23 @@ class Csvexport extends CI_Controller
 			$this->sheet->setCellValue('AK'.$indice, $row['a_1'] );
 			$this->sheet->setCellValue('AL'.$indice, $row['a_2'] );
 			$this->sheet->setCellValue('AM'.$indice, $row['a_3'] );
-			$this->sheet->setCellValue('AN'.$indice, $row['eman'] );
-			$this->sheet->setCellValue('AO'.$indice, $row['ereh'] );
-			$this->sheet->setCellValue('AP'.$indice, $row['edem'] );
+			/*$this->sheet->setCellValue('AN'.$indice, $row['estruc_1'] );
+			$this->sheet->setCellValue('AO'.$indice, $row['estruc_2'] );
+			$this->sheet->setCellValue('AP'.$indice, $row['estruc_3'] );
+			$this->sheet->setCellValue('AQ'.$indice, $row['estruc_4'] );
+			$this->sheet->setCellValue('AR'.$indice, $row['estruc_5'] );
+			$this->sheet->setCellValue('AS'.$indice, $row['estruc_6'] );
+			$this->sheet->setCellValue('AT'.$indice, $row['estruc_7'] );
+			$this->sheet->setCellValue('AU'.$indice, $row['estruc_8'] );*/
+			$this->sheet->setCellValue('AV'.$indice, $row['eman'] );
+			$this->sheet->setCellValue('AW'.$indice, $row['ereh'] );
+			$this->sheet->setCellValue('AX'.$indice, $row['edem'] );
 
 			if ( $indice % 2 != 0 )
 			{
-				$this->sheet->getStyle('A'.$indice.':AP'.$indice)->applyFromArray($this->style_impar);
+				$this->sheet->getStyle('A'.$indice.':AX'.$indice)->applyFromArray($this->style_impar);
 			}
-			$this->sheet->getStyle('A'.$indice.':AP'.$indice)->applyFromArray($this->style_contenido_all);
+			$this->sheet->getStyle('A'.$indice.':AX'.$indice)->applyFromArray($this->style_contenido_all);
 
 			$indice++;
 		}
