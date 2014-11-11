@@ -240,6 +240,15 @@
                                     if( datos.ereh== 0){ $('.inf_countEdiEstruc').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiEstruc').append(datos.ereh);}
                                     if( datos.edem== 0){ $('.inf_countEdiDemo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
                                     
+                                    if( datos.estruc_1== 0){ $('.inf_countPorticos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countPorticos').append(datos.estruc_1);}
+                                    if( datos.estruc_2== 0){ $('.inf_countAramda').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countAramda').append(datos.estruc_2);}
+                                    if( datos.estruc_3== 0){ $('.inf_countEstructura').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEstructura').append(datos.estruc_3);}
+                                    if( datos.estruc_4== 0){ $('.inf_countMadera').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countMadera').append(datos.estruc_4);}
+                                    if( datos.estruc_5== 0){ $('.inf_countAdobe').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countAdobe').append(datos.estruc_5);}
+                                    if( datos.estruc_6== 0){ $('.inf_countSinConfinar').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countSinConfinar').append(datos.estruc_6);}
+                                    if( datos.estruc_7== 0){ $('.inf_countPrecarias').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countPrecarias').append(datos.estruc_7);}
+                                    if( datos.estruc_8== 0){ $('.inf_countProvisional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countProvisional').append(datos.estruc_8);}
+                                    
                                     var data = google.visualization.arrayToDataTable([                                        
                                         ['', 'Cantidad',{ role: "style" }],
                                         ['Mantenimiento',  parseInt(datos.eman),'#2ecc71'],
@@ -579,15 +588,64 @@
                                                                             '</div>' +
                                                                         '</div>' +
                                                                     '</div>' +
+                                                                    
                                                                     '<div class="panel panel-default all_acordion_chidren">' +
                                                                         '<div class="panel-heading all_acordion_title">' +
-                                                                            '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree_3">' +
+                                                                            '<a class="accordion-toggle" data-toggle="collapse"  data-parent="#accordion" href="#collapseTwo_3">' +
+                                                                                '<h5 class="panel-title infra_content_name_collapse">' +
+                                                                                    'Edificaciones según sistema estructural predominante' +
+                                                                                '</h5>' +
+                                                                            '</a>' +
+                                                                        '</div>' +
+                                                                        '<div id="collapseTwo_3" class="panel-collapse collapse">' +
+                                                                            '<div class="panel-body all_acordion_panelBody">' +
+                                                                                '<table class="table content_infra_table">' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Pórticos de concreto armado y/o muros de albañilería (dual)</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countPorticos"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Albañilería confinada o armada</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countAramda"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Estructura de acero</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countEstructura"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Madera (normalizada)</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countMadera"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Adobe</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countAdobe"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Albañilería sin confinar</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countSinConfinar"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Construcciones precarias (triplay, quincha, tapial, similares)</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countPrecarias"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                    '<tr>' +
+                                                                                        '<td width="90%">Aulas provisionales</td>' +
+                                                                                        '<td width="10%" class="text-center"><strong><span class="inf_countProvisional"></span></strong></td>' +
+                                                                                    '</tr>' +
+                                                                                '</table>' +
+                                                                            '</div>' +
+                                                                        '</div>' +
+                                                                    '</div>' +
+                                                                    
+                                                                    '<div class="panel panel-default all_acordion_chidren">' +
+                                                                        '<div class="panel-heading all_acordion_title">' +
+                                                                            '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree_4">' +
                                                                                 '<h5 class="panel-title infra_content_name_collapse">' +
                                                                                     'Intervención a realizar' +
                                                                                 '</h5>' +
                                                                             '</a>' +
                                                                         '</div>' +
-                                                                        '<div id="collapseThree_3" class="panel-collapse collapse">' +
+                                                                        '<div id="collapseThree_4" class="panel-collapse collapse">' +
                                                                             '<div class="panel-body all_acordion_panelBody">' +
                                                                                 '<table class="table content_infra_table">' +
                                                                                     '<tr>' +
