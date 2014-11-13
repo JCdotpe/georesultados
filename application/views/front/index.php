@@ -31,6 +31,7 @@
                             <div class="form-group col-xs-12 h3_footer">
                                 <input type="text" name="searchCodigo" class="col-xs-9 form-control input-sm " maxlength="6" id="searchCodigo" placeholder="Código de local" onKeyPress="return validar(event);"/>
                             </div>
+                            <div class="col-xs-12 cod_error text-center h3_footer"></div>
                         </div>
                         <div id='div-colegio'>
                             <div id="dv_searchColegio" class="form-group col-xs-12 topSearchColegio"  style="margin-bottom: 0;padding-top: 8px;">
@@ -61,8 +62,12 @@
                             </div>
                         </div>
                         <a rel="facebox" href="" class="mihref"></a>
-                        <div id="boton_accion" class="form-group col-xs-12 clase_boton_accion">
-                            <button name="sendSearch" id="filtrar" class="col-xs-12 btn btn-success" onclick="filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1)" type="button" ><i class="fa fa-search"></i> Buscar</button>
+                        <div class="col-xs-12 cod_errorIE text-center h3_footer"></div>
+                        <div id="boton_accion_codigo" class="form-group col-xs-12 clase_boton_accion">
+                            <button name="sendSearch" id="filtrarCodigo" class="col-xs-12 btn btn-success changeButtonFiltro"  type="button" ><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                        <div id="boton_accion_colegio" class="form-group col-xs-12 clase_boton_accion">
+                            <button name="sendSearch" id="filtrarIE" class="col-xs-12 btn btn-success changeButtonFiltro"  type="button" ><i class="fa fa-search"></i> Buscar</button>
                         </div>
                         <div id="download_general_archive">
                             <hr>
@@ -70,9 +75,9 @@
                                 <label style="padding-left: 17px;"> Documentos de Consulta</label>
                             </div>
                             <div class="form-group col-xs-12 h3_footer">
-                                <a href="<?php echo base_url()?>assets/public/download/censo_de_insfraestructura_educativa_2013.pdf" class="download_href" target="_blank" download="censo_de_insfraestructura_educativa_2013.pdf">
+                                <a href="<?php echo base_url() ?>assets/public/download/censo_de_insfraestructura_educativa_2013.pdf" class="download_href" target="_blank" download="censo_de_insfraestructura_educativa_2013.pdf">
                                     <div class="col-xs-2" style="padding-top: 10px;">
-                                        <img class="" src="<?php echo base_url()?>assets/img/pdf_new.png" width="30" />
+                                        <img class="" src="<?php echo base_url() ?>assets/img/pdf_new.png" width="30" />
                                     </div>
                                     <div class="col-xs-10">
                                         <span style="font-size: 13px;">Glosario de términos del Censo de Infraestructura Educativa 2013</span>
@@ -80,9 +85,9 @@
                                 </a>
                             </div>
                             <div class="form-group col-xs-12 h3_footer">
-                                <a href="<?php echo base_url()?>assets/public/download/nivel_de_intervencion_censo_de_insfraestructura_educativa_2013.pptx" target="_blank" class="download_href" download="nivel_de_intervencion_censo_de_insfraestructura_educativa_2013.pptx">
+                                <a href="<?php echo base_url() ?>assets/public/download/nivel_de_intervencion_censo_de_insfraestructura_educativa_2013.pptx" target="_blank" class="download_href" download="nivel_de_intervencion_censo_de_insfraestructura_educativa_2013.pptx">
                                     <div class="col-xs-2" style="padding-top: 16px;">
-                                        <img class="" src="<?php echo base_url()?>assets/img/ppt_new.png"  width="30"/>
+                                        <img class="" src="<?php echo base_url() ?>assets/img/ppt_new.png"  width="30"/>
                                     </div>
                                     <div class="col-xs-10">
                                         <span style="font-size: 13px;">Flujograma resumen del Nivel de intervención Censo de Infraestructura Educativa 2013</span>
@@ -103,17 +108,21 @@
     $(function() {
         $("#dv_searchParent").hide();
         $("#div-colegio").hide();
-        $("#boton_accion").hide();
         $("#download_general_archive").hide();
+        $("#boton_accion_codigo").hide();
+        $("#boton_accion_colegio").hide();
+
         $('.mihref').attr('href', '');
 
         $("#optCodigo").on("click", function() {
+            $(".cod_error").empty();
             $(".mihref").removeAttr('href');
             $("#div-colegio").hide();
             $("#dv_searchParent").show();
             $("#searchCodigo").val("");
             $("#searchColegio").val("");
-            $("#boton_accion").show();
+            $("#boton_accion_colegio").hide();
+            $("#boton_accion_codigo").show();
             $("#download_general_archive").show();
             $('#prov').empty();
             $('#dist').empty();
@@ -125,17 +134,59 @@
             $("#dv_prov .select2-chosen").text("Seleccione");
             $("#dv_dist .select2-chosen").text("Seleccione");
             $("#searchCodigo").focus();
+            $(".changeButtonFiltro").attr('id', "filtrarCodigo");
+
+
         });
 
+
+
         $("#optColegio").on("click", function() {
+            $(".cod_errorIE").empty();
             $(".mihref").removeAttr('href');
             $("#dv_searchParent").hide();
             $("#div-colegio").show();
             $("#searchCodigo").val("");
             $("#searchColegio").val("");
-            $("#boton_accion").show();
+            $("#boton_accion_colegio").show();
+            $("#boton_accion_codigo").hide();
             $("#download_general_archive").show();
             $("#searchColegio").focus();
         });
+
+        $("#filtrarCodigo").on("click", function() {
+            var codVacio = $("#searchCodigo").val();
+            if (codVacio == "") {
+                $(".cod_error").html('<span>Ingrese código</span>');
+                return false;
+            } else if (codVacio.length < 6) {
+                $(".cod_error").html('<span>Código tiene 6 números</span>');
+                return false;
+            } else {
+                $(".cod_error").html('');
+                filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1);
+            }
+        });
+
+
+        $("#filtrarIE").on("click", function() {
+            var colVacio = $("#searchColegio").val();
+            
+            var departa = $("#depa option:selected").val();
+            
+            if (colVacio === "" && departa === "") {
+                $(".cod_errorIE").html('<span>Ingrese nombre I.E o eliga Departamento</span>');
+                return false;
+            } else if(colVacio === "" && departa !== "") {
+                
+                $(".cod_errorIE").html('');
+                filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1);
+
+            }else if(colVacio !== "" && departa === ""){
+                $(".cod_errorIE").html('');
+                filtrarTablaLista('<?php echo base_url(); ?>', 'buscarDatosLocal', 1);
+            }
+        });
+
     });
 </script>

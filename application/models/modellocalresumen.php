@@ -23,8 +23,6 @@ class ModelLocalResumen extends CI_Model {
     }
 
     public function getIESearch($params) {
-
-
         if ((isset($params['searchColegio']) and $params['searchColegio'] != "") and (isset($params['searchCodigo']) and $params['searchCodigo'] != "")) {
             $likeColegio = " AND codigo_de_local = '" . $params['searchCodigo'] . "'";
         } else if (isset($params['searchColegio']) and $params['searchColegio'] != "" and $params['searchCodigo'] == "") {

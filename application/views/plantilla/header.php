@@ -203,7 +203,7 @@
                                     $('.gen_longitud').append(datos.LongitudPunto_UltP);
                                     $('.gen_altitud').append(datos.AltitudPunto_UltP+" msnm");
                                     
-                                    if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center" id="galery_img"><h3 class="general_content_name text-center"  style="margin-bottom:10px">Fotografía del Local Escolar</h3><a href="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'"" rel="facebox" class="foto_general_img"><span></span><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></a></div></div>');}else{$('.gen_rutaFoto').append('');}
+                                    if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center" id="galery_img"><h3 class="general_content_name text-center">Fotografía del Local Escolar</h3><a href="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'"" rel="facebox" class="foto_general_img" style="width:100%;"><span></span><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></a></div></div>');}else{$('.gen_rutaFoto').append('');}
                                     
                                     if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
                                     if( datos.cEdif== 0){ $('.inf_numEdificaciones').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
@@ -297,13 +297,15 @@
                                     '</ul>' +
                                     '<div class="tab_container">' +
                                         '<div id="tab1" class="tab_content">' +
-                                            '<div class="col-xs-12 h3_footer">' +
-                                                '<div class="general">' +
-                                                    '<div class="general_content">' +
-                                                        '<div class="col-xs-12 h3_footer">'+
-                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Características generales del local escolar<br>n° <span class="gen_codLocal"></span></h3>' +
-                                                            '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id="" style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
-                                                        '</div>'+
+                                            '<div class="col-xs-12" style="padding: 0 10px 0 5px;">' +
+//                                                '<div class="general">' +
+                                                '<div class="general_content">' +
+                                                    '<div class="col-xs-12 h3_footer"  style="margin-left: -5px;height:50px">'+
+                                                        '<h3 class="col-xs-9 general_content_name_general text-center" style="margin-bottom: 0;font-size:12px;height:50px">Características generales del local escolar<br>n° <span class="gen_codLocal"></span></h3>' +
+                                                        '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id="" style="padding: 5px;margin-bottom: 0;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                                    '</div>'+
+
+                                                    '<div class="row infra_content">' +
                                                         '<div class="col-xs-12 h3_footer">'+
                                                             '<div class="panel-group all_acordion" id="accordion_gen">' +
                                                                 '<div class="panel  panel-default all_acordion_chidren">' +
@@ -391,12 +393,14 @@
                                                                 '</div>' +
                                                             '</div>'+
                                                         '</div>'+
-                                                        
                                                         '<div class="col-xs-12 h3_footer">'+
                                                             '<div class="gen_rutaFoto"></div>'+
                                                         '</div>'+
-                                                    '</div>' +
+                                                    '</div>'+
+
+                                                    
                                                 '</div>' +
+//                                                '</div>' +
                                             '</div>' +
                                         '</div>' +
                                         
@@ -404,10 +408,9 @@
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
                                                     '<div class="col-xs-12 h3_footer"  style="margin-left: -4px;">'+
-                                                            '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar código<br>n° <span class="gen_codLocal"></span></h3>' +
-                                                            '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
-                                                        '</div>'+
-                                                
+                                                        '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar código<br>n° <span class="gen_codLocal"></span></h3>' +
+                                                        '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                                    '</div>'+
                                                 
                                                     '<div class="row infra_content">' +
                                                         '<div class="col-xs-6 h3_footer">' +
@@ -679,14 +682,18 @@
                                         '</div>' +
                                         
                                         '<div id="tab4" class="tab_content" style="display:none;">' +
-                                            '<div class="col-xs-12 ">'+
-                                                '<h3 class=" col-xs-9 general_content_name_general text-center">Tomas fotografícas del local escolar<br>n° <span class="gen_codLocal"></span></h3>' +
-                                                '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                            '<div class="col-xs-12" style="padding: 0 10px 0 5px;">'+
+                                                '<div class="col-xs-12"  style="margin-left: -5px;">'+
+                                                    '<h3 class=" col-xs-9 general_content_name_general text-center" style="margin-bottom:2px">Tomas fotografícas del local escolar<br>n° <span class="gen_codLocal"></span></h3>' +
+                                                    '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id="" style="padding: 5px;margin-bottom: 0;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
+                                                '</div>'+
+                                                '<div class="row infra_content">' +
+                                                    '<div class="col-xs-12 text-center">'+
+//                                                        '<h3 class="general_content_name text-center" style="margin-bottom: 10px;border-radius: 0;">REGISTRO FOTOGRÁFICO</h3>'+
+                                                        '<div class="product-gallery" id=""></div>'+
+                                                    '</div>' +
+                                                '</div>' +
                                             '</div>'+
-                                            '<div class="col-xs-12 text-center">'+
-                                                '<h3 class="general_content_name text-center" style="margin-bottom: 10px;border-radius: 0;">REGISTRO FOTOGRÁFICO</h3>'+
-                                                '<div class="product-gallery" id=""></div>'+
-                                            '</div>' +
                                             
                                         '</div>' +
                                     '</div>';
