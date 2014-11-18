@@ -562,7 +562,7 @@ ul.tabs li.active, html ul.tabs li.active a:hover  {
 }
 .general_content{
     font-size: 11px;
-/*    display: inline-block;*/
+    /*    display: inline-block;*/
 }
 .select2-results {
     /*font-family: 'Arimo', sans-serif;*/
@@ -709,8 +709,8 @@ a.details_eyes.close_image:hover i.floatCodigo:hover, a.details_eyes.close_image
     text-decoration: none;
 }
 .gm-style-iw{
-/*    height: 600px;
-    min-height: 590px;*/
+    /*    height: 600px;
+        min-height: 590px;*/
 }
 #facebox .image {
     text-align: center;
@@ -727,7 +727,7 @@ a.details_eyes.close_image:hover i.floatCodigo:hover, a.details_eyes.close_image
 .galery_ima_foto_a{
     position:relative; 
     float:left; 
-    
+
 }
 
 #galery_img a span,
@@ -1060,7 +1060,7 @@ a.details_eyes.close_image:hover i.floatCodigo:hover, a.details_eyes.close_image
 }
 .download_href{
     display: inline-block;
-    
+
 }
 .download_href:hover{
     color: #165ba8;
@@ -1068,5 +1068,5 @@ a.details_eyes.close_image:hover i.floatCodigo:hover, a.details_eyes.close_image
 }
 #download_general_archive{
     display: inline-block;
-padding-top: 5px;
+    padding-top: 5px;
 }

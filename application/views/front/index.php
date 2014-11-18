@@ -111,11 +111,11 @@
         $("#download_general_archive").hide();
         $("#boton_accion_codigo").hide();
         $("#boton_accion_colegio").hide();
-
         $('.mihref').attr('href', '');
 
         $("#optCodigo").on("click", function() {
             $(".cod_error").empty();
+            $(".cod_errorIE").empty();
             $(".mihref").removeAttr('href');
             $("#div-colegio").hide();
             $("#dv_searchParent").show();
@@ -135,13 +135,10 @@
             $("#dv_dist .select2-chosen").text("Seleccione");
             $("#searchCodigo").focus();
             $(".changeButtonFiltro").attr('id', "filtrarCodigo");
-
-
         });
-
-
-
+        
         $("#optColegio").on("click", function() {
+            $(".cod_error").empty();
             $(".cod_errorIE").empty();
             $(".mihref").removeAttr('href');
             $("#dv_searchParent").hide();
