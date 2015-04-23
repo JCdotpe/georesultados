@@ -11,6 +11,9 @@ class Home extends CI_Controller {
     }
 
     public function index() {
+        add_css(array('select2'));
+        add_js(array('select2.min', 'facebox/src/facebox', 'jquery-ui', 'Am2_SimpleSlider'));
+
         $datos['titulo'] = "Censo de Infraestructura Educativa 2013";
         $datos['contenido'] = "front/index";
         $this->load->view('plantilla/plantilla', $datos);
@@ -21,7 +24,7 @@ class Home extends CI_Controller {
         $locales = $this->modeloResumen->getDatosLocales($idCodigo);
         echo json_encode($locales);
     }
-    
+
     public function getSchoolPhotos() {
         $idCodigo = $_REQUEST['codigoFoto'];
         $locales = $this->modeloResumen->getListSchoolPhotos($idCodigo);
@@ -37,7 +40,6 @@ class Home extends CI_Controller {
         $datos['datos_Resumen'] = $this->modeloResumen->getIESearch($_REQUEST);
         $this->load->view("front/recargarDatos", $datos);
     }
-
 
 }
 

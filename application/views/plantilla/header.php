@@ -5,22 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo (isset($titulo) and $titulo != "") ? $titulo . " | " : ""; ?>INEI</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" />
-        <link type="text/css" href="<?php echo base_url() ?>assets/css/bootswatch.min.css" rel="stylesheet" />
-        <link type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap-tour.min.css" rel="stylesheet" />
-        <link type="text/css" href="<?php echo base_url() ?>assets/css/font-awesome.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/select2.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/maps.css" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-        
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/facebox/src/facebox.js"></script>
+<!--        <link rel="stylesheet" type="text/css" href="<?php #echo base_url('assets/css/bootstrap.min.css'); ?>" />
+        <link type="text/css" href="<?php #echo base_url('assets/css/bootswatch.min.css') ?>" rel="stylesheet" />
+        <link type="text/css" href="<?php #echo base_url('assets/css/font-awesome.css') ?>" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="<?php #echo base_url('assets/css/select2.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php #echo base_url('assets/css/maps.css'); ?>" />-->
+        <?php echo put_headersCss() ?>
+        <script type="text/javascript">
+            var CI = {
+                base_url: '<?php echo base_url() ?>',
+                site_url: '<?php echo site_url() ?>'
+            };
+        </script>
+        <script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
+<!--        <script src="<?php #echo base_url('assets/js/facebox/src/facebox.js') ?>"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-        <script src="<?php echo base_url() ?>assets/js/Am2_SimpleSlider.js" type="text/javascript"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/global.js"></script>      
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+        <script src="<?php #echo base_url('assets/js/Am2_SimpleSlider.js') ?>"></script>
+        <script src="<?php #echo base_url('assets/js/global.js') ?>"></script>-->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="http://www.google.com/jsapi"></script>
+        <script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $('a[rel*=facebox]').facebox();
@@ -46,11 +50,11 @@
             });
             function checkGoogleMap() {
                 var msg = document.getElementById('msg');
-                if (maploaded == false) {
-                    msg.innerHTML = '<strong>Cargando Puntos<img src="<?php echo base_url()?>assets/img/294.gif" /></strong>';
+                if (maploaded === false) {
+                    msg.innerHTML = '<strong>Cargando Puntos<img src="'+CI.base_url+'assets/img/294.gif" /></strong>';
                     $("#msg").slideDown("fast");
                 } else {
-                    msg.innerHTML = '<strong>Puntos Cargados<img src="<?php echo base_url()?>assets/img/08.gif" /></strong>';
+                    msg.innerHTML = '<strong>Puntos Cargados<img src="'+CI.base_url+'assets/img/08.gif" /></strong>';
                     $("#msg").delay("slow").slideUp('slow');
                 }
             }
@@ -99,7 +103,7 @@
 
             $(document).ready(function() {
                 initialize();
-                $.getJSON('<?php echo base_url() ?>assets/json/region.json', function(regionjson) {
+                $.getJSON(CI.base_url+'assets/json/region.json', function(regionjson) {
                     $.each(regionjson.Departamento, function(i, nombre) {
                         $("#depa").append('<option id="' + i + '" value="' + nombre.CCDD + '" >' + nombre.Nombre + '</option>');
                     });
@@ -113,7 +117,7 @@
                     $("#prov").append('<option value="">Seleccione</option>');
                     $("#dv_prov .select2-chosen").text("Seleccione");
                     $("#dv_dist .select2-chosen").text("Seleccione");
-                    if ($(this).val() != "") {
+                    if ($(this).val() !== "") {
                         load_ubigeo('PROV');
                     }
                     $('#dist').html('<option value="">Seleccione</option>');
@@ -123,7 +127,7 @@
                     $("#dist").empty();
                     $("#dist").append('<option value="">Seleccione</option>');
                     $("#dv_dist .select2-chosen").text("Seleccione");
-                    if ($(this).val() != "") {
+                    if ($(this).val() !== "") {
                         load_ubigeo('DIST');
                     }
                 });
@@ -132,25 +136,25 @@
 
             function load_fusiontable(query) {
                 query = query || "";
-                if (layer != undefined) {
+                if (layer !== undefined) {
                     layer.setMap(null);
                 }
                 
-                if($('#searchCodigo').val() !=""){
+                if($('#searchCodigo').val() !==""){
                     maploaded = false;
                     checkGoogleMap();
                     condicion = query;
                     cargar_tabs();
                 }
                 
-                if($('#searchColegio').val() !=""){
+                if($('#searchColegio').val() !==""){
                     maploaded = false;
                     checkGoogleMap();
                     condicion = query;
                     cargar_tabs();
                 }
                 
-                if ($('#depa').val() != "") {
+                if ($('#depa').val() !== "") {
                     maploaded = false;
                     checkGoogleMap();
                     condicion = query;
@@ -178,20 +182,20 @@
                         google.maps.event.addListener(layer, 'click', function(e) {
                             var codigoid = e.row['id_local'].value;
                             var contentString = '<div>';
-                            var url = "<?php echo base_url() ?>home/getBubble?idCodigo=" + codigoid;
+                            var url = CI.base_url+"home/getBubble?idCodigo=" + codigoid;
                             $.get(url, function(data) {
                                 var result = JSON.parse(data);
                                 $.each(result, function(i, datos) {
                                     //General
-                                    $(".btnDonwload").attr("href","<?php echo base_url()?>exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
+                                    $(".btnDonwload").attr("href",CI.base_url+"exportar/csvexport/por_Codigo?idCodigo=" + codigoid);
                                     
                                     $('.gen_codLocal').append(datos.codigo_de_local);
                                     $('.gen_nombreIE').append((datos.nombres_IIEE).toUpperCase());
                                     $('.gen_direccionIE').append((datos.direcc_IE).toUpperCase());
-                                    if( datos.tel_IE == null){$('.gen_telLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
+                                    if( datos.tel_IE == null){$('.gen_telLocal').append('<i class="fa fa-times text-danger"></i>'); }else{$('.gen_telLocal').append(datos.tel_IE);}
                                     $('.gen_nivEducativo').append((datos.nivel).toUpperCase());
-                                    if( datos.prop_IE == null){$('.gen_proLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_proLocal').append((datos.prop_IE).toUpperCase());}
-                                    if( datos.Talum == 0 ){$('.gen_countAlumnos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.gen_countAlumnos').append(datos.Talum);}
+                                    if( datos.prop_IE == null){$('.gen_proLocal').append('<i class="fa fa-times text-danger"></i>');}else{$('.gen_proLocal').append((datos.prop_IE).toUpperCase());}
+                                    if( datos.Talum == 0 ){$('.gen_countAlumnos').append('<i class="fa fa-times text-danger"></i>');}else{$('.gen_countAlumnos').append(datos.Talum);}
                                     
                                     $('.gen_departLocal').append((datos.dpto_nombre).toUpperCase());
                                     $('.gen_provLocal').append((datos.prov_nombre).toUpperCase());
@@ -203,51 +207,56 @@
                                     $('.gen_longitud').append(datos.LongitudPunto_UltP);
                                     $('.gen_altitud').append(datos.AltitudPunto_UltP+" msnm");
                                     
-                                    if(datos.RutaFoto !=null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center" id="galery_img"><h3 class="general_content_name text-center">Fotografía del Local Escolar</h3><a href="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'"" rel="facebox" class="foto_general_img" style="width:100%;"><span></span><img src="http://jc.pe/portafolio/cie/cap3/'+datos.RutaFoto+'" class="foto_img" /></a></div></div>');}else{$('.gen_rutaFoto').append('');}
+                                    if(datos.RutaFoto != null){$('.gen_rutaFoto').append('<div class="row name_educativo"><div class="col-xs-12 text-center" id="galery_img"><h3 class="general_content_name text-center">Fotografía del Local Escolar</h3><a href="http://webinei.inei.gob.pe/cie/2013/cap3/'+datos.RutaFoto+'"" rel="facebox" class="foto_general_img" style="width:100%;"><span></span><img src="http://webinei.inei.gob.pe/cie/2013/cap3/'+datos.RutaFoto+'" class="foto_img image_general_colegio" /></a></div></div>');}else{$('.gen_rutaFoto').append('');}
                                     
-                                    if( datos.cPred == 0){ $('.inf_numPredios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numPredios').append(datos.cPred);}
-                                    if( datos.cEdif== 0){ $('.inf_numEdificaciones').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
-                                    if( (datos.Piso ==null) || (datos.Piso== 0)){ $('.inf_countPiso').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_countPiso').append(datos.Piso); }
-                                    if( datos.P1_B_3_9_At_Local== null){ $('.inf_areTerreno').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local+" m<sup>2</sup>");}                                    
+                                    $('.image_general_colegio').error(function () {
+                                        $(".gen_rutaFoto, .tomas_fotograficas").remove();
+        //                                                            $(this).prop('src', CI.base_url + 'assets/img/no-disponible.jpg');
+                                    });
                                     
-                                    if( datos.P== 0){ $('.inf_numPatios').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numPatios').append(datos.P);}
-                                    if( datos.LD== 0){ $('.inf_numLosDeportivas').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numLosDeportivas').append(datos.LD);}
-                                    if( datos.CTE== 0){ $('.inf_numCisTanques').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_numCisTanques').append(datos.CTE);}
-                                    if( datos.MC== 0){$('.inf_numMurContencion').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_numMurContencion').append(datos.MC);}
+                                    if( datos.cPred == 0){ $('.inf_numPredios').append('<i class="fa fa-times text-danger "></i>'); }else{ $('.inf_numPredios').append(datos.cPred);}
+                                    if( datos.cEdif == 0){ $('.inf_numEdificaciones').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_numEdificaciones').append(datos.cEdif);}
+                                    if( (datos.Piso == null) || (datos.Piso === 0)){ $('.inf_countPiso').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_countPiso').append(datos.Piso); }
+                                    if( datos.P1_B_3_9_At_Local == null){ $('.inf_areTerreno').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_areTerreno').append(datos.P1_B_3_9_At_Local+" m<sup>2</sup>");}                                    
                                     
-                                    if( (datos.P2_C_2LocE_1_Energ== null) || (datos.P2_C_2LocE_1_Energ ==2)){ $('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_serBasEnerElec').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>'); }
-                                    if( (datos.P2_C_2LocE_2_Agua== null) || (datos.P2_C_2LocE_2_Agua ==2)){$('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_aguPtable').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
-                                    if( (datos.P2_C_2LocE_3_Alc== null) || (datos.P2_C_2LocE_3_Alc ==2)){ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_alcantarillado').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
-                                    if( (datos.P2_C_2LocE_4_Tfija== null) || (datos.P2_C_2LocE_4_Tfija ==2)){ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_telFija').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
-                                    if( (datos.P2_C_2LocE_5_Tmov== null) || (datos.P2_C_2LocE_5_Tmov ==2)){$('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_telMovil').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
-                                    if( (datos.P2_C_2LocE_6_Int== null) || (datos.P2_C_2LocE_6_Int ==2)){$('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>'); }else{ $('.inf_internet').append('<img src="<?php echo base_url()?>assets/img/icono/success.png "/>');}
+                                    if( datos.P == 0){ $('.inf_numPatios').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_numPatios').append(datos.P);}
+                                    if( datos.LD == 0){ $('.inf_numLosDeportivas').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_numLosDeportivas').append(datos.LD);}
+                                    if( datos.CTE == 0){ $('.inf_numCisTanques').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_numCisTanques').append(datos.CTE);}
+                                    if( datos.MC == 0){$('.inf_numMurContencion').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_numMurContencion').append(datos.MC);}
                                     
-                                    if( datos.e_1== 0){ $('.inf_aulComun').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_aulComun').append(datos.e_1);}
-                                    if( datos.e_2== 0){ $('.inf_pedagogico').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_pedagogico').append(datos.e_2);}
-                                    if( datos.e_3== 0){ $('.inf_administrativo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_administrativo').append(datos.e_3);}
-                                    if( datos.e_4== 0){ $('.inf_complementario').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_complementario').append(datos.e_4);}
-                                    if( datos.e_5== 0){ $('.inf_servicio').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_servicio').append(datos.e_5);}
+                                    if( (datos.P2_C_2LocE_1_Energ == null) || (datos.P2_C_2LocE_1_Energ===2)){ $('.inf_serBasEnerElec').append('<i class="fa fa-times text-danger"></i>');}else{$('.inf_serBasEnerElec').append('<i class="fa fa-check text-success"></i>'); }
+                                    if( (datos.P2_C_2LocE_2_Agua == null) || (datos.P2_C_2LocE_2_Agua===2)){$('.inf_aguPtable').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_aguPtable').append('<i class="fa fa-check text-success"></i>');}
+                                    if( (datos.P2_C_2LocE_3_Alc == null) || (datos.P2_C_2LocE_3_Alc===2)){ $('.inf_alcantarillado').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_alcantarillado').append('<i class="fa fa-check text-success"></i>');}
+                                    if( (datos.P2_C_2LocE_4_Tfija == null) || (datos.P2_C_2LocE_4_Tfija===2)){ $('.inf_telFija').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_telFija').append('<i class="fa fa-check text-success"></i>');}
+                                    if( (datos.P2_C_2LocE_5_Tmov == null) || (datos.P2_C_2LocE_5_Tmov===2)){$('.inf_telMovil').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_telMovil').append('<i class="fa fa-check text-success"></i>');}
+                                    if( (datos.P2_C_2LocE_6_Int == null) || (datos.P2_C_2LocE_6_Int===2)){$('.inf_internet').append('<i class="fa fa-times text-danger"></i>'); }else{ $('.inf_internet').append('<i class="fa fa-check text-success"></i>');}
                                     
-                                    if( datos.eo_1== 0){ $('.inf_gobNacional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobNacional').append(datos.eo_1);}
-                                    if( datos.eo_2== 0){ $('.inf_gobLocal').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_gobLocal').append(datos.eo_2);}
-                                    if( datos.eo_3== 0){ $('.inf_apafa').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_apafa').append(datos.eo_3); }
-                                    if( datos.eo_4== 0){ $('.inf_ong').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_ong').append(datos.eo_4); }
-                                    if( datos.eo_5== 0){ $('.inf_privada').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{$('.inf_privada').append(datos.eo_5); }
-                                    if( datos.a_1== 0){ $('.inf_antes').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_antes').append(datos.a_1);}
-                                    if( datos.a_2== 0){ $('.inf_entre').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_entre').append(datos.a_2);}
-                                    if( datos.a_3== 0){ $('.inf_despues').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_despues').append(datos.a_3);}
-                                    if( datos.eman== 0){ $('.inf_countEdiMante').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiMante').append(datos.eman);}
-                                    if( datos.ereh== 0){ $('.inf_countEdiEstruc').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiEstruc').append(datos.ereh);}
-                                    if( datos.edem== 0){ $('.inf_countEdiDemo').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
+                                    if( datos.e_1 == 0){ $('.inf_aulComun').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_aulComun').append(datos.e_1);}
+                                    if( datos.e_2 == 0){ $('.inf_pedagogico').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_pedagogico').append(datos.e_2);}
+                                    if( datos.e_3 == 0){ $('.inf_administrativo').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_administrativo').append(datos.e_3);}
+                                    if( datos.e_4 == 0){ $('.inf_complementario').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_complementario').append(datos.e_4);}
+                                    if( datos.e_5 == 0){ $('.inf_servicio').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_servicio').append(datos.e_5);}
                                     
-                                    if( datos.estruc_1== 0){ $('.inf_countPorticos').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countPorticos').append(datos.estruc_1);}
-                                    if( datos.estruc_2== 0){ $('.inf_countAramda').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countAramda').append(datos.estruc_2);}
-                                    if( datos.estruc_3== 0){ $('.inf_countEstructura').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countEstructura').append(datos.estruc_3);}
-                                    if( datos.estruc_4== 0){ $('.inf_countMadera').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countMadera').append(datos.estruc_4);}
-                                    if( datos.estruc_5== 0){ $('.inf_countAdobe').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countAdobe').append(datos.estruc_5);}
-                                    if( datos.estruc_6== 0){ $('.inf_countSinConfinar').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countSinConfinar').append(datos.estruc_6);}
-                                    if( datos.estruc_7== 0){ $('.inf_countPrecarias').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countPrecarias').append(datos.estruc_7);}
-                                    if( datos.estruc_8== 0){ $('.inf_countProvisional').append('<img src="<?php echo base_url()?>assets/img/icono/cancel.png "/>');}else{ $('.inf_countProvisional').append(datos.estruc_8);}
+                                    if( datos.eo_1 == 0){ $('.inf_gobNacional').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_gobNacional').append(datos.eo_1);}
+                                    if( datos.eo_2 == 0){ $('.inf_gobLocal').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_gobLocal').append(datos.eo_2);}
+                                    if( datos.eo_3 == 0){ $('.inf_apafa').append('<i class="fa fa-times text-danger"></i>');}else{$('.inf_apafa').append(datos.eo_3); }
+                                    if( datos.eo_4 == 0){ $('.inf_ong').append('<i class="fa fa-times text-danger"></i>');}else{$('.inf_ong').append(datos.eo_4); }
+                                    if( datos.eo_5 == 0){ $('.inf_privada').append('<i class="fa fa-times text-danger"></i>');}else{$('.inf_privada').append(datos.eo_5); }
+                                    if( datos.a_1 == 0){ $('.inf_antes').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_antes').append(datos.a_1);}
+                                    if( datos.a_2 == 0){ $('.inf_entre').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_entre').append(datos.a_2);}
+                                    if( datos.a_3 == 0){ $('.inf_despues').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_despues').append(datos.a_3);}
+                                    if( datos.eman == 0){ $('.inf_countEdiMante').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countEdiMante').append(datos.eman);}
+                                    if( datos.ereh == 0){ $('.inf_countEdiEstruc').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countEdiEstruc').append(datos.ereh);}
+                                    if( datos.edem == 0){ $('.inf_countEdiDemo').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countEdiDemo').append(datos.edem);}
+                                    
+                                    if( datos.estruc_1==0){ $('.inf_countPorticos').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countPorticos').append(datos.estruc_1);}
+                                    if( datos.estruc_2 == 0){ $('.inf_countAramda').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countAramda').append(datos.estruc_2);}
+                                    if( datos.estruc_3 == 0){ $('.inf_countEstructura').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countEstructura').append(datos.estruc_3);}
+                                    if( datos.estruc_4 == 0){ $('.inf_countMadera').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countMadera').append(datos.estruc_4);}
+                                    if( datos.estruc_5 == 0){ $('.inf_countAdobe').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countAdobe').append(datos.estruc_5);}
+                                    if( datos.estruc_6 == 0){ $('.inf_countSinConfinar').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countSinConfinar').append(datos.estruc_6);}
+                                    if( datos.estruc_7 == 0){ $('.inf_countPrecarias').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countPrecarias').append(datos.estruc_7);}
+                                    if( datos.estruc_8 == 0){ $('.inf_countProvisional').append('<i class="fa fa-times text-danger"></i>');}else{ $('.inf_countProvisional').append(datos.estruc_8);}
                                     
                                     var data = google.visualization.arrayToDataTable([                                        
                                         ['', 'Cantidad',{ role: "style" }],
@@ -261,7 +270,7 @@
                                     var res=Math.floor(maxvalue);
                                     res=res+1;
                                     
-                                    if(res != 0) {
+                                    if(res !== 0) {
                                         maxvalue=(res * 4);
                                     }
                                     else{
@@ -281,19 +290,19 @@
                                 });
                             });
                             
-                            var urlFotos = "<?php echo base_url() ?>home/getSchoolPhotos?codigoFoto=" + codigoid;
+                            var urlFotos = CI.base_url+"home/getSchoolPhotos?codigoFoto=" + codigoid;
                             $.get(urlFotos, function(data) {
                                 var resultFoto = JSON.parse(data);
                                 $.each(resultFoto, function(i, datos) {
-                                    $('.product-gallery').append('<div class="col-xs-4 galery_ima_foto_a gallery-img"><a class="img_a_fotografico"><span></span><img src="http://jc.pe/portafolio/cie/resumen/'+datos.P9_F_Url_Foto+'" alt=""  class="foto_img_croqui_toma"></a><div data-desc="asd"></div></div>');
+                                    $('.product-gallery').append('<div class="col-xs-4 galery_ima_foto_a gallery-img"><a class="img_a_fotografico"><span></span><img src="http://webinei.inei.gob.pe/cie/2013/resumen/'+datos.P9_F_Url_Foto+'" alt=""  class="foto_img_croqui_toma"></a><div data-desc="asd"></div></div>');
                                     $('.gallery-img').Am2_SimpleSlider();
                                 });
                             });
 
                             contentString += '<ul class="tabs">' +
-                                    '<li class="active"><a href="#tab1"><i class="glyphicon glyphicon-fire"></i> GENERAL</a></li>' +
+                                    '<li class="active"><a href="#tab1"><i class="fa fa-university"></i> GENERAL</a></li>' +
                                     '<li><a href="#tab2"><i class="fa fa-building"></i> INFRAESTRUCTURA</a></li>' +
-                                    '<li><a href="#tab4"><i class="fa fa-camera"></i> TOMAS FOTOGRÁFICAS</a></li>' +
+                                    '<li><a href="#tab4" class="tomas_fotograficas"><i class="fa fa-camera"></i> TOMAS FOTOGRÁFICAS</a></li>' +
                                     '</ul>' +
                                     '<div class="tab_container">' +
                                         '<div id="tab1" class="tab_content">' +
@@ -360,32 +369,32 @@
                                                                         '<div class="panel-body all_acordion_panelBody">' +
                                                                             '<table class="table content_infra_table">' +
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Departamento</td>' +
-                                                                                    '<td width="70%"><strong><span class="gen_departLocal"></span></strong></td>' +
+                                                                                    '<td width="20%">Región</td>' +
+                                                                                    '<td width="80%"><strong><span class="gen_departLocal"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Provincia</td>' +
-                                                                                    '<td width="70%"><strong><span class="gen_provLocal"></span></strong></td>' +
+                                                                                    '<td width="20%">Provincia</td>' +
+                                                                                    '<td width="80%"><strong><span class="gen_provLocal"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Distrito</td>' +
-                                                                                    '<td width="70%"><strong><span class="gen_distLocal"></span></strong></td>' +
+                                                                                    '<td width="20%">Distrito</td>' +
+                                                                                    '<td width="80%"><strong><span class="gen_distLocal"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Centro poblado</td>' +
-                                                                                    '<td width="70%"><strong><span class="micentropoblado"></span></strong></td>' +
+                                                                                    '<td width="20%">Centro poblado</td>' +
+                                                                                    '<td width="80%"><strong><span class="micentropoblado"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Área</td>' +
-                                                                                    '<td width="70%"><strong><span class="gen_areaLocal"></span></strong></td>' +
+                                                                                    '<td width="20%">Área</td>' +
+                                                                                    '<td width="80%"><strong><span class="gen_areaLocal"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Dirección</td>' +
-                                                                                    '<td width="70%"><strong><span class="gen_direccionIE"></span></strong></td>' +
+                                                                                    '<td width="20%">Dirección</td>' +
+                                                                                    '<td width="80%"><strong><span class="gen_direccionIE"></span></strong></td>' +
                                                                                 '</tr>' + 
                                                                                 '<tr>' +
-                                                                                    '<td width="30%">Georeferenciación</td>' +
-                                                                                    '<td width="70%">Latitud <strong style="margin-right:20px"><span class="gen_latitud"></span></strong> Longitud <strong style="margin-right:20px"><span class="gen_longitud"></span></strong> Altitud <strong><span class="gen_altitud"></span></strong></td>' +
+                                                                                    '<td width="20%">Georeferenciación</td>' +
+                                                                                    '<td width="80%">Latitud <strong style="margin-right:5px"><span class="gen_latitud"></span></strong> Longitud <strong style="margin-right:5px"><span class="gen_longitud"></span></strong> Altitud <strong><span class="gen_altitud"></span></strong></td>' +
                                                                                 '</tr>' +
                                                                             '</table>' +
                                                                         '</div>' +
@@ -397,8 +406,6 @@
                                                             '<div class="gen_rutaFoto"></div>'+
                                                         '</div>'+
                                                     '</div>'+
-
-                                                    
                                                 '</div>' +
 //                                                '</div>' +
                                             '</div>' +
@@ -408,7 +415,7 @@
                                             '<div class="col-xs-12">' +
                                                 '<div class="infraestructura">' +
                                                     '<div class="col-xs-12 h3_footer"  style="margin-left: -4px;">'+
-                                                        '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar código<br>n° <span class="gen_codLocal"></span></h3>' +
+                                                        '<h3 class=" col-xs-9 general_content_name_general text-center">Infraestructura del local escolar <br>n° <span class="gen_codLocal"></span></h3>' +
                                                         '<a href="" class="col-xs-3 btn btn-success btn-sm descar_info_general btnDonwload" id=""  style="padding: 5px;"><div class="col-xs-2" style="padding: 0;"><i class="glyphicon glyphicon-download-alt"></i></div>  <div class="col-xs-10" style="padding: 0">Descargar <br>información</div></a>' +
                                                     '</div>'+
                                                 
@@ -698,6 +705,7 @@
                                         '</div>' +
                                     '</div>';
                             contentString += "<div>";
+                            
                             infowindow.setContent(contentString);
                             array = e.row['LatitudPunto_UltP'].value.split(",");
                             infolatlng = new google.maps.LatLng(parseFloat(array[0]), parseFloat(array[1]));
@@ -726,11 +734,11 @@
                 zomCenter = new google.maps.LatLng(-10.089204, -69.802552);
                 zom = 6;
                 var posicion = $('#depa option:selected').attr('id');
-                if (posicion == -1) {
+                if (posicion === -1) {
                     zomCenter = new google.maps.LatLng(-11.7866731456649, -76.6324097107669);
                     zom = 8;
                 }
-                if (capaKml != undefined) {
+                if (capaKml !== undefined) {
                     capaKml.setMap(null);
                 }
                 capaKml = new google.maps.FusionTablesLayer({
@@ -751,14 +759,14 @@
             function load_ubigeo(name) {
                 var depaSelect = $('#depa option:selected').attr('id');
                 var provSelect = $('#prov option:selected').attr('id');
-                if (name == 'PROV') {
-                    $.getJSON('<?php echo base_url() ?>assets/json/region.json', function(data) {
+                if (name === 'PROV') {
+                    $.getJSON(CI.base_url+'assets/json/region.json', function(data) {
                         $.each(data.Departamento[depaSelect].PROVINCIA, function(i, nombre) {
                             $("#prov").append('<option id="' + i + '" value="' + nombre.CCPP + '" >' + nombre.Nombre + '</option>');
                         });
                     });
-                } else if (name == 'DIST') {
-                    $.getJSON('<?php echo base_url() ?>assets/json/region.json', function(data) {
+                } else if (name === 'DIST') {
+                    $.getJSON(CI.base_url+'assets/json/region.json', function(data) {
                         $.each(data.Departamento[depaSelect].PROVINCIA[provSelect].DISTRITO, function(i, nombre) {
                             $("#dist").append('<option id="' + i + '" value="' + nombre.CCDI + '" >' + nombre.Nombre + '</option>');
                         });

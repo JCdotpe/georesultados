@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','Convert_UTF8');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url','funciones');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('addcssjs');
 
 
 /*

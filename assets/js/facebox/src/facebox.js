@@ -67,7 +67,7 @@
  *
  */
 
- var rutaServer =   "assets/";//"/test/public_html";
+ var rutaServer =   CI.base_url+"assets/";//"/test/public_html";
  document.write('<link href="'+rutaServer+'js/facebox/src/facebox.css" media="screen" rel="stylesheet" type="text/css" />');
 
 (function($) {
@@ -104,7 +104,7 @@
 
     loading: function() {
       init()
-      if ($('#facebox .loading').length == 1) return true
+      if ($('#facebox .loading').length === 1) return true
       showOverlay()
 
       $('#facebox .content').empty()
